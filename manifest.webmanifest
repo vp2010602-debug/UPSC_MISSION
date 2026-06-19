@@ -2,17 +2,25 @@
   "id": "./",
   "name": "Mission UPSC AI OS",
   "short_name": "Mission UPSC",
-  "description": "Personal UPSC preparation operating system with Jarvis, notes, tests, revision, memory, calendar and AI tools.",
+  "description": "Responsive UPSC preparation operating system with Jarvis Pro, Smart Router, personal memory, notes, tests, revision and offline app support.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
-  "background_color": "#f5f7fb",
-  "theme_color": "#0a2647",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#f4f7fb",
+  "theme_color": "#06264a",
   "orientation": "any",
   "lang": "en-IN",
   "dir": "ltr",
-  "categories": ["education", "productivity", "utilities"],
+  "categories": [
+    "education",
+    "productivity",
+    "utilities"
+  ],
   "icons": [
     {
       "src": "./assets/icons/icon-192.png",
@@ -39,21 +47,36 @@
       "short_name": "Jarvis",
       "description": "Open Jarvis and run a UPSC command.",
       "url": "./?section=jarvis",
-      "icons": [{"src": "./assets/icons/icon-192.png", "sizes": "192x192"}]
+      "icons": [
+        {
+          "src": "./assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Today's Mission",
       "short_name": "Today",
       "description": "Open the AI Daily Command Centre.",
       "url": "./?section=dailyCommandV261",
-      "icons": [{"src": "./assets/icons/icon-192.png", "sizes": "192x192"}]
+      "icons": [
+        {
+          "src": "./assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Memory Review",
       "short_name": "Recall",
       "description": "Open due spaced-revision cards.",
       "url": "./?section=memoryEngineV263",
-      "icons": [{"src": "./assets/icons/icon-192.png", "sizes": "192x192"}]
+      "icons": [
+        {
+          "src": "./assets/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

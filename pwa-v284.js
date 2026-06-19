@@ -1,7 +1,7 @@
 /* Mission UPSC AI OS V28.4 — PWA controller */
 (() => {
   'use strict';
-  const VERSION = '28.4';
+  const VERSION = '28.5';
   const REMINDER_KEY = 'mupsc_pwa_reminders_v284';
   const READY_KEY = 'mupsc_pwa_offline_ready_v284';
   let deferredInstallPrompt = null;

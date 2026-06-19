@@ -1,0 +1,15 @@
+V28.5 GitHub update
+
+Upload these files to the ROOT of your existing UPSC_MISSION repository and replace the older files:
+- index.html
+- responsive-v285.css (new)
+- jarvis-v285.js (new)
+- service-worker.js
+- pwa-v284.js
+- manifest.webmanifest
+
+After GitHub Pages finishes deploying:
+1. Open the site.
+2. Refresh once.
+3. In the installed PWA, open App & Offline and choose Check for Update.
+4. If the old colours remain, close the app fully and open it again.
