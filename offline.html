@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a2647">
+  <title>Mission UPSC — Offline</title>
+  <style>
+    :root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#102a43;background:#f4f7fb}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at top,#dcecff 0,#f4f7fb 52%,#edf2f8 100%)}
+    .card{width:min(520px,100%);background:#fff;border:1px solid #d9e2ec;border-radius:26px;padding:34px;box-shadow:0 24px 60px rgba(15,45,77,.13);text-align:center}
+    .logo{width:90px;height:90px;border-radius:24px;margin:0 auto 18px;display:grid;place-items:center;background:#0a2647;color:#fff;border:4px solid #f5bd36;font-weight:800;font-size:30px}
+    h1{margin:0 0 10px;font-size:28px}p{line-height:1.6;color:#52667a}.pill{display:inline-block;padding:8px 12px;border-radius:999px;background:#fff3cd;color:#704d00;font-weight:700;margin:8px 0 18px}
+    button,a{border:0;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}.primary{background:#0a5f55;color:#fff}.ghost{background:#eaf1f8;color:#17324d;margin-left:8px}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="logo">IAS</div>
+    <span class="pill">Offline mode</span>
+    <h1>Mission UPSC is temporarily offline</h1>
+    <p>The app shell and locally saved study data remain available after the first successful online load. Reconnect to sync Firebase or use cloud AI.</p>
+    <button class="primary" onclick="location.reload()">Try again</button>
+    <a class="ghost" href="./">Open app</a>
+  </main>
+</body>
+</html>

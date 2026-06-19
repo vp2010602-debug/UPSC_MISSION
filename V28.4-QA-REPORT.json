@@ -1,0 +1,21 @@
+{
+  "version": "28.4",
+  "build": "Installable App and Offline Experience",
+  "base": "V28.2 + V28.3 Smart Router and Personal Memory",
+  "checks": {
+    "app_js_syntax": "pass",
+    "jarvis_v2811_syntax": "pass",
+    "jarvis_v2823_syntax": "pass",
+    "pwa_controller_syntax": "pass",
+    "service_worker_syntax": "pass",
+    "manifest_json": "pass",
+    "duplicate_html_ids": 0,
+    "required_pwa_assets": "pass",
+    "pwa_inline_handlers": "pass"
+  },
+  "notes": [
+    "Install prompt availability is controlled by the browser.",
+    "iPad and iPhone installation uses Safari Share > Add to Home Screen.",
+    "Local reminders are not presented as closed-app background push notifications."
+  ]
+}

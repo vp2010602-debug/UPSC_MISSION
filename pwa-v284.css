@@ -1,0 +1,58 @@
+/* Mission UPSC AI OS V28.4 — Installable App & Offline Experience */
+:root{
+  --pwa-navy:#0a2647;
+  --pwa-blue:#174a78;
+  --pwa-gold:#f2bd3b;
+  --pwa-green:#0a6d5d;
+  --pwa-border:#d9e4ef;
+  --pwa-soft:#f6f9fc;
+}
+html,body{overscroll-behavior-y:none}
+body.pwaStandaloneV284{padding-bottom:78px}
+body.pwaStandaloneV284 .mobileTop{padding-top:calc(10px + env(safe-area-inset-top))}
+body.pwaStandaloneV284 main{min-height:100dvh}
+.pwaHeroV284{overflow:hidden;position:relative;background:linear-gradient(135deg,#0a2647,#123f6b 58%,#0a6d5d);color:#fff;border:0!important}
+.pwaHeroV284:after{content:"";position:absolute;right:-80px;top:-110px;width:290px;height:290px;border-radius:50%;background:rgba(255,255,255,.08)}
+.pwaHeroV284 h1,.pwaHeroV284 h2{color:#fff}.pwaHeroV284 .sub{color:#dfefff}
+.pwaHeroGridV284{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;position:relative;z-index:1}
+.pwaAppIconV284{width:108px;height:108px;border-radius:26px;background:#0a2647;border:4px solid var(--pwa-gold);display:grid;place-items:center;font-size:34px;font-weight:900;box-shadow:0 18px 45px rgba(0,0,0,.25)}
+.pwaStatusGridV284{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+.pwaStatusTileV284{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:14px;backdrop-filter:blur(8px)}
+.pwaStatusTileV284 span{display:block;font-size:12px;color:#d8e8f8}.pwaStatusTileV284 b{display:block;margin-top:4px;color:#fff;font-size:15px}
+.pwaGridV284{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pwaCardV284{border:1px solid var(--pwa-border);background:#fff;border-radius:20px;box-shadow:0 10px 28px rgba(18,54,87,.06)}
+[data-theme="dark"] .pwaCardV284{background:#132536;border-color:#29455e}
+.pwaCardHeadV284{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:14px}
+.pwaCardHeadV284 h2{margin:0}.pwaCardHeadV284 p{margin:5px 0 0}
+.pwaInstallBadgeV284{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800;background:#eaf2fb;color:#174a78;white-space:nowrap}
+.pwaInstallBadgeV284.ready{background:#dff5ec;color:#075c4d}.pwaInstallBadgeV284.warn{background:#fff2cf;color:#765200}.pwaInstallBadgeV284.offline{background:#ffe2e2;color:#8f1d1d}
+.pwaActionGridV284{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pwaActionBtnV284{border:0;border-radius:14px;padding:13px 14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;background:#eaf2fb;color:#123f6b}
+.pwaActionBtnV284.primary{background:var(--pwa-green);color:#fff}.pwaActionBtnV284.gold{background:var(--pwa-gold);color:#3f2c00}.pwaActionBtnV284.dark{background:var(--pwa-navy);color:#fff}.pwaActionBtnV284:disabled{opacity:.55;cursor:not-allowed}
+.pwaInstructionV284{padding:14px;border-radius:14px;background:#f5f8fb;border:1px dashed #c9d8e7;line-height:1.55;color:#3f566c}
+[data-theme="dark"] .pwaInstructionV284{background:#0f2030;border-color:#36516a;color:#cbd9e7}
+.pwaMetricRowV284{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pwaMetricV284{padding:14px;border-radius:14px;background:var(--pwa-soft);border:1px solid var(--pwa-border)}
+[data-theme="dark"] .pwaMetricV284{background:#0f2030;border-color:#2a455e}.pwaMetricV284 span{display:block;font-size:12px;color:#60778e}.pwaMetricV284 b{display:block;margin-top:4px;font-size:18px}
+.pwaOnlinePillV284{position:fixed;right:18px;bottom:18px;z-index:1200;border-radius:999px;padding:9px 13px;font-weight:800;font-size:12px;box-shadow:0 12px 35px rgba(0,0,0,.18);background:#dff5ec;color:#075c4d;border:1px solid #bfe6d9;display:flex;align-items:center;gap:7px}
+.pwaOnlinePillV284.offline{background:#ffe2e2;color:#8f1d1d;border-color:#ffc3c3}
+body.pwaStandaloneV284 .pwaOnlinePillV284{bottom:88px}
+.pwaBottomDockV284{display:none;position:fixed;left:50%;bottom:calc(10px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:1190;width:min(620px,calc(100% - 20px));padding:8px;border-radius:20px;background:rgba(10,38,71,.96);box-shadow:0 18px 46px rgba(0,0,0,.28);backdrop-filter:blur(14px);grid-template-columns:repeat(5,1fr);gap:5px}
+body.pwaStandaloneV284 .pwaBottomDockV284{display:grid}
+.pwaBottomDockV284 button{border:0;background:transparent;color:#dcecff;border-radius:13px;padding:9px 5px;font-weight:800;font-size:11px;cursor:pointer}
+.pwaBottomDockV284 button span{display:block;font-size:19px;margin-bottom:3px}.pwaBottomDockV284 button:active,.pwaBottomDockV284 button:hover{background:rgba(255,255,255,.12);color:#fff}
+.pwaReminderFormV284{display:grid;grid-template-columns:1.2fr 1fr .8fr auto;gap:10px;align-items:end}
+.pwaReminderFormV284 label{margin:0}.pwaReminderListV284{display:grid;gap:10px;margin-top:14px;max-height:360px;overflow:auto}
+.pwaReminderItemV284{display:grid;grid-template-columns:1fr auto;gap:12px;padding:13px;border:1px solid var(--pwa-border);border-radius:14px;background:var(--pwa-soft)}
+[data-theme="dark"] .pwaReminderItemV284{background:#0f2030;border-color:#2a455e}.pwaReminderItemV284 small{display:block;color:#62788d;margin-top:4px}.pwaReminderItemV284.done{opacity:.65}
+.pwaAuditGridV284{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:14px}
+.pwaAuditItemV284{border-radius:13px;padding:12px;border:1px solid var(--pwa-border);background:var(--pwa-soft)}
+[data-theme="dark"] .pwaAuditItemV284{background:#0f2030;border-color:#2a455e}.pwaAuditItemV284.pass{border-left:5px solid #15906f}.pwaAuditItemV284.warn{border-left:5px solid #e6a800}.pwaAuditItemV284.fail{border-left:5px solid #d44646}.pwaAuditItemV284 b{display:block}.pwaAuditItemV284 small{display:block;margin-top:4px;color:#647b90}
+.pwaToastV284{position:fixed;left:50%;bottom:26px;transform:translate(-50%,22px);opacity:0;pointer-events:none;z-index:2000;background:#102a43;color:#fff;padding:12px 16px;border-radius:13px;box-shadow:0 18px 45px rgba(0,0,0,.28);font-weight:700;transition:.22s ease;max-width:min(520px,calc(100% - 30px));text-align:center}
+.pwaToastV284.show{opacity:1;transform:translate(-50%,0)}body.pwaStandaloneV284 .pwaToastV284{bottom:92px}
+.pwaWakeStateV284{display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:13px;background:#f5f8fb;border:1px solid var(--pwa-border);margin-top:12px}
+[data-theme="dark"] .pwaWakeStateV284{background:#0f2030;border-color:#2a455e}
+.pwaWakeDotV284{width:10px;height:10px;border-radius:50%;background:#8ba1b5}.pwaWakeDotV284.on{background:#12a37d;box-shadow:0 0 0 5px rgba(18,163,125,.13)}
+@media(max-width:980px){.pwaStatusGridV284{grid-template-columns:repeat(2,minmax(0,1fr))}.pwaGridV284{grid-template-columns:1fr}.pwaReminderFormV284{grid-template-columns:1fr 1fr}.pwaReminderFormV284 .pwaFullV284{grid-column:1/-1}}
+@media(max-width:640px){.pwaHeroGridV284{grid-template-columns:1fr}.pwaAppIconV284{width:82px;height:82px;border-radius:21px}.pwaStatusGridV284,.pwaMetricRowV284,.pwaAuditGridV284,.pwaActionGridV284{grid-template-columns:1fr}.pwaReminderFormV284{grid-template-columns:1fr}.pwaBottomDockV284{border-radius:18px}.pwaOnlinePillV284{right:10px}}
+@media(display-mode:standalone){.topbar{padding-top:max(10px,env(safe-area-inset-top))}}

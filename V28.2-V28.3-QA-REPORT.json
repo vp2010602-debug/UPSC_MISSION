@@ -1,0 +1,21 @@
+{
+  "version": "28.3",
+  "html_ids": 756,
+  "duplicate_ids": 0,
+  "scripts": [
+    "app.js",
+    "jarvis-v2811.js",
+    "jarvis-v2823.js"
+  ],
+  "features": [
+    "Smart AI Router",
+    "Monthly cloud guard",
+    "Provider route log",
+    "Personal workspace memory",
+    "Multi-step queue",
+    "Saved routines",
+    "Next-step suggestions",
+    "Focus-session command"
+  ],
+  "syntax": "passed"
+}
