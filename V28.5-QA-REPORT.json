@@ -1,0 +1,12 @@
+{
+  "version": "28.5",
+  "build": "Responsive Jarvis Pro",
+  "base": "28.4",
+  "checks": {
+    "responsive_css": true,
+    "jarvis_enhancement_script": true,
+    "service_worker_cache_updated": true,
+    "manifest_valid": true,
+    "all_previous_files_preserved": true
+  }
+}
