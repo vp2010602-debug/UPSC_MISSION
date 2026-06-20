@@ -1,0 +1,24 @@
+
+/* Mission UPSC V28.7 — file coverage, sidebar reachability and navigation polish */
+:root{--v287-navy:#06264a;--v287-blue:#0b67d1;--v287-line:#d7e4f2;--v287-soft:#f4f8fd;--v287-green:#087f68}
+.libraryUploadV287{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:12px;padding:14px;border:1px dashed #9fc4ed;border-radius:16px;background:linear-gradient(135deg,#f7fbff,#edf6ff)}
+.libraryUploadCopyV287{display:flex;flex-direction:column;gap:4px;min-width:0}.libraryUploadCopyV287 b{color:#0a3767}.libraryUploadCopyV287 span{font-size:.78rem;line-height:1.45;color:var(--muted)}
+.libraryUploadBtnV287{position:relative;overflow:hidden;white-space:nowrap;flex:0 0 auto}.libraryUploadBtnV287 input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.libraryUploadStatusV287{margin-top:9px;padding:10px 12px;border-radius:12px;background:rgba(11,103,209,.07);font-size:.78rem;color:#415b78;line-height:1.45}.libraryUploadStatusV287.busy{background:#fff8df;color:#7a5a00}.libraryUploadStatusV287.ok{background:#e9faf4;color:#07634f}.libraryUploadStatusV287.error{background:#fff0f0;color:#9d1c1c}
+.v287UploadCoverage{margin:12px 0 0;padding:10px 12px;border:1px solid var(--v287-line);border-radius:12px;background:#f8fbff;font-size:.76rem;color:#4d6681}
+
+/* The dock must never hide the last sidebar entries. */
+#sidebar{box-sizing:border-box!important;overscroll-behavior:contain!important;scrollbar-gutter:stable!important;-webkit-overflow-scrolling:touch!important}
+#sidebar .nav{padding-bottom:calc(150px + env(safe-area-inset-bottom))!important}
+#sidebar .nav>button:last-child{margin-bottom:30px!important}
+
+/* Make section changes feel deterministic and avoid inherited scroll positions. */
+main{scroll-behavior:auto!important}.section{scroll-margin-top:90px}
+
+@media(max-width:820px){
+  #sidebar{height:calc(100dvh - 72px)!important;max-height:calc(100dvh - 72px)!important;overflow-y:auto!important;padding-bottom:0!important}
+  #sidebar .nav{padding-bottom:calc(180px + env(safe-area-inset-bottom))!important}
+  .libraryUploadV287{align-items:stretch;flex-direction:column}.libraryUploadBtnV287{width:100%;justify-content:center}
+  .libraryUploadStatusV287{font-size:.74rem}
+}
+@media(min-width:821px){#sidebar .nav{padding-bottom:42px!important}}

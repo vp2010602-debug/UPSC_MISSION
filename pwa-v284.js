@@ -183,14 +183,14 @@
       if (registration?.showNotification) {
         await registration.showNotification(title, {
           body,
-          icon:'./assets/icons/icon-192.png',
-          badge:'./assets/icons/favicon-32.png',
+          icon:'./assets/icons/jarvis-icon-192-v287.png',
+          badge:'./assets/icons/jarvis-favicon-v287.png',
           tag:data.tag || `mupsc-${Date.now()}`,
           renotify:false,
           data:{url:data.url || './?section=dailyCommandV261'}
         });
       } else {
-        new Notification(title, {body, icon:'./assets/icons/icon-192.png'});
+        new Notification(title, {body, icon:'./assets/icons/jarvis-icon-192-v287.png'});
       }
       return true;
     } catch { return false; }

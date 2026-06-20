@@ -3,21 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mission UPSC AI OS V28.5 — Responsive Jarvis Pro</title>
+  <title>Jarvis UPSC V28.7 — Usability Fix</title>
   <meta name="theme-color" content="#06264a" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Mission UPSC" />
-  <meta name="application-name" content="Mission UPSC" />
+  <meta name="apple-mobile-web-app-title" content="Jarvis UPSC" />
+  <meta name="application-name" content="Jarvis UPSC" />
   <meta name="format-detection" content="telephone=no" />
-  <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="./manifest.webmanifest?v=28.7" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/jarvis-favicon-v287.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/jarvis-apple-touch-v287.png" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./pwa-v284.css?v=28.5" />
   <link rel="stylesheet" href="./responsive-v285.css?v=28.5" />
   <link rel="stylesheet" href="./v286-polish.css?v=28.6" />
+  <link rel="stylesheet" href="./v287-usability.css?v=28.7" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -1119,6 +1120,11 @@
           <div class="v266PanelHead"><div><h2>Add Resource</h2><p class="sub">Save a trusted book, PDF link, website, typed note, map or AI output.</p></div><span class="v266Pill">UNIFIED</span></div>
           <div class="v266FilterGrid"><select id="libTypePro"><option>Book</option><option>PDF</option><option>Map</option><option>Typed Note</option><option>AI Note</option><option>Current Affairs</option><option>PYQ</option><option>Mock Report</option><option>Mains Answer</option><option>Website Link</option></select><select id="libSubjectPro"><option>Polity</option><option>History</option><option>Geography</option><option>Economy</option><option>Environment</option><option>Science & Tech</option><option>Ethics</option><option>Essay</option><option>CSAT</option><option>Maps</option><option>Current Affairs</option><option>General</option></select></div>
           <input id="libTitlePro" placeholder="Resource title"><input id="libUrlPro" placeholder="Drive / PDF / website link (optional)"><input id="libraryTagsV266" placeholder="Tags separated by commas: federalism, GS2, PYQ"><textarea id="libContentPro" placeholder="Summary, extracted facts, why this resource matters, or your typed notes"></textarea>
+          <div class="libraryUploadV287">
+            <div class="libraryUploadCopyV287"><b>📎 Upload resource files</b><span>PDF, DOCX, TXT, MD, JSON or images. Files are added to the Library and File Vault.</span></div>
+            <label class="btn blue libraryUploadBtnV287">＋ Choose Files<input id="libraryFileV287" type="file" multiple accept=".pdf,.docx,.txt,.md,.csv,.json,.html,.rtf,.png,.jpg,.jpeg,.webp" onchange="importLibraryFilesV287(this)"></label>
+          </div>
+          <div id="libraryUploadStatusV287" class="libraryUploadStatusV287">No library file selected.</div>
           <div class="actions"><button class="btn green" onclick="saveDigitalLibrary2()">💾 Save Resource</button><button class="btn purple" onclick="aiDigitalLibrary2()">🤖 AI Analyze</button><button class="btn gold" onclick="library2ToRevision()">📌 Revision</button><button class="btn ghost" onclick="clearLibraryFormV266()">Clear</button></div>
         </div>
         <div class="card v266Panel">
@@ -2576,9 +2582,9 @@
         <div class="card">
           <h2>📦 Release Information</h2>
           <div class="v275ReleaseList">
-            <div><span>Version</span><b>Mission UPSC AI OS V28.5 Responsive Jarvis Pro</b></div>
-            <div><span>Build date</span><b>19 June 2026</b></div>
-            <div><span>Base</span><b>V28.4 Installable App + V28.3 Smart Router Memory</b></div>
+            <div><span>Version</span><b>Mission UPSC AI OS V28.7 Usability Fix</b></div>
+            <div><span>Build date</span><b>20 June 2026</b></div>
+            <div><span>Base</span><b>V28.6 Final UI + V28.5 Responsive Jarvis Pro</b></div>
             <div><span>Data policy</span><b>No automatic deletion or paid AI calls</b></div>
           </div>
           <p class="sub">Use Chrome for local Ollama testing. Gemini/ChatGPT Prompt modes remain available for phone and tablet use.</p>
@@ -2594,11 +2600,12 @@
 </div>
 <div id="pwaOnlinePillV284" class="pwaOnlinePillV284">● Checking network</div>
 <script type="module" src="firebase-config.js"></script>
-<script type="module" src="./app.js?v=28.5"></script>
-<script defer src="./jarvis-v2811.js?v=28.5"></script>
-<script defer src="./jarvis-v2823.js?v=28.5"></script>
-<script defer src="./pwa-v284.js?v=28.5"></script>
-<script defer src="./jarvis-v285.js?v=28.5"></script>
-<script defer src="./v286-polish.js?v=28.6"></script>
+<script type="module" src="./app.js?v=28.7"></script>
+<script defer src="./jarvis-v2811.js?v=28.7"></script>
+<script defer src="./jarvis-v2823.js?v=28.7"></script>
+<script defer src="./pwa-v284.js?v=28.7"></script>
+<script defer src="./jarvis-v285.js?v=28.7"></script>
+<script defer src="./v286-polish.js?v=28.7"></script>
+<script defer src="./v287-usability.js?v=28.7"></script>
 </body>
 </html>

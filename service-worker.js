@@ -1,5 +1,5 @@
 /* Mission UPSC AI OS V28.4 PWA service worker */
-const VERSION = 'v28.6.0';
+const VERSION = 'v28.7.0';
 const SHELL_CACHE = `mission-upsc-shell-${VERSION}`;
 const RUNTIME_CACHE = `mission-upsc-runtime-${VERSION}`;
 const CORE_ASSETS = [
@@ -10,19 +10,21 @@ const CORE_ASSETS = [
   './pwa-v284.css',
   './responsive-v285.css',
   './v286-polish.css',
+  './v287-usability.css',
   './app.js',
   './firebase-config.js',
   './jarvis-v2811.js',
   './jarvis-v2823.js',
   './jarvis-v285.js',
   './v286-polish.js',
+  './v287-usability.js',
   './pwa-v284.js',
   './manifest.webmanifest',
-  './assets/icons/icon-192.png',
-  './assets/icons/icon-512.png',
-  './assets/icons/icon-maskable-512.png',
-  './assets/icons/apple-touch-icon.png',
-  './assets/icons/favicon-32.png',
+  './assets/icons/jarvis-icon-192-v287.png',
+  './assets/icons/jarvis-icon-512-v287.png',
+  './assets/icons/jarvis-maskable-512-v287.png',
+  './assets/icons/jarvis-apple-touch-v287.png',
+  './assets/icons/jarvis-favicon-v287.png',
   './assets/jarvis-emblem.png',
   './assets/jarvis-logo-full.jpg'
 ];
