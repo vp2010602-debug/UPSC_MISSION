@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jarvis UPSC V28.8 — Login & Interface Fix</title>
+  <title>Jarvis UPSC V28.9 — Workspace & Vault Fix</title>
   <meta name="theme-color" content="#06264a" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -11,15 +11,16 @@
   <meta name="apple-mobile-web-app-title" content="Jarvis UPSC" />
   <meta name="application-name" content="Jarvis UPSC" />
   <meta name="format-detection" content="telephone=no" />
-  <link rel="manifest" href="./manifest.webmanifest?v=28.8" />
+  <link rel="manifest" href="./manifest.webmanifest?v=28.9" />
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/jarvis-favicon-v287.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/jarvis-apple-touch-v287.png" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./pwa-v284.css?v=28.5" />
   <link rel="stylesheet" href="./responsive-v285.css?v=28.5" />
   <link rel="stylesheet" href="./v286-polish.css?v=28.6" />
-  <link rel="stylesheet" href="./v287-usability.css?v=28.8" />
-  <link rel="stylesheet" href="./v288-login-ui.css?v=28.8" />
+  <link rel="stylesheet" href="./v287-usability.css?v=28.9" />
+  <link rel="stylesheet" href="./v288-login-ui.css?v=28.9" />
+  <link rel="stylesheet" href="./v289-workspace-fix.css?v=28.9" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -71,7 +72,7 @@
       <button onclick="show('pomodoroPage',this)">⏱️ Pomodoro</button>
 
       <button onclick="show('snarkRevision',this)">🔥 Snark Revision Engine</button>
-      <button onclick="show('aiNotesPro',this)">📝 AI Notes Studio</button>
+      <button class="unifiedNotesNavV289" onclick="show('richNotesV4',this)">📝 AI Notes Studio Pro</button>
       <button onclick="show('aiPdfAnalyzer',this)">📄 AI PDF Analyzer</button>
       <button onclick="show('aiMockCentre',this)">🧪 AI Mock Centre</button>
       <button onclick="show('prelimsWarRoomV251',this)">🎯 AI Prelims War Room</button>
@@ -90,7 +91,6 @@
       <button onclick="show('libraryShelf',this)">🏛️ AI Digital Library Pro</button>
       <button onclick="show('mapsCommand',this)">🗺️ UPSC Maps Command</button>
       <button onclick="show('voiceSaarthi',this)">🎙️ AI Voice Saarthi</button>
-      <button onclick="show('richNotesV4',this)">✍️ Rich Note Studio Pro</button>
       <button onclick="show('aiCalendarV4',this)">📅 AI Smart Calendar</button>
       <button onclick="show('knowledgeGraphProV273',this)">🕸️ Knowledge Graph Pro</button>
       <button class="pwaNavV284" onclick="openAppOfflineV284(this)">📱 App & Offline</button>
@@ -102,7 +102,7 @@
   <main>
     <div class="topbar">
       <div>
-        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V28.8 • Login & UI Fix</span></h1>
+        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V28.9 • Workspace Fix</span></h1>
         <p class="sub">Plan today, revise smarter and keep your UPSC journey organised in one place.</p>
       </div>
       <button type="button" class="topToolsToggleV286" onclick="toggleTopToolsV286()" aria-label="Show or hide page tools">⚙ Tools</button>
@@ -1878,7 +1878,7 @@
       </div>
     </section>
     <section id="richNotesV4" class="section v266Workspace richNoteProV266">
-      <div class="v266Hero noteHeroV266"><div><span class="eyebrow blueEye">V26.6 • WRITE • STRUCTURE • IMPROVE • REVISE</span><h1>Rich Note Studio Pro</h1><p class="sub">A professional UPSC editor with templates, autosave, AI transformations, version history, conversion tools and clean exports.</p></div><div class="heroIcon">✍️</div></div>
+      <div class="v266Hero noteHeroV266"><div><span class="eyebrow blueEye">V28.9 • AI NOTES + RICH EDITOR • ONE WORKSPACE</span><h1>AI Notes Studio Pro</h1><p class="sub">AI Notes Studio and Rich Note Studio are now one unified workspace with generation, rich editing, templates, autosave, version history, conversions and clean exports. Existing AI notes are preserved and merged into this notes library.</p></div><div class="heroIcon">📝</div></div>
       <div class="grid v266NoteLayout">
         <div class="card v266Panel v266EditorPanel">
           <div class="v266PanelHead"><div><h2 id="richEditorModeTitleV266">Create UPSC Note</h2><p class="sub">Autosaved locally while you type.</p></div><span id="richAutosaveStatusV266" class="v266Pill">READY</span></div>
@@ -1905,9 +1905,9 @@
     <section id="aiCalendarV4" class="section v266Workspace calendarProV266">
       <div class="v266Hero calendarHeroV266"><div><span class="eyebrow blueEye">V26.6 • ONE CALENDAR • AI + MANUAL + REVISION</span><h1>AI Smart Calendar</h1><p class="sub">The old Calendar and AI Smart Calendar are now one workspace for manual events, AI time-block plans, revision dues, daily plans and exam milestones.</p></div><div class="heroIcon">📅</div></div>
       <div class="v266MetricGrid"><div class="v266Metric"><span>This Month</span><b id="calendarMonthCountV266">0</b><small>Total items</small></div><div class="v266Metric"><span>Today</span><b id="calendarTodayCountV266">0</b><small>Scheduled</small></div><div class="v266Metric"><span>Revision Due</span><b id="calendarRevisionCountV266">0</b><small>Month view</small></div><div class="v266Metric"><span>Study Hours</span><b id="calendarHoursV266">0h</b><small>Planned</small></div></div>
-      <div class="grid two">
-        <div class="card v266Panel"><div class="v266PanelHead"><div><h2>Quick Add</h2><p class="sub">Add a study block, test, revision, class or personal commitment.</p></div><span class="v266Pill">MANUAL</span></div><div class="v266FilterGrid"><input id="calendarQuickDateV266" type="date"><input id="calendarQuickTimeV266" type="time"><select id="calendarQuickTypeV266"><option>Study</option><option>Revision</option><option>Prelims Test</option><option>Mains Answer</option><option>Current Affairs</option><option>Class</option><option>Exam</option><option>Personal</option></select><input id="calendarQuickMinutesV266" type="number" min="10" step="5" value="60" placeholder="Minutes"></div><input id="calendarQuickTitleV266" placeholder="Task or event title"><textarea id="calendarQuickNoteV266" placeholder="Notes, source or completion criteria"></textarea><div class="actions"><button class="btn green" onclick="addCalendarItemV266()">＋ Add to Calendar</button><button class="btn ghost" onclick="setCalendarTodayV266()">Today</button></div></div>
-        <div class="card v266Panel"><div class="v266PanelHead"><div><h2>AI Time-Block Planner</h2><p class="sub">Uses your selected AI to build a realistic schedule.</p></div><span class="v266Pill">AI</span></div><input id="smartCalDateV4" type="date"><textarea id="smartCalPromptV4" placeholder="Available time, weak areas, fixed commitments, energy, pending targets..."></textarea><div class="actions"><button class="btn purple" onclick="generateSmartCalendarV4()">Generate AI Plan</button><button class="btn green" onclick="saveSmartCalendarV4()">Save Plan</button><button class="btn gold" onclick="calendarFromCommandV266()">Use Daily Mission</button></div><div id="smartCalOutputV4" class="aiOutput bigAI">AI plan will appear here.</div></div>
+      <div class="grid two calendarComposerGridV289">
+        <div class="card v266Panel calendarQuickPanelV289"><div class="v266PanelHead"><div><h2>Quick Add</h2><p class="sub">Add a study block, test, revision, class or personal commitment.</p></div><span class="v266Pill">MANUAL</span></div><div class="v266FilterGrid calendarQuickGridV289"><input id="calendarQuickDateV266" type="date"><input id="calendarQuickTimeV266" type="time"><select id="calendarQuickTypeV266"><option>Study</option><option>Revision</option><option>Prelims Test</option><option>Mains Answer</option><option>Current Affairs</option><option>Class</option><option>Exam</option><option>Personal</option></select><input id="calendarQuickMinutesV266" type="number" min="10" step="5" value="60" placeholder="Minutes"></div><input id="calendarQuickTitleV266" placeholder="Task or event title"><textarea id="calendarQuickNoteV266" placeholder="Notes, source or completion criteria"></textarea><div class="actions"><button class="btn green" onclick="addCalendarItemV266()">＋ Add to Calendar</button><button class="btn ghost" onclick="setCalendarTodayV266()">Today</button></div></div>
+        <div class="card v266Panel calendarAiPanelV289"><div class="v266PanelHead"><div><h2>AI Time-Block Planner</h2><p class="sub">Uses your selected AI to build a realistic schedule.</p></div><span class="v266Pill">AI</span></div><input id="smartCalDateV4" type="date"><textarea id="smartCalPromptV4" placeholder="Available time, weak areas, fixed commitments, energy, pending targets..."></textarea><div class="actions"><button class="btn purple" onclick="generateSmartCalendarV4()">Generate AI Plan</button><button class="btn green" onclick="saveSmartCalendarV4()">Save Plan</button><button class="btn gold" onclick="calendarFromCommandV266()">Use Daily Mission</button></div><div id="smartCalOutputV4" class="aiOutput bigAI">AI plan will appear here.</div></div>
       </div>
       <div class="card v266Panel"><div class="v266PanelHead"><div><h2>Integrated Month Calendar</h2><p class="sub">Double-click a day to add a task. Revision and Daily Command items appear automatically.</p></div><select id="calendarTypeFilterV266" onchange="renderCalendarAI()"><option>All Types</option><option>Study</option><option>Revision</option><option>Prelims Test</option><option>Mains Answer</option><option>Current Affairs</option><option>Plan</option><option>Exam</option><option>Personal</option></select></div><div id="calendarMonthControls" class="calendarHeader v266CalendarControls"></div><div id="calendarGridV4" class="calendarGrid v266CalendarGrid"></div></div>
       <div class="card v266Panel"><div class="v266PanelHead"><div><h2>Month Agenda</h2><p class="sub">All calendar, revision and saved-plan items in chronological order.</p></div><button class="btn ghost" onclick="exportCalendarV266()">⬇ Export</button></div><div id="calendarAgendaV4" class="list v266CalendarAgenda"></div></div>
@@ -2353,17 +2353,37 @@
       </div>
     </section>
 
-    <section id="fileVault" class="section lightStudySection">
+    <section id="fileVault" class="section lightStudySection fileVaultV289">
       <div class="cleanHero">
-        <div><span class="eyebrow blueEye">FILES • ALL SECTIONS • MASTER CONTROL</span><h1>UPSC File Vault</h1><p class="sub">Files uploaded only from supported document-analysis and study-material sections appear here. Use Master Delete only when you want to remove all stored file records.</p></div>
-        <div class="heroIcon">📁</div>
+        <div><span class="eyebrow blueEye">V28.9 • FILES • PDF LINKS • NOTES • ONE VAULT</span><h1>UPSC File Vault</h1><p class="sub">Uploaded files and saved Library resources now appear together. Filter PDFs, documents, images, links and notes without losing the original Library record.</p></div>
+        <div class="heroIcon">🗂️</div>
       </div>
-      <div class="card">
-        <div class="fileVaultTop">
-          <div><h2>All Uploaded Files</h2><p class="sub">Search, preview metadata, delete individual files, or clear everything with warning.</p></div>
-          <div class="actions"><input id="fileVaultSearch" oninput="renderFileVault()" placeholder="Search files / section"><button class="btn danger" onclick="masterDeleteAllFiles()">Delete All Uploaded Files</button></div>
+      <div class="v289VaultMetrics">
+        <div class="v289VaultMetric"><span>Total items</span><b id="vaultTotalV289">0</b><small>Files + Library</small></div>
+        <div class="v289VaultMetric"><span>PDFs</span><b id="vaultPdfV289">0</b><small>Uploads and links</small></div>
+        <div class="v289VaultMetric"><span>Links</span><b id="vaultLinksV289">0</b><small>Library resources</small></div>
+        <div class="v289VaultMetric"><span>Uploaded size</span><b id="vaultStorageV289">0 B</b><small>Stored file records</small></div>
+      </div>
+      <div class="card v289VaultPanel">
+        <div class="fileVaultTop v289VaultTop">
+          <div><h2>My Study Files & Resources</h2><p class="sub">A PDF link saved in AI Digital Library Pro will automatically appear here.</p></div>
+          <button class="btn danger" onclick="masterDeleteAllFiles()">Delete Uploaded Files</button>
         </div>
-        <div id="fileVaultList" class="fileVaultGrid"></div>
+        <div class="v289VaultControls">
+          <input id="fileVaultSearch" oninput="renderFileVault()" placeholder="Search title, subject, type or section">
+          <select id="fileVaultSourceFilterV289" onchange="renderFileVault()"><option value="all">All sources</option><option value="upload">Uploaded files</option><option value="library">Library resources</option></select>
+          <select id="fileVaultSortV289" onchange="renderFileVault()"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="name">Name A–Z</option><option value="size">Largest files</option></select>
+        </div>
+        <div class="v289VaultTabs" id="fileVaultTabsV289" aria-label="File type filters">
+          <button class="active" data-category="all" onclick="setFileVaultCategoryV289('all',this)">All <span id="vaultCountAllV289">0</span></button>
+          <button data-category="pdf" onclick="setFileVaultCategoryV289('pdf',this)">PDF <span id="vaultCountPdfV289">0</span></button>
+          <button data-category="document" onclick="setFileVaultCategoryV289('document',this)">Documents <span id="vaultCountDocumentV289">0</span></button>
+          <button data-category="image" onclick="setFileVaultCategoryV289('image',this)">Images <span id="vaultCountImageV289">0</span></button>
+          <button data-category="link" onclick="setFileVaultCategoryV289('link',this)">Links <span id="vaultCountLinkV289">0</span></button>
+          <button data-category="note" onclick="setFileVaultCategoryV289('note',this)">Notes <span id="vaultCountNoteV289">0</span></button>
+          <button data-category="other" onclick="setFileVaultCategoryV289('other',this)">Other <span id="vaultCountOtherV289">0</span></button>
+        </div>
+        <div id="fileVaultList" class="fileVaultGrid v289VaultGrid"></div>
       </div>
     </section>
 
@@ -2574,7 +2594,7 @@
             <option value="strategy">Strategy, Readiness & Progress</option>
             <option value="knowledge">Knowledge Graph</option>
             <option value="calendar">AI Smart Calendar</option>
-            <option value="richnotes">Rich Note Studio drafts/history</option>
+            <option value="richnotes">AI Notes Studio Pro drafts/history</option>
           </select>
           <label class="v275Toggle"><input id="v275ResetCloud" type="checkbox"><span><b>Also delete this module from Firebase</b><small>Requires Google login and a second confirmation.</small></span></label>
           <div class="actions"><button type="button" class="btn danger" onclick="resetModuleV275()">Reset Selected Module</button></div>
@@ -2590,7 +2610,7 @@
         <div class="card">
           <h2>📦 Release Information</h2>
           <div class="v275ReleaseList">
-            <div><span>Version</span><b>Mission UPSC AI OS V28.8 Login & Interface Fix</b></div>
+            <div><span>Version</span><b>Mission UPSC AI OS V28.9 Workspace & Vault Fix</b></div>
             <div><span>Build date</span><b>20 June 2026</b></div>
             <div><span>Base</span><b>V28.6 Final UI + V28.5 Responsive Jarvis Pro</b></div>
             <div><span>Data policy</span><b>No automatic deletion or paid AI calls</b></div>
@@ -2608,12 +2628,13 @@
 </div>
 <div id="pwaOnlinePillV284" class="pwaOnlinePillV284">● Checking network</div>
 <script type="module" src="firebase-config.js"></script>
-<script type="module" src="./app.js?v=28.8"></script>
-<script defer src="./jarvis-v2811.js?v=28.8"></script>
-<script defer src="./jarvis-v2823.js?v=28.8"></script>
-<script defer src="./pwa-v284.js?v=28.8"></script>
-<script defer src="./jarvis-v285.js?v=28.8"></script>
-<script defer src="./v286-polish.js?v=28.8"></script>
-<script defer src="./v287-usability.js?v=28.8"></script>
+<script type="module" src="./app.js?v=28.9"></script>
+<script defer src="./jarvis-v2811.js?v=28.9"></script>
+<script defer src="./jarvis-v2823.js?v=28.9"></script>
+<script defer src="./pwa-v284.js?v=28.9"></script>
+<script defer src="./jarvis-v285.js?v=28.9"></script>
+<script defer src="./v286-polish.js?v=28.9"></script>
+<script defer src="./v287-usability.js?v=28.9"></script>
+<script defer src="./v289-workspace-fix.js?v=28.9"></script>
 </body>
 </html>

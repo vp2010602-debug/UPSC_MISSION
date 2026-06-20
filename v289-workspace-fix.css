@@ -1,0 +1,202 @@
+/* Mission UPSC AI OS V28.9 — Calendar, Vault, Notes Merge & Trackpad Scroll */
+
+/* Restore natural document scrolling for laptop touchpads and mouse wheels. */
+html,body{
+  overflow-y:auto!important;
+  overscroll-behavior-y:auto!important;
+  scroll-behavior:auto!important;
+}
+body,.app,main{
+  touch-action:pan-y pinch-zoom!important;
+}
+#sidebar{overscroll-behavior-y:auto!important}
+main{
+  overflow:visible!important;
+  height:auto!important;
+  max-height:none!important;
+}
+.section.active{
+  overflow:visible!important;
+  min-height:0;
+}
+
+/* AI Smart Calendar: equal columns, aligned controls and no field overflow. */
+.calendarComposerGridV289{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  align-items:stretch!important;
+  gap:18px!important;
+}
+.calendarComposerGridV289>.card{
+  min-width:0!important;
+  width:100%!important;
+  display:flex;
+  flex-direction:column;
+}
+.calendarQuickPanelV289 input,
+.calendarQuickPanelV289 select,
+.calendarQuickPanelV289 textarea,
+.calendarAiPanelV289 input,
+.calendarAiPanelV289 select,
+.calendarAiPanelV289 textarea,
+.calendarAiPanelV289 .aiOutput{
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+.calendarQuickGridV289{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  width:100%;
+}
+.calendarQuickPanelV289 textarea,
+.calendarAiPanelV289 textarea{
+  min-height:124px;
+}
+.calendarAiPanelV289 #smartCalOutputV4{
+  flex:1 1 auto;
+  min-height:150px;
+  margin-top:10px;
+}
+.calendarComposerGridV289 .actions{
+  align-items:center;
+}
+
+/* Upgraded File Vault. */
+.fileVaultV289 .cleanHero{margin-bottom:16px}
+.v289VaultMetrics{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+  margin:0 0 16px;
+}
+.v289VaultMetric{
+  background:#fff;
+  border:1px solid #d9e3ef;
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 9px 25px rgba(15,23,42,.07);
+}
+.v289VaultMetric span,.v289VaultMetric small{display:block;color:#64748b;font-weight:800}
+.v289VaultMetric b{display:block;font-size:28px;color:#155bd7;margin:6px 0}
+.v289VaultPanel{overflow:visible!important}
+.v289VaultTop{margin-bottom:12px}
+.v289VaultControls{
+  display:grid;
+  grid-template-columns:minmax(260px,1.5fr) minmax(170px,.55fr) minmax(170px,.55fr);
+  gap:10px;
+  align-items:center;
+}
+.v289VaultControls input,.v289VaultControls select{margin:0!important}
+.v289VaultTabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:14px 0 16px;
+  padding-bottom:2px;
+}
+.v289VaultTabs button{
+  border:1px solid #d8e3f0;
+  background:#f7faff;
+  color:#29445f;
+  border-radius:999px;
+  padding:9px 12px;
+  font-weight:900;
+  cursor:pointer;
+}
+.v289VaultTabs button span{
+  display:inline-grid;
+  place-items:center;
+  min-width:22px;
+  height:22px;
+  margin-left:5px;
+  padding:0 6px;
+  border-radius:999px;
+  background:#e7eef8;
+  font-size:11px;
+}
+.v289VaultTabs button.active{
+  background:#0b5fc3;
+  border-color:#0b5fc3;
+  color:#fff;
+}
+.v289VaultTabs button.active span{background:rgba(255,255,255,.2);color:#fff}
+.v289VaultGrid{
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr))!important;
+  align-items:stretch;
+}
+.v289VaultCard{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  position:relative;
+  border-top:5px solid #7c8aa0!important;
+}
+.v289VaultCard[data-category="pdf"]{border-top-color:#dc2626!important}
+.v289VaultCard[data-category="document"]{border-top-color:#2563eb!important}
+.v289VaultCard[data-category="image"]{border-top-color:#7c3aed!important}
+.v289VaultCard[data-category="link"]{border-top-color:#0f8a5f!important}
+.v289VaultCard[data-category="note"]{border-top-color:#d97706!important}
+.v289VaultCard .vaultIcon{flex:0 0 auto}
+.v289VaultCard .v289VaultCardHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.v289VaultCard .v289VaultTypeBadge{
+  padding:5px 8px;
+  border-radius:999px;
+  background:#eef4fb;
+  color:#35526e;
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:.4px;
+  white-space:nowrap;
+}
+.v289VaultCard h3{
+  overflow-wrap:anywhere;
+  line-height:1.3;
+  margin-bottom:8px!important;
+}
+.v289VaultMeta{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 10px}
+.v289VaultMeta span{
+  padding:5px 8px;
+  border-radius:999px;
+  background:#f1f5f9;
+  color:#526173;
+  font-size:11px;
+  font-weight:850;
+}
+.v289VaultPreview{
+  color:#64748b;
+  font-size:13px;
+  line-height:1.45;
+  min-height:38px;
+  overflow-wrap:anywhere;
+}
+.v289VaultCard .actions{margin-top:auto;padding-top:12px}
+.v289VaultCard .actions .btn{flex:1 1 auto;text-align:center}
+.v289VaultEmpty{
+  grid-column:1/-1;
+  padding:42px 18px;
+  border:1px dashed #bfd0e2;
+  border-radius:18px;
+  text-align:center;
+  color:#64748b;
+  background:#f8fbff;
+  font-weight:850;
+}
+
+/* Unified notes navigation marker. */
+.unifiedNotesNavV289{font-weight:950!important}
+
+@media(max-width:980px){
+  .calendarComposerGridV289{grid-template-columns:1fr!important}
+  .v289VaultMetrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .v289VaultControls{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .calendarQuickGridV289{grid-template-columns:1fr!important}
+  .v289VaultMetrics{grid-template-columns:1fr 1fr}
+  .v289VaultMetric{padding:13px}
+  .v289VaultMetric b{font-size:23px}
+  .v289VaultTabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .v289VaultTabs button{flex:0 0 auto}
+  .v289VaultGrid{grid-template-columns:1fr!important}
+}

@@ -1,0 +1,25 @@
+MISSION UPSC AI OS V28.9 — GITHUB UPDATE
+=========================================
+
+BASE
+- Built from the working V28.8 GitHub-ready version.
+- Existing Firebase configuration, login, saved data and working features are preserved.
+
+FIXES INCLUDED
+1. AI Smart Calendar Quick Add and AI Time-Block Planner now use equal, aligned columns with no input overflow.
+2. PDF links and other resources saved in AI Digital Library Pro now appear automatically in File Vault.
+3. File Vault is upgraded with PDF, Documents, Images, Links, Notes and Other filters, source filters, sorting and counters.
+4. Laptop mouse-wheel and two-finger touchpad vertical scrolling is restored through natural document scrolling.
+5. AI Notes Studio and Rich Note Studio Pro are merged into one AI Notes Studio Pro navigation workspace.
+6. Existing legacy AI notes are copied safely into the unified notes library; original records are not deleted.
+
+HOW TO UPDATE GITHUB
+1. Extract Mission-UPSC-v28.9-GitHub-Update.zip.
+2. Upload all files and the assets folder to the ROOT of the existing GitHub repository.
+3. Choose Replace/Overwrite for files with the same names.
+4. Do not delete or replace your existing firebase-config.js.
+5. Wait for GitHub Pages deployment to finish.
+6. Reload the website. If the old version remains, open App & Offline and use Check App Update, or clear the site cache once.
+
+CACHE VERSION
+- Service worker: v28.9.0

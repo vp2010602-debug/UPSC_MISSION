@@ -1,9 +1,9 @@
 {
-  "id": "./?app=jarvis-upsc-v288",
+  "id": "./?app=jarvis-upsc-v289",
   "name": "Jarvis UPSC \u2014 AI Study OS",
   "short_name": "Jarvis UPSC",
   "description": "Responsive UPSC preparation operating system with Jarvis Pro, Smart Router, personal memory, notes, tests, revision and offline app support.",
-  "start_url": "./index.html?app=v28.8",
+  "start_url": "./index.html?app=v28.9",
   "scope": "./",
   "display": "standalone",
   "display_override": [
