@@ -1,5 +1,5 @@
 /* Mission UPSC AI OS V28.4 PWA service worker */
-const VERSION = 'v28.5.0';
+const VERSION = 'v28.6.0';
 const SHELL_CACHE = `mission-upsc-shell-${VERSION}`;
 const RUNTIME_CACHE = `mission-upsc-runtime-${VERSION}`;
 const CORE_ASSETS = [
@@ -9,18 +9,22 @@ const CORE_ASSETS = [
   './styles.css',
   './pwa-v284.css',
   './responsive-v285.css',
+  './v286-polish.css',
   './app.js',
   './firebase-config.js',
   './jarvis-v2811.js',
   './jarvis-v2823.js',
   './jarvis-v285.js',
+  './v286-polish.js',
   './pwa-v284.js',
   './manifest.webmanifest',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/icon-maskable-512.png',
   './assets/icons/apple-touch-icon.png',
-  './assets/icons/favicon-32.png'
+  './assets/icons/favicon-32.png',
+  './assets/jarvis-emblem.png',
+  './assets/jarvis-logo-full.jpg'
 ];
 
 self.addEventListener('install', event => {

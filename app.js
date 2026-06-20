@@ -1,13 +1,6 @@
 import { firebaseConfig, AI_FUNCTION_URL, GEMINI_API_KEY } from './firebase-config.js';
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-  signOut,
-  onAuthStateChanged
-} from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js';
 
@@ -183,28 +176,18 @@ function schedulePostAuthRenderV2751(){
 
 function setupAuth(){
   if(!cloudEnabled){ $('userStatus').innerText='Firebase not configured'; return; }
-  $('loginBtn').onclick = async () => {
-  const provider = new GoogleAuthProvider();
-
-  const isAppleMobile =
-    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-  const isStandalone =
-    window.matchMedia('(display-mode: standalone)').matches ||
-    window.navigator.standalone === true;
-
-  try {
-    if (isAppleMobile || isStandalone) {
-      await signInWithRedirect(auth, provider);
-    } else {
-      await signInWithPopup(auth, provider);
+  $('loginBtn').onclick=async()=>{
+    const provider=new GoogleAuthProvider();
+    const isAppleMobile=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+    const isStandalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+    try{
+      if(isAppleMobile||isStandalone) await signInWithRedirect(auth,provider);
+      else await signInWithPopup(auth,provider);
+    }catch(error){
+      console.error('Google login failed:',error);
+      $('userStatus').innerText='Login failed: '+(error.message||error.code||'Unknown error');
     }
-  } catch (error) {
-    console.error('Google login failed:', error);
-    $('userStatus').innerText = `Login failed: ${error.message}`;
-  }
-};
+  };
   $('logoutBtn').onclick=()=>signOut(auth);
   onAuthStateChanged(auth,async u=>{
     user=u;

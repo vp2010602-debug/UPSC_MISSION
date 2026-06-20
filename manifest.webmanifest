@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Mission UPSC AI OS",
-  "short_name": "Mission UPSC",
+  "name": "Jarvis UPSC — AI Study OS",
+  "short_name": "Jarvis UPSC",
   "description": "Responsive UPSC preparation operating system with Jarvis Pro, Smart Router, personal memory, notes, tests, revision and offline app support.",
   "start_url": "./",
   "scope": "./",

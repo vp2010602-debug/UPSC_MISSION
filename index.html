@@ -17,18 +17,19 @@
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./pwa-v284.css?v=28.5" />
   <link rel="stylesheet" href="./responsive-v285.css?v=28.5" />
+  <link rel="stylesheet" href="./v286-polish.css?v=28.6" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
   <button type="button" class="v2754MenuBtn" onclick="toggleSidebarV2754()" aria-label="Open section list">☰</button>
-  <b>Mission UPSC</b>
-  <button type="button" class="v2754HomeBtn" onclick="show('dashboard');closeSidebarV2754()" aria-label="Open dashboard">🏛️</button>
+  <div class="mobileBrandV286"><img src="./assets/jarvis-emblem.png" alt="Jarvis"><b>Mission UPSC</b></div>
+  <button type="button" class="v2754HomeBtn logoHomeV286" onclick="show('dashboard');closeSidebarV2754()" aria-label="Open dashboard"><img src="./assets/jarvis-emblem.png" alt="Jarvis home"></button>
 </div>
 <div id="sidebarOverlayV2754" class="v2754SidebarOverlay" onclick="closeSidebarV2754()"></div>
 <div class="app aiFirstApp">
   <aside id="sidebar" class="sidebar">
     <div class="brand">
-      <div class="logo">IAS</div>
+      <div class="logo logoV286"><img src="./assets/jarvis-emblem.png" alt="Jarvis logo"></div>
       <div>
         <h1>Mission UPSC</h1>
         <p>AI-First War Room</p>
@@ -95,7 +96,8 @@
         <h1 id="pageTitle">Command Dashboard <span class="versionBadge">V28.4 • Installable App</span></h1>
         <p class="sub">Premium navy responsive interface for mobile, tablet and desktop with offline shell, Smart Router, Personal Memory and faster Jarvis Pro controls.</p>
       </div>
-      <div class="topActions">
+      <button type="button" class="topToolsToggleV286" onclick="toggleTopToolsV286()" aria-label="Show or hide page tools">⚙ Tools</button>
+      <div class="topActions" id="topActionsV286">
         <button class="btn ghost" onclick="setTheme('light')">☀️ Light</button>
         <button class="btn ghost" onclick="setTheme('dark')">🌙 Dark</button>
         <button class="btn green" onclick="exportCompleteBackupV275()">Backup</button>
@@ -164,12 +166,12 @@
     </section>
 
 
-    <section id="jarvisCommandV281" class="section v281Jarvis">
+    <section id="jarvisCommandV281" class="section v281Jarvis jarvisSimpleV286">
       <div class="v281Hero">
         <div>
           <span class="v281Eyebrow">V28.3 • SMART ROUTER + PERSONAL WORKSPACE MEMORY</span>
           <h1>Jarvis Command Centre</h1>
-          <p class="sub">Tell Jarvis what you need in plain English. It remembers your preparation preferences, chooses the right module and AI, handles multi-step commands and keeps all data-changing actions reviewable.</p>
+          <p class="sub">Type one clear command. Jarvis will understand it, show the action, and ask before changing your data.</p>
           <div class="v281HeroBadges">
             <span id="jarvisAIModeV281" class="pill blue">AI mode: loading</span>
             <span id="jarvisStatusV281" class="pill green">Ready</span>
@@ -194,17 +196,17 @@
             <button type="button" id="jarvisMicBtnV281" class="btn ghost" onclick="jarvisVoiceV281()">🎤 Speak</button>
           </div>
           <textarea id="jarvisCommandInputV281" class="v281CommandInput" placeholder="Jarvis, plan my day using my weak topics and due revisions..."></textarea>
-          <div class="v281CommandOptions">
+          <details class="jarvisAdvancedV286"><summary>Advanced options</summary><div class="v281CommandOptions">
             <label><input id="jarvisSafeModeV281" type="checkbox" checked> Confirm actions that save or change data</label>
             <label><input id="jarvisAutoOpenV281" type="checkbox" checked> Open the destination module</label>
             <label><input id="jarvisUseAIV281" type="checkbox" checked> Use selected AI when the command is unclear</label><label><input id="jarvisUseMemoryV283" type="checkbox" checked> Use my preparation memory</label><label>Response style <select id="jarvisResponseModeV283"><option value="concise">Concise action</option><option value="coach">Mentor coach</option><option value="deep">Deep analysis</option></select></label>
-          </div>
+          </div></details>
           <div class="actions v281RunActions">
             <button type="button" class="btn purple" onclick="jarvisRunV281()">✨ Understand & Run</button>
             <button type="button" id="jarvisExecuteBtnV281" class="btn green" onclick="jarvisExecutePlanV281()" disabled>▶ Execute Planned Action</button>
             <button type="button" class="btn ghost" onclick="jarvisClearV281()">Clear</button>
           </div>
-          <div class="v281QuickCommands">
+          <div class="v281QuickCommands quickSimpleV286">
             <button type="button" onclick="jarvisSetCommandV281('Plan my day for 7 hours using my weak topics and due revisions',true)">Plan today</button>
             <button type="button" onclick="jarvisSetCommandV281('Generate 25 Economy MCQs on inflation',true)">25 MCQs</button>
             <button type="button" onclick="jarvisSetCommandV281('Create detailed UPSC notes on Article 14',true)">Create notes</button>
@@ -286,12 +288,17 @@
     </section>
 
     <section id="dashboard" class="section active">
-      <div class="hero formalHero">
-        <div>
-          <p class="kicker">MISSION UPSC WAR ROOM</p>
-          <h2>Command your preparation like a civil servant in training.</h2>
-          <p>Every weak topic from mocks, mains, PYQs and habits flows into AI revision and calendar planning.</p>
+      <div class="hero formalHero dashboardHeroV286">
+        <div class="dashboardCopyV286">
+          <p class="kicker">MISSION UPSC • PERSONAL AI MENTOR</p>
+          <h2>Crack UPSC with clarity, discipline and your own Jarvis.</h2>
+          <p>Plan, learn, practise, revise and evaluate from one intelligent workspace built around your preparation.</p>
+          <div class="dashboardHeroActionsV286">
+            <button type="button" class="btn blue" onclick="openJarvisV2811()">✨ Ask Jarvis</button>
+            <button type="button" class="btn ghost" onclick="show('dailyCommandV261')">☀️ Start Today</button>
+          </div>
         </div>
+        <div class="dashboardVisualV286"><img src="./assets/jarvis-logo-full.jpg" alt="Jarvis UPSC logo"></div>
         <div class="heroScore">
           <small>AI Readiness</small>
           <b id="aiReadinessScore">0%</b>
@@ -2592,5 +2599,6 @@
 <script defer src="./jarvis-v2823.js?v=28.5"></script>
 <script defer src="./pwa-v284.js?v=28.5"></script>
 <script defer src="./jarvis-v285.js?v=28.5"></script>
+<script defer src="./v286-polish.js?v=28.6"></script>
 </body>
 </html>
