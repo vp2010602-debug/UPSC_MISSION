@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jarvis UPSC V28.7 — Usability Fix</title>
+  <title>Jarvis UPSC V28.8 — Login & Interface Fix</title>
   <meta name="theme-color" content="#06264a" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -11,19 +11,20 @@
   <meta name="apple-mobile-web-app-title" content="Jarvis UPSC" />
   <meta name="application-name" content="Jarvis UPSC" />
   <meta name="format-detection" content="telephone=no" />
-  <link rel="manifest" href="./manifest.webmanifest?v=28.7" />
+  <link rel="manifest" href="./manifest.webmanifest?v=28.8" />
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/jarvis-favicon-v287.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/jarvis-apple-touch-v287.png" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./pwa-v284.css?v=28.5" />
   <link rel="stylesheet" href="./responsive-v285.css?v=28.5" />
   <link rel="stylesheet" href="./v286-polish.css?v=28.6" />
-  <link rel="stylesheet" href="./v287-usability.css?v=28.7" />
+  <link rel="stylesheet" href="./v287-usability.css?v=28.8" />
+  <link rel="stylesheet" href="./v288-login-ui.css?v=28.8" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
   <button type="button" class="v2754MenuBtn" onclick="toggleSidebarV2754()" aria-label="Open section list">☰</button>
-  <div class="mobileBrandV286"><img src="./assets/jarvis-emblem.png" alt="Jarvis"><b>Mission UPSC</b></div>
+  <div class="mobileBrandV286"><img src="./assets/jarvis-emblem.png" alt="Jarvis"><b>Jarvis UPSC</b></div>
   <button type="button" class="v2754HomeBtn logoHomeV286" onclick="show('dashboard');closeSidebarV2754()" aria-label="Open dashboard"><img src="./assets/jarvis-emblem.png" alt="Jarvis home"></button>
 </div>
 <div id="sidebarOverlayV2754" class="v2754SidebarOverlay" onclick="closeSidebarV2754()"></div>
@@ -32,19 +33,26 @@
     <div class="brand">
       <div class="logo logoV286"><img src="./assets/jarvis-emblem.png" alt="Jarvis logo"></div>
       <div>
-        <h1>Mission UPSC</h1>
-        <p>AI-First War Room</p>
+        <h1>Jarvis UPSC</h1>
+        <p>Your AI Study Companion</p>
       </div>
     </div>
 
-    <div class="userbox">
-      <div id="userStatus">Not signed in</div>
-      <button class="btn green" id="loginBtn">Google Login</button>
-      <button class="btn danger" id="logoutBtn" style="display:none">Logout</button>
+    <div class="userbox authPanelV288" id="authPanelV288">
+      <div class="authCopyV288">
+        <span class="authEyebrowV288">CLOUD BACKUP</span>
+        <strong id="userStatus">Your study data is saved on this device</strong>
+        <small id="authHintV288">Sign in to back up and sync your progress across devices.</small>
+      </div>
+      <button class="googleLoginBtnV288" id="loginBtn" type="button">
+        <span class="googleMarkV288" aria-hidden="true">G</span>
+        <span class="loginLabelV288">Continue with Google</span>
+      </button>
+      <button class="signOutBtnV288" id="logoutBtn" type="button" style="display:none">Sign out</button>
     </div>
 
     <div class="nav">
-      <button class="active" onclick="show('dashboard',this)">🏛️ Command Dashboard</button>
+      <button class="active" onclick="show('dashboard',this)">🏠 Home Dashboard</button>
       <button class="jarvisNavV281" onclick="openJarvisV2811(this)">✨ Jarvis Command Centre</button>
       <button onclick="show('dailyCommandV261',this)">☀️ AI Daily Command Centre</button>
       <button onclick="show('timeHabitV262',this)">⏱️ Focus & Habit Intelligence</button>
@@ -94,8 +102,8 @@
   <main>
     <div class="topbar">
       <div>
-        <h1 id="pageTitle">Command Dashboard <span class="versionBadge">V28.4 • Installable App</span></h1>
-        <p class="sub">Premium navy responsive interface for mobile, tablet and desktop with offline shell, Smart Router, Personal Memory and faster Jarvis Pro controls.</p>
+        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V28.8 • Login & UI Fix</span></h1>
+        <p class="sub">Plan today, revise smarter and keep your UPSC journey organised in one place.</p>
       </div>
       <button type="button" class="topToolsToggleV286" onclick="toggleTopToolsV286()" aria-label="Show or hide page tools">⚙ Tools</button>
       <div class="topActions" id="topActionsV286">
@@ -2582,7 +2590,7 @@
         <div class="card">
           <h2>📦 Release Information</h2>
           <div class="v275ReleaseList">
-            <div><span>Version</span><b>Mission UPSC AI OS V28.7 Usability Fix</b></div>
+            <div><span>Version</span><b>Mission UPSC AI OS V28.8 Login & Interface Fix</b></div>
             <div><span>Build date</span><b>20 June 2026</b></div>
             <div><span>Base</span><b>V28.6 Final UI + V28.5 Responsive Jarvis Pro</b></div>
             <div><span>Data policy</span><b>No automatic deletion or paid AI calls</b></div>
@@ -2600,12 +2608,12 @@
 </div>
 <div id="pwaOnlinePillV284" class="pwaOnlinePillV284">● Checking network</div>
 <script type="module" src="firebase-config.js"></script>
-<script type="module" src="./app.js?v=28.7"></script>
-<script defer src="./jarvis-v2811.js?v=28.7"></script>
-<script defer src="./jarvis-v2823.js?v=28.7"></script>
-<script defer src="./pwa-v284.js?v=28.7"></script>
-<script defer src="./jarvis-v285.js?v=28.7"></script>
-<script defer src="./v286-polish.js?v=28.7"></script>
-<script defer src="./v287-usability.js?v=28.7"></script>
+<script type="module" src="./app.js?v=28.8"></script>
+<script defer src="./jarvis-v2811.js?v=28.8"></script>
+<script defer src="./jarvis-v2823.js?v=28.8"></script>
+<script defer src="./pwa-v284.js?v=28.8"></script>
+<script defer src="./jarvis-v285.js?v=28.8"></script>
+<script defer src="./v286-polish.js?v=28.8"></script>
+<script defer src="./v287-usability.js?v=28.8"></script>
 </body>
 </html>

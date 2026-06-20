@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  const VERSION='28.7';
+  const VERSION='28.8';
   const $=id=>document.getElementById(id);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const today=()=>new Date().toISOString().slice(0,10);
@@ -49,7 +49,7 @@
         if(typeof window.saveCol==='function') await window.saveCol('sectionFiles',record);
         if(typeof window.saveCol==='function') await window.saveCol('digitalLibrary',{
           type:fileType(file),subject:$('libSubjectPro')?.value||'General',title,url:uploaded.url||'',content:String(text||'').slice(0,60000)||`Uploaded file: ${file.name}. Open it from File Vault or the resource link.`,
-          tags:['uploaded',String(file.name||'').split('.').pop()?.toLowerCase()].filter(Boolean),date:today(),lastReviewed:'',source:'AI Digital Library Pro V28.7',fileId:record.id,storagePath:record.storagePath||''
+          tags:['uploaded',String(file.name||'').split('.').pop()?.toLowerCase()].filter(Boolean),date:today(),lastReviewed:'',source:'AI Digital Library Pro V28.8',fileId:record.id,storagePath:record.storagePath||''
         });
         saved++;
       }catch(e){errors.push(`${file.name}: ${e.message}`)}
@@ -103,9 +103,9 @@
     if(setupBtn)setupBtn.dataset.finalSection='true';
   }
   function updateVersion(){
-    const badge=document.querySelector('#pageTitle .versionBadge');if(badge)badge.textContent='V28.7 • Usability Fix';
+    const badge=document.querySelector('#pageTitle .versionBadge');if(badge)badge.textContent='V28.8 • Login & UI Fix';
     const release=[...document.querySelectorAll('.v275ReleaseList>div')].find(x=>/^Version$/i.test(x.querySelector('span')?.textContent||''));
-    if(release?.querySelector('b'))release.querySelector('b').textContent='Mission UPSC AI OS V28.7 Usability Fix';
+    if(release?.querySelector('b'))release.querySelector('b').textContent='Mission UPSC AI OS V28.8 Login & Interface Fix';
   }
   function init(){
     patchNavigation();ensureRequiredUploadCoverage();improveSidebar();updateVersion();resetSectionScroll();

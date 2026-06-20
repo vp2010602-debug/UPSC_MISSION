@@ -1,6 +1,6 @@
 import { firebaseConfig, AI_FUNCTION_URL, GEMINI_API_KEY } from './firebase-config.js';
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, setPersistence, browserLocalPersistence, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js';
 
@@ -175,31 +175,101 @@ function schedulePostAuthRenderV2751(){
 }
 
 function setupAuth(){
-  if(!cloudEnabled){ $('userStatus').innerText='Firebase not configured'; return; }
-  $('loginBtn').onclick=async()=>{
-    const provider=new GoogleAuthProvider();
-    const isAppleMobile=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-    const isStandalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
-    try{
-      if(isAppleMobile||isStandalone) await signInWithRedirect(auth,provider);
-      else await signInWithPopup(auth,provider);
-    }catch(error){
-      console.error('Google login failed:',error);
-      $('userStatus').innerText='Login failed: '+(error.message||error.code||'Unknown error');
-    }
+  const statusEl=$('userStatus'), hintEl=$('authHintV288'), loginBtn=$('loginBtn'), logoutBtn=$('logoutBtn');
+  const setAuthMessage=(title,hint='',state='local')=>{
+    if(statusEl) statusEl.innerText=title;
+    if(hintEl) hintEl.innerText=hint;
+    const panel=$('authPanelV288');
+    if(panel){ panel.dataset.authState=state; panel.classList.toggle('isSignedInV288',state==='signed-in'); }
   };
-  $('logoutBtn').onclick=()=>signOut(auth);
+  const resetLoginButton=()=>{
+    if(!loginBtn)return;
+    loginBtn.disabled=false;
+    const label=loginBtn.querySelector('.loginLabelV288');
+    if(label)label.textContent='Continue with Google'; else loginBtn.textContent='Continue with Google';
+  };
+  const setLoginBusy=(text='Opening Google…')=>{
+    if(!loginBtn)return;
+    loginBtn.disabled=true;
+    const label=loginBtn.querySelector('.loginLabelV288');
+    if(label)label.textContent=text; else loginBtn.textContent=text;
+  };
+  const friendlyAuthError=(error)=>{
+    const code=String(error?.code||'');
+    if(code.includes('unauthorized-domain')) return ['This website is not allowed in Firebase yet.',`Add ${location.hostname} in Firebase Authentication → Settings → Authorized domains.`];
+    if(code.includes('popup-closed-by-user')) return ['Google sign-in was closed.','Tap Continue with Google whenever you are ready.'];
+    if(code.includes('network-request-failed')) return ['Could not reach Google sign-in.','Check the internet connection and try again.'];
+    if(code.includes('web-storage-unsupported')) return ['Browser privacy settings blocked sign-in.','Open the website in Safari or Chrome and allow cookies, then try again.'];
+    return ['Google sign-in could not be completed.',String(error?.message||code||'Please try again.')];
+  };
+
+  if(!cloudEnabled){
+    setAuthMessage('Cloud backup is not configured','You can continue using Jarvis in local mode.','error');
+    if(loginBtn)loginBtn.style.display='none';
+    return;
+  }
+
+  try{ auth.languageCode='en'; }catch(e){}
+
   onAuthStateChanged(auth,async u=>{
     user=u;
     if(u){
       try{await setDoc(doc(db,`users/${u.uid}`),{name:u.displayName||'',email:u.email||'',photo:u.photoURL||'',lastLogin:serverTimestamp()}, {merge:true});}catch(e){console.warn('Profile sync failed',e)}
-      setCloudBadge('☁️ Cloud connected: '+(u.email||u.displayName),'green');
-    }else{ setCloudBadge('Local mode: sign in for cloud sync','gold'); }
-    $('userStatus').innerText=u?`Signed in: ${u.displayName||u.email}`:'Not signed in';
-    $('loginBtn').style.display=u?'none':'inline-block';
-    $('logoutBtn').style.display=u?'inline-block':'none';
+      setCloudBadge('☁️ Cloud sync active: '+(u.email||u.displayName),'green');
+      setAuthMessage(`Hi, ${u.displayName||u.email||'UPSC aspirant'}`,'Your progress is backed up and can sync across devices.','signed-in');
+    }else{
+      setCloudBadge('Local mode: Google sign-in enables cloud backup','gold');
+      setAuthMessage('Your study data is saved on this device','Sign in to back up and sync your progress across devices.','local');
+    }
+    if(loginBtn)loginBtn.style.display=u?'none':'flex';
+    if(logoutBtn)logoutBtn.style.display=u?'block':'none';
+    resetLoginButton();
     schedulePostAuthRenderV2751();
   });
+
+  (async()=>{
+    try{
+      await setPersistence(auth,browserLocalPersistence);
+      const result=await getRedirectResult(auth);
+      if(result?.user) setAuthMessage('Google sign-in completed','Finishing cloud sync…','loading');
+    }catch(error){
+      console.error('Google redirect result failed:',error);
+      const [title,hint]=friendlyAuthError(error);
+      setAuthMessage(title,hint,'error');
+      resetLoginButton();
+    }
+  })();
+
+  if(loginBtn)loginBtn.onclick=async()=>{
+    const provider=new GoogleAuthProvider();
+    provider.setCustomParameters({prompt:'select_account'});
+    setLoginBusy();
+    setAuthMessage('Connecting to Google…','A secure Google sign-in window will open.','loading');
+    try{
+      await setPersistence(auth,browserLocalPersistence);
+      await signInWithPopup(auth,provider);
+    }catch(error){
+      const code=String(error?.code||'');
+      const canFallback=/popup-blocked|operation-not-supported|cancelled-popup-request|web-storage-unsupported/.test(code);
+      if(canFallback){
+        try{
+          setLoginBusy('Redirecting to Google…');
+          await signInWithRedirect(auth,provider);
+          return;
+        }catch(redirectError){ error=redirectError; }
+      }
+      console.error('Google login failed:',error);
+      const [title,hint]=friendlyAuthError(error);
+      setAuthMessage(title,hint,'error');
+      resetLoginButton();
+    }
+  };
+  if(logoutBtn)logoutBtn.onclick=async()=>{
+    try{await signOut(auth)}catch(error){
+      const [title,hint]=friendlyAuthError(error);
+      setAuthMessage(title,hint,'error');
+    }
+  };
 }
 
 window.addTask=async()=>{if(!$('taskInput').value.trim())return;await saveCol('tasks',{text:$('taskInput').value,done:false,date:today()});$('taskInput').value='';renderAll()};
@@ -1801,7 +1871,7 @@ window.renderCloudSystemStatus = function(){
   const el=$('aiSystemStatus'); if(!el)return;
   const cloud = cloudEnabled&&user;
   el.querySelector('#cloudSystemStatusItemV275')?.remove();
-  el.insertAdjacentHTML('beforeend',`<div class="item" id="cloudSystemStatusItemV275"><h3>☁️ Firebase Cloud</h3><p>${cloud?'Connected as '+(user.email||user.uid):'Not logged in. Use Google Login to sync.'}</p><span class="pill">Firestore: ${cloudEnabled?'Ready':'Not configured'}</span><span class="pill">Storage: ${storage?'Ready':'Not configured'}</span></div>`);
+  el.insertAdjacentHTML('beforeend',`<div class="item" id="cloudSystemStatusItemV275"><h3>☁️ Firebase Cloud</h3><p>${cloud?'Connected as '+(user.email||user.uid):'Cloud backup is off. Use Continue with Google to sync.'}</p><span class="pill">Firestore: ${cloudEnabled?'Ready':'Not configured'}</span><span class="pill">Storage: ${storage?'Ready':'Not configured'}</span></div>`);
 };
 setInterval(()=>{try{if(isActiveSectionV225('settings'))renderCloudSystemStatus()}catch(e){}},30000);
 
@@ -1844,6 +1914,7 @@ renderAIIntegrated = async function(){
 
 /* ===== V13.2 Google Docs & Link Hub + stable delete helpers ===== */
 (function(){
+  const safe = (value)=>String(value ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const DEFAULT_LINKS = [
     {id:'default_docs', title:'Google Docs', url:'https://docs.google.com/document/u/1/', category:'Google Doc', note:'Your Google Docs workspace'},
     {id:'default_tracker', title:'Tracker Pro', url:'https://tracker.atishmathur.com/', category:'Tracker', note:'Atish Mathur Tracker Pro'},

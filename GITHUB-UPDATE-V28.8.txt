@@ -1,0 +1,14 @@
+MISSION UPSC V28.8 — GITHUB UPDATE
+
+1. Open your GitHub repository.
+2. Upload every file and folder in this ZIP to the repository root.
+3. Choose Replace/Overwrite when GitHub reports existing files.
+4. Keep the assets/icons folder structure exactly as supplied.
+5. Wait for GitHub Pages to redeploy, then refresh the website.
+6. On iPhone, close the old tab and reopen the site. If an old Home Screen app is cached, remove it and add it again from Safari.
+
+Important for Google sign-in:
+In Firebase Console > Authentication > Settings > Authorized domains, add your GitHub Pages domain, for example:
+vp2010602-debug.github.io
+
+This update keeps the V28.7 working features and applies the V28.8 login and mobile UI fixes.
