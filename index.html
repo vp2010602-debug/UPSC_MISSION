@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jarvis UPSC V29.0 — Jarvis Saarathi</title>
+  <title>Jarvis UPSC V29.1 — Clean Consolidated</title>
   <meta name="theme-color" content="#06264a" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -11,7 +11,7 @@
   <meta name="apple-mobile-web-app-title" content="Jarvis UPSC" />
   <meta name="application-name" content="Jarvis UPSC" />
   <meta name="format-detection" content="telephone=no" />
-  <link rel="manifest" href="./manifest.webmanifest?v=29.0" />
+  <link rel="manifest" href="./manifest.webmanifest?v=29.1" />
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/jarvis-favicon-v287.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/jarvis-apple-touch-v287.png" />
   <link rel="stylesheet" href="./styles.css" />
@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="./v288-login-ui.css?v=28.9" />
   <link rel="stylesheet" href="./v289-workspace-fix.css?v=28.9" />
   <link rel="stylesheet" href="./v290-jarvis-saarathi.css?v=29.0" />
+  <link rel="stylesheet" href="./v291-clean-consolidated.css?v=29.1" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -58,32 +59,25 @@
       <button class="jarvisNavV281" onclick="openJarvisV2811(this)">✨ Jarvis Command Centre</button>
       <button onclick="show('dailyCommandV261',this)">☀️ AI Daily Command Centre</button>
       <button onclick="show('timeHabitV262',this)">⏱️ Focus & Habit Intelligence</button>
-      <button onclick="show('memoryEngineV263',this)">🧠 AI Memory Engine</button>
+      <button onclick="show('memoryEngineV263',this)">🧠 Smart Recall & Spaced Revision</button>
       <button onclick="show('aiControlCentre',this)">🤖 AI Control Centre</button>
       <button onclick="show('aiMentorPage',this)">🤖 AI Personal Mentor</button>
-      <button onclick="show('aiRevisionBrain',this)">🧠 AI Revision Brain</button>
-      <button onclick="show('aiLibraryAssistant',this)">🔎 AI Library Assistant</button>
+      <button onclick="show('revisionPlannerV291',this)">🧠 Weak Topics & Revision Planner</button>
+      <button onclick="show('aiLibraryAssistant',this)">🔎 Smart Library Assistant</button>
       <button onclick="show('currentAffairsAI',this)">📰 AI Current Affairs Engine</button>
-      <button onclick="show('evernoteNotes',this)">📒 UPSC Notes Hub</button>
+      <button onclick="show('upscNotesHubV291',this)">📒 UPSC Notes Hub</button>
       <button onclick="show('syllabusCommand',this)">📘 Syllabus Command</button>
       <button onclick="show('countdownPage',this)">⏳ Exam Countdown</button>
       <button onclick="show('strategyRoomV271',this)">🧭 AI Strategy Room</button>
-      <button onclick="show('rankReadinessV272',this)">📊 Readiness & Rank Intelligence</button>
+      <button onclick="show('rankReadinessV272',this)">📊 UPSC Readiness Dashboard</button>
       <button onclick="show('progressAutomationV274',this)">🌐 AI Progress & Automation Hub</button>
-      <button onclick="show('pomodoroPage',this)">⏱️ Pomodoro</button>
-
-      <button onclick="show('snarkRevision',this)">🔥 Snark Revision Engine</button>
-      <button class="unifiedNotesNavV289" onclick="show('richNotesV4',this)">📝 AI Notes Studio Pro</button>
       <button onclick="show('aiPdfAnalyzer',this)">📄 AI PDF Analyzer</button>
-      <button onclick="show('aiMockCentre',this)">🧪 AI Mock Centre</button>
-      <button onclick="show('prelimsWarRoomV251',this)">🎯 AI Prelims War Room</button>
-      <button onclick="show('aiMainsCentre',this)">✍️ AI Mains Centre</button>
-      <button onclick="show('mainsWarRoomV252',this)">📈 Mains War Room</button>
+      <button onclick="show('prelimsTestCentreV291',this)">🧪 AI Prelims Test Centre</button>
+      <button onclick="show('mainsAnswerCentreV291',this)">✍️ AI Mains Answer Writing Centre</button>
       <button onclick="show('interviewRoomV253',this)">🎙️ AI Interview Room</button>
       <button onclick="show('pyqIntelligence',this)">🔬 PYQ Intelligence Pro</button>
       <button onclick="show('onePagerAI',this)">📄 One Pager AI</button>
       <button onclick="show('mindMapStudio',this)">🧠 Mind Map Studio</button>
-      <button onclick="show('answerEvaluator',this)">📤 Answer Evaluator</button>
       <button onclick="show('smartFlashcards',this)">🃏 Smart Flashcards</button>
       <button onclick="show('wrongAnswerNotebook',this)">❌ Wrong Answer Notebook</button>
       <button onclick="show('topperAnswers',this)">🏆 Topper Answer Bank</button>
@@ -103,7 +97,7 @@
   <main>
     <div class="topbar">
       <div>
-        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V28.9 • Workspace Fix</span></h1>
+        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V29.1 • Clean Consolidated</span></h1>
         <p class="sub">Plan today, revise smarter and keep your UPSC journey organised in one place.</p>
       </div>
       <button type="button" class="topToolsToggleV286" onclick="toggleTopToolsV286()" aria-label="Show or hide page tools">⚙ Tools</button>
@@ -1192,7 +1186,7 @@
 
     <section id="rankReadinessV272" class="section v27Workspace">
       <div class="v27Hero readinessHeroV272">
-        <div><span class="eyebrow blueEye">V27.2 • EVIDENCE-BASED READINESS, NOT FALSE PROMISES</span><h1>Readiness & Rank Intelligence</h1><p class="sub">Measures preparation strength, risk and trend from your own records. It never guarantees selection or invents an AIR from insufficient data.</p></div>
+        <div><span class="eyebrow blueEye">V29.1 • EVIDENCE-BASED UPSC READINESS</span><h1>UPSC Readiness Dashboard</h1><p class="sub">Measures preparation strength, risk and trend from your own records. It never guarantees selection or invents an AIR from insufficient data.</p></div>
         <div class="heroIcon">📊</div>
       </div>
       <div class="v27Disclaimer"><b>Important:</b> This is a preparation diagnostic, not an official result predictor. UPSC outcomes depend on paper difficulty, competition, normalization, answer quality and exam-day execution.</div>
@@ -1390,7 +1384,7 @@
       <div class="cleanHero revisionHeroV241">
         <div>
           <span class="eyebrow blueEye">V24.1 • AI REVISION BRAIN</span>
-          <h1>AI Revision Brain + Weak Topic Tracker</h1>
+          <h1>Weak Topics & Revision Planner</h1>
           <p class="sub">AI reads your notes, flashcards, wrong answers, mains reports, mock reports and pending tasks to find weak areas and create a repair plan.</p>
         </div>
         <div class="heroIcon">🧠</div>
@@ -1434,7 +1428,7 @@
       </div>
 
       <div class="card v24Panel">
-        <h2>AI Revision Brain Report</h2>
+        <h2>Revision Repair Report</h2>
         <div id="revisionBrainOutputV241" class="aiOutput bigAI">Use local diagnosis first, then generate AI plan.</div>
         <div class="actions outputActionsV231">
           <button class="btn green" onclick="saveRevisionBrainReportV241()">💾 Save Report</button>
@@ -1450,7 +1444,7 @@
       <div class="cleanHero libraryHeroV242">
         <div>
           <span class="eyebrow blueEye">V24.2 • AI LIBRARY SEARCH + CONVERSION HUB</span>
-          <h1>AI Digital Library Assistant</h1>
+          <h1>Smart Library Assistant</h1>
           <p class="sub">Search across your notes, PDFs, flashcards, mindmaps, current affairs, mains reports, mock reports and saved library items. Convert results into notes, one-pagers, flashcards, mindmaps and revision plans.</p>
         </div>
         <div class="heroIcon">🔎</div>
@@ -1601,7 +1595,7 @@
     <section id="evernoteNotes" class="section">
       <div class="two">
         <div class="card">
-          <h2>Evernote-style UPSC Notes Hub</h2>
+          <h2>Quick Note</h2>
           <input id="noteTitlePro" placeholder="Note title">
           <select id="notePaperPro">
             <option>Prelims GS</option><option>CSAT</option><option>Essay</option>
@@ -1933,7 +1927,7 @@
       <div class="v264HubTabs" aria-label="Daily Command hub navigation">
         <button class="active" onclick="jumpHubV264('dailyMissionBuilderV264',this)">🎯 Today Mission</button>
         <button onclick="jumpHubV264('dailyExecutionV264',this)">▶ Execution</button>
-        <button onclick="jumpHubV264('dailyPlannerLegacyV264',this)">📅 Planner & Saved Plans</button>
+        <button onclick="jumpHubV264('dailyPlannerLegacyV264',this)">💾 Saved Plans</button>
         <button onclick="jumpHubV264('dailyEveningV264',this)">🌙 Evening Review</button>
         <button onclick="jumpHubV264('dailyHistoryV264',this)">🕘 History</button>
       </div>
@@ -2006,10 +2000,10 @@
 
       <div id="dailyPlannerLegacyV264" class="v264MergedModule v264Anchor">
         <div class="v264ModuleHead">
-          <div><span class="v264MergeBadge">MERGED FROM AI DAILY PLANNER</span><h2>Planner & Saved Plans</h2><p>Use this flexible planner when you want to describe the day manually. It now lives inside Daily Command Centre and keeps all existing saved-plan data.</p></div>
+          <div><span class="v264MergeBadge">V29.1 • DUPLICATE PLANNER REMOVED</span><h2>Saved Plans</h2><p>Your earlier daily plans remain available here. Create new plans only from Today Mission for a simpler workflow.</p></div>
           <button class="btn ghost" onclick="jumpHubV264('dailyMissionBuilderV264')">Back to Mission Builder</button>
         </div>
-      <div class="two">
+      <div class="two v291LegacyPlannerHidden" aria-hidden="true">
         <div class="card">
           <h2>Flexible Daily Planner</h2>
           <input id="planDate" type="date">
@@ -2168,7 +2162,7 @@
       <div class="cleanHero v26Hero v263MemoryHero">
         <div>
           <span class="eyebrow blueEye">V26.3 • RETENTION, ACTIVE RECALL AND SPACED REVISION</span>
-          <h1>AI Memory Engine</h1>
+          <h1>Smart Recall & Spaced Revision</h1>
           <p class="sub">Turn flashcards, wrong answers, notes and revision items into a daily recall queue. Rate each recall and the engine automatically schedules the next revision.</p>
           <div id="memoryAIBadgeV263" class="aiModeBadgeV231">Selected AI: loading...</div>
         </div>
@@ -2587,15 +2581,15 @@
           <select id="v275ResetModule">
             <option value="daily">Daily Command & Planner</option>
             <option value="habit">Focus & Habit Intelligence</option>
-            <option value="memory">AI Memory Engine</option>
-            <option value="prelims">Prelims War Room</option>
-            <option value="mains">Mains War Room & Evaluations</option>
+            <option value="memory">Smart Recall & Spaced Revision</option>
+            <option value="prelims">AI Prelims Test Centre</option>
+            <option value="mains">AI Mains Answer Writing Centre</option>
             <option value="interview">Interview Room</option>
-            <option value="revision">Revision Brain & Wrong Answers</option>
+            <option value="revision">Weak Topics & Revision Planner</option>
             <option value="strategy">Strategy, Readiness & Progress</option>
             <option value="knowledge">Knowledge Graph</option>
             <option value="calendar">AI Smart Calendar</option>
-            <option value="richnotes">AI Notes Studio Pro drafts/history</option>
+            <option value="richnotes">UPSC Notes Hub Pro Editor drafts/history</option>
           </select>
           <label class="v275Toggle"><input id="v275ResetCloud" type="checkbox"><span><b>Also delete this module from Firebase</b><small>Requires Google login and a second confirmation.</small></span></label>
           <div class="actions"><button type="button" class="btn danger" onclick="resetModuleV275()">Reset Selected Module</button></div>
@@ -2611,8 +2605,8 @@
         <div class="card">
           <h2>📦 Release Information</h2>
           <div class="v275ReleaseList">
-            <div><span>Version</span><b>Mission UPSC AI OS V29.0 Jarvis Saarathi</b></div>
-            <div><span>Build date</span><b>20 June 2026</b></div>
+            <div><span>Version</span><b>Mission UPSC AI OS V29.1 Clean Consolidated</b></div>
+            <div><span>Build date</span><b>21 June 2026</b></div>
             <div><span>Base</span><b>V28.6 Final UI + V28.5 Responsive Jarvis Pro</b></div>
             <div><span>Data policy</span><b>No automatic deletion or paid AI calls</b></div>
           </div>
@@ -2638,5 +2632,6 @@
 <script defer src="./v287-usability.js?v=28.9"></script>
 <script defer src="./v289-workspace-fix.js?v=28.9"></script>
 <script defer src="./v290-jarvis-saarathi.js?v=29.0"></script>
+<script defer src="./v291-clean-consolidated.js?v=29.1"></script>
 </body>
 </html>

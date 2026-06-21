@@ -1,0 +1,33 @@
+/* Mission UPSC AI OS V29.1 — Clean Consolidated */
+.v291LegacyPlannerHidden{display:none!important}
+.v291UnifiedSection{padding-bottom:36px}
+.v291UnifiedHero{margin-bottom:16px;background:linear-gradient(135deg,rgba(26,93,160,.1),rgba(22,163,138,.08))}
+.v291ModuleTabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px;padding:10px;border:1px solid var(--border,#dbe3ec);border-radius:18px;background:var(--card,#fff);position:sticky;top:70px;z-index:12;box-shadow:0 8px 24px rgba(15,35,60,.06)}
+.v291ModuleTabs button{border:0;border-radius:13px;padding:11px 16px;font-weight:800;cursor:pointer;background:rgba(20,52,88,.07);color:inherit;transition:.18s ease}
+.v291ModuleTabs button:hover{transform:translateY(-1px);background:rgba(22,104,190,.13)}
+.v291ModuleTabs button.active{background:linear-gradient(135deg,#0b4c8c,#087f73);color:#fff;box-shadow:0 8px 18px rgba(9,78,130,.22)}
+.v291PanelHost{min-width:0}
+.v291UnifiedPanel{animation:v291Fade .22s ease;min-width:0}
+.v291UnifiedPanel>.cleanHero:first-child,.v291UnifiedPanel>.v266Hero:first-child,.v291UnifiedPanel>.v25Hero:first-child{margin-top:0}
+@keyframes v291Fade{from{opacity:.25;transform:translateY(5px)}to{opacity:1;transform:none}}
+.v291RevisionGuide,.v291FocusNotice,.v291NotesIntro{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 16px;padding:14px 16px;border:1px solid var(--border,#dbe3ec);border-radius:16px;background:linear-gradient(135deg,rgba(255,184,0,.1),rgba(15,126,118,.08))}
+.v291RevisionGuide div,.v291FocusNotice,.v291NotesIntro{line-height:1.45}
+.v291RevisionGuide span,.v291FocusNotice span,.v291NotesIntro span{display:block;color:var(--muted,#5c6b7a);font-size:.92rem;margin-top:2px}
+.v291NotesIntro{justify-content:flex-start}
+.v291EvalControls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.v291EvalControls label{font-weight:800;font-size:.83rem;color:var(--muted,#5c6b7a)}
+.v291EvalControls select{width:100%;margin-top:5px}
+.v291WordMeter{margin:-2px 0 10px;padding:7px 10px;border-radius:10px;background:rgba(20,52,88,.07);font-size:.84rem;font-weight:800;color:var(--muted,#5c6b7a)}
+.v291WordMeter.good{background:rgba(22,163,74,.12);color:#14753a}
+.v291WordMeter.over{background:rgba(220,38,38,.1);color:#b42318}
+.v291EvalSummary{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px;padding:10px 12px;border-radius:12px;background:rgba(11,76,140,.08);font-size:.9rem}
+.v291EvalActions{margin-top:14px}
+.v291LocalFallback{padding:12px;border-radius:12px;background:rgba(255,184,0,.1)}
+html[data-theme="dark"] .v291ModuleTabs,html[data-theme="dark"] .v291RevisionGuide,html[data-theme="dark"] .v291FocusNotice,html[data-theme="dark"] .v291NotesIntro{border-color:rgba(255,255,255,.12)}
+@media(max-width:760px){
+  .v291ModuleTabs{top:58px;display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:8px}
+  .v291ModuleTabs button{padding:10px 8px;font-size:.82rem}
+  .v291RevisionGuide,.v291FocusNotice{align-items:flex-start;flex-direction:column}
+  .v291EvalControls{grid-template-columns:1fr}
+  .v291EvalSummary{align-items:flex-start;flex-direction:column}
+}

@@ -1,0 +1,10 @@
+MISSION UPSC AI OS V29.1 — GITHUB UPDATE
+
+1. Upload every file from the V29.1 GitHub Update ZIP to the ROOT of your existing repository.
+2. Replace matching files when GitHub asks.
+3. Keep your existing firebase-config.js if it contains your live Firebase details.
+4. Commit and wait for GitHub Pages deployment to finish.
+5. Open the website and press Ctrl + Shift + R once.
+6. If an older interface remains, unregister the old service worker or clear site data, then reload.
+
+This update preserves V29.0 and only adds the V29.1 consolidation layer plus cache/version changes.

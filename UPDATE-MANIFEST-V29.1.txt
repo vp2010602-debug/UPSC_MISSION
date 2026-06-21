@@ -1,0 +1,22 @@
+MISSION UPSC V29.1 UPDATE MANIFEST
+
+REPLACE
+- index.html
+- manifest.webmanifest
+- service-worker.js
+
+ADD
+- v291-clean-consolidated.css
+- v291-clean-consolidated.js
+- README-V29.1.md
+- V29.1-QA-REPORT.txt
+- GITHUB-UPDATE-V29.1.txt
+- V29.0-BASE-PRESERVED.txt
+
+DO NOT DELETE
+- firebase-config.js
+- app.js
+- V29.0 Jarvis/Saarathi files
+- functions/
+- assets/
+- existing data or Firebase collections
