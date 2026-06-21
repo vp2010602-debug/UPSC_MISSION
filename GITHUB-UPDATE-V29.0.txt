@@ -1,0 +1,38 @@
+MISSION UPSC AI OS V29.0 — GITHUB UPDATE
+Jarvis Saarathi Upgrade | Built over the working V28.9 GitHub update
+
+UPLOAD METHOD
+1. Extract this ZIP.
+2. Open your existing Mission UPSC GitHub repository.
+3. Upload every file and folder INSIDE this extracted folder to the repository root.
+4. Select Replace/Overwrite for files with the same names.
+5. Commit the changes and wait 2–5 minutes for GitHub Pages to deploy.
+6. Hard refresh the website:
+   Windows: Ctrl + Shift + R
+   iPad/iPhone Safari: close the tab and reopen it.
+7. If the Home Screen app still shows the old version, delete that shortcut and add the website again using Safari → Share → Add to Home Screen.
+
+IMPORTANT — KEEP THESE EXISTING REPOSITORY ITEMS
+- Do not delete or replace firebase-config.js.
+- Do not delete the functions folder.
+- Do not delete your repository or create a new repository.
+- Existing Firebase login, cloud data, notes, library records and storage keys remain compatible.
+
+V29.0 NEW FILES
+- v290-jarvis-saarathi.css
+- v290-jarvis-saarathi.js
+
+V29.0 UPDATED FILES
+- index.html
+- manifest.webmanifest
+- service-worker.js
+
+CARRIED FORWARD FOR SAFE OVERWRITE
+The package also includes the working V28.9 GitHub update files, including app.js, PWA files, Jarvis icons and V28.7–V28.9 patch files. This makes the update cumulative and prevents a missing older patch from breaking V29.0.
+
+MAIN RESULT
+- Cleaner, simpler Ask Jarvis experience
+- Advanced Jarvis tools preserved inside Advanced Workspace
+- Upgraded AI Voice Saarathi with mentor, revision, oral quiz and study-plan modes
+- Auto-ask, auto-speak, language/voice controls, speed controls and hands-free mode
+- V28.9 functionality and data structures preserved

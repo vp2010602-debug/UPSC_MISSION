@@ -1,0 +1,29 @@
+MISSION UPSC AI OS V29.0 — UPDATE MANIFEST
+
+New:
+  v290-jarvis-saarathi.css
+  v290-jarvis-saarathi.js
+
+Updated from V28.9:
+  index.html
+  manifest.webmanifest
+  service-worker.js
+
+Preserved/cumulative support files:
+  app.js
+  pwa-v284.js
+  v287-usability.css
+  v287-usability.js
+  v288-login-ui.css
+  v289-workspace-fix.css
+  v289-workspace-fix.js
+  assets/icons/jarvis-icon-192-v287.png
+  assets/icons/jarvis-icon-512-v287.png
+  assets/icons/jarvis-maskable-512-v287.png
+  assets/icons/jarvis-apple-touch-v287.png
+  assets/icons/jarvis-favicon-v287.png
+
+Intentionally excluded:
+  firebase-config.js — preserve the repository's existing configured file
+  functions/ — preserve the repository's existing backend folder
+  node_modules/ — never required for a GitHub Pages update

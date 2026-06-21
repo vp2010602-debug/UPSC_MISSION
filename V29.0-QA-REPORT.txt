@@ -1,0 +1,30 @@
+MISSION UPSC AI OS V29.0 — QA REPORT
+Build: Jarvis Saarathi
+Date: 20 June 2026
+
+PRESERVATION
+[PASS] V28.9 package copied as the base.
+[PASS] Existing app.js, Jarvis executors, Firebase configuration and data collections retained.
+[PASS] Existing sections and navigation retained.
+[PASS] No storage keys were renamed or deleted.
+[PASS] Advanced Jarvis tools remain accessible.
+
+JARVIS V29
+[PASS] Simplified Ask Jarvis layout added.
+[PASS] Voice capture added with automatic execution option.
+[PASS] Quick student actions added.
+[PASS] Response copy/save/read/PDF actions added.
+[PASS] Daily context summary mirrors existing workspace metrics.
+[PASS] Mobile, tablet and desktop responsive rules included.
+
+VOICE SAARATHI V29
+[PASS] Listening/thinking/speaking visual states added.
+[PASS] Auto-ask and auto-speak controls added.
+[PASS] Hands-free continuation added.
+[PASS] Voice and speed controls added.
+[PASS] Existing output conversions and saving actions retained.
+
+PWA
+[PASS] Service worker cache version changed to v29.0.0.
+[PASS] New V29 CSS and JS included in the app shell cache.
+[PASS] Manifest start URL and app id changed to V29.0.

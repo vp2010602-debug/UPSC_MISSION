@@ -1,0 +1,6 @@
+V28.9 BASE PRESERVATION CONFIRMATION
+
+This V29.0 package was created from the complete Mission UPSC AI OS V28.9 Workspace & Vault Fix package.
+The original V28.9 ZIP was not edited or overwritten.
+V29.0 retains all previous application files and adds a separate V29 Jarvis/Voice presentation-and-usability patch.
+No data key or Firebase collection was removed or renamed.
