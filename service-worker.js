@@ -1,5 +1,5 @@
 /* Mission UPSC AI OS V30.0 PWA service worker */
-const VERSION = 'v30.0.1';
+const VERSION = 'v30.0.2';
 const SHELL_CACHE = `mission-upsc-shell-${VERSION}`;
 const RUNTIME_CACHE = `mission-upsc-runtime-${VERSION}`;
 const CORE_ASSETS = [
@@ -17,7 +17,7 @@ const CORE_ASSETS = [
   './v291-clean-consolidated.css',
   './v292-visual-notes.css',
   './v300-smart-calendar.css',
-  './v3001-responsive-fix.css',
+  './v3002-alignment-hotfix.css',
   './app.js',
   './firebase-config.js',
   './jarvis-v2811.js',

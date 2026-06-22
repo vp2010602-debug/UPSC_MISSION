@@ -1,0 +1,9 @@
+Mission UPSC V30.0.2 GitHub Update
+
+Upload and replace:
+- index.html
+- service-worker.js
+- v3002-alignment-hotfix.css
+- README-V30.0.2.md
+
+This is a minimal alignment hotfix based on V30.0. It does not include the broader V30.0.1 responsive redesign.

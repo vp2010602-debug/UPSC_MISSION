@@ -1,0 +1,225 @@
+/* Mission UPSC AI OS V30.0.2 — Minimal alignment hotfix
+   Scope: buttons, App & Offline spacing, and AI Voice Saarathi alignment only.
+   The V30.0 layout, sidebar, tablet shell and section structure are intentionally unchanged. */
+
+/* Prevent card contents from forcing horizontal overflow without changing layout. */
+#dailyCommandV261 .card,
+#memoryEngineV263 .card,
+#currentAffairsAI .card,
+#aiCalendarV4 .card,
+#voiceSaarthi .card,
+#appOfflineV284 .card{
+  min-width:0;
+}
+
+/* ---------- Button alignment from the supplied tablet screenshots ---------- */
+@media (min-width:641px) and (max-width:1280px){
+  /* Daily Command: two primary actions, one clean full-width secondary action. */
+  #dailyCommandV261 .v26MissionBuilder > .actions{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px!important;
+    align-items:stretch;
+  }
+  #dailyCommandV261 .v26MissionBuilder > .actions > .btn{
+    width:100%;
+    min-width:0!important;
+    margin:0!important;
+    justify-content:center;
+  }
+  #dailyCommandV261 .v26MissionBuilder > .actions > .btn:last-child{
+    grid-column:1/-1;
+  }
+  #dailyCommandV261 .v26BriefCard > .actions,
+  #dailyCommandV261 .v26MissionDesk > .actions{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:9px!important;
+  }
+  #dailyCommandV261 .v26BriefCard > .actions > .btn,
+  #dailyCommandV261 .v26MissionDesk > .actions > .btn{
+    width:100%;
+    min-width:0!important;
+    margin:0!important;
+  }
+
+  /* Smart Recall: balanced scan controls and file-import row. */
+  #memoryEngineV263 .v263BuilderGrid > .card:first-child > .actions{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);
+    gap:10px!important;
+    align-items:stretch;
+  }
+  #memoryEngineV263 .v263BuilderGrid > .card:first-child > .actions > .btn{
+    width:100%;
+    min-width:0!important;
+    margin:0!important;
+  }
+  #memoryEngineV263 .aiRoomImportGridV254{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)!important;
+    gap:12px!important;
+    align-items:stretch!important;
+  }
+  #memoryEngineV263 .aiRoomFilePickerV254,
+  #memoryEngineV263 .aiRoomImportGridV254 > .btn{
+    box-sizing:border-box;
+    width:100%;
+    min-width:0;
+    min-height:54px;
+    height:auto;
+    margin:0!important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* Current Affairs: four primary actions as a neat 2 × 2 grid. */
+  #currentAffairsAI .grid.two > .card:first-child > .actions{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px!important;
+    align-items:stretch;
+  }
+  #currentAffairsAI .grid.two > .card:first-child > .actions > .btn{
+    width:100%;
+    min-width:0!important;
+    margin:0!important;
+  }
+
+  /* Smart Calendar: keep the original two mini-sections; align only their buttons. */
+  #aiCalendarV4 .v30QuickCalendar .v30CalendarActions{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px!important;
+  }
+  #aiCalendarV4 .v30QuickCalendar .v30CalendarActions > .btn{
+    width:100%;
+    min-width:0!important;
+    margin:0!important;
+  }
+
+  /* Voice Saarathi: balanced 3-button first row and 2-button second row. */
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel > .actions{
+    display:grid!important;
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    gap:9px!important;
+    align-items:stretch;
+  }
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel > .actions > .btn{
+    width:100%;
+    min-width:0!important;
+    margin:0!important;
+    min-height:46px!important;
+    padding-inline:9px!important;
+    justify-content:center;
+  }
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel > .actions > .btn:nth-child(-n+3){grid-column:span 2;}
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel > .actions > .btn:nth-child(n+4){grid-column:span 3;}
+  #voiceSaarthi.v290Voice .v290HandsFreeRow{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px 14px!important;
+    align-items:start;
+  }
+  #voiceSaarthi.v290Voice .v290HandsFreeRow label{
+    min-width:0;
+    align-items:flex-start;
+    line-height:1.35;
+  }
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel,
+  #voiceSaarthi.v290Voice .v290VoiceOutputPanel{
+    min-width:0;
+    overflow:hidden;
+  }
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel #voiceSaarthiText,
+  #voiceSaarthi.v290Voice .v290VoiceOutputPanel #voiceSaarthiOutput{
+    box-sizing:border-box;
+    width:100%!important;
+    max-width:100%!important;
+  }
+}
+
+/* ---------- App & Offline: spacing only; original two-card layout retained ---------- */
+#appOfflineV284 .pwaHeroV284{
+  padding:24px!important;
+}
+#appOfflineV284 .pwaHeroGridV284{
+  gap:22px!important;
+}
+#appOfflineV284 .pwaHeroV284 .actions{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px!important;
+  margin-top:16px!important;
+  align-items:stretch;
+}
+#appOfflineV284 .pwaHeroV284 .actions > .btn{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0!important;
+  min-height:45px;
+  margin:0!important;
+  justify-content:center;
+}
+#appOfflineV284 .pwaStatusGridV284{
+  gap:14px!important;
+  margin-top:22px!important;
+}
+#appOfflineV284 .pwaStatusTileV284{
+  padding:15px!important;
+}
+#appOfflineV284 .pwaGridV284{
+  gap:18px!important;
+  margin-top:18px;
+  align-items:stretch;
+}
+#appOfflineV284 .pwaCardV284{
+  padding:20px!important;
+}
+#appOfflineV284 .pwaCardHeadV284{
+  gap:14px!important;
+  margin-bottom:16px!important;
+}
+#appOfflineV284 .pwaMetricRowV284,
+#appOfflineV284 .pwaActionGridV284{
+  gap:11px!important;
+}
+#appOfflineV284 .pwaActionGridV284 > .pwaActionBtnV284{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  margin:0!important;
+}
+#appOfflineV284 .pwaInstructionV284,
+#appOfflineV284 .pwaWakeStateV284{
+  margin-top:14px!important;
+}
+
+@media (max-width:760px){
+  /* Keep existing mobile behaviour, but avoid uneven button widths. */
+  #dailyCommandV261 .v26MissionBuilder > .actions,
+  #dailyCommandV261 .v26BriefCard > .actions,
+  #dailyCommandV261 .v26MissionDesk > .actions,
+  #memoryEngineV263 .v263BuilderGrid > .card:first-child > .actions,
+  #memoryEngineV263 .aiRoomImportGridV254,
+  #currentAffairsAI .grid.two > .card:first-child > .actions,
+  #aiCalendarV4 .v30QuickCalendar .v30CalendarActions,
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel > .actions,
+  #appOfflineV284 .pwaHeroV284 .actions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:9px!important;
+  }
+  #dailyCommandV261 .v26MissionBuilder > .actions > .btn:last-child,
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel > .actions > .btn{
+    grid-column:auto!important;
+  }
+  #voiceSaarthi.v290Voice .v290HandsFreeRow{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:9px!important;
+  }
+  #appOfflineV284 .pwaHeroV284{padding:18px!important;}
+  #appOfflineV284 .pwaCardV284{padding:17px!important;}
+}
