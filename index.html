@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jarvis UPSC V30.0.3 — Alignment Polish</title>
+  <title>Jarvis UPSC V30.0 — Smart Calendar Composer</title>
   <meta name="theme-color" content="#06264a" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -25,7 +25,6 @@
   <link rel="stylesheet" href="./v291-clean-consolidated.css?v=29.1" />
   <link rel="stylesheet" href="./v292-visual-notes.css?v=29.2" />
   <link rel="stylesheet" href="./v300-smart-calendar.css?v=30.0" />
-  <link rel="stylesheet" href="./v3003-alignment-polish.css?v=30.0.3" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -2661,7 +2660,7 @@
         <div class="card">
           <h2>📦 Release Information</h2>
           <div class="v275ReleaseList">
-            <div><span>Version</span><b>Mission UPSC AI OS V30.0.3 Alignment Polish</b></div>
+            <div><span>Version</span><b>Mission UPSC AI OS V30.0 Smart Calendar Composer</b></div>
             <div><span>Build date</span><b>22 June 2026</b></div>
             <div><span>Base</span><b>V28.6 Final UI + V28.5 Responsive Jarvis Pro</b></div>
             <div><span>Data policy</span><b>No automatic deletion or paid AI calls</b></div>
@@ -2691,28 +2690,5 @@
 <script defer src="./v291-clean-consolidated.js?v=29.1"></script>
 <script defer src="./v292-visual-notes.js?v=29.2"></script>
 <script defer src="./v300-smart-calendar.js?v=30.0"></script>
-
-<script>
-(function(){
-  function ensureSidebarHideButtonV3003(){
-    if(document.getElementById('sidebarHideToggleV3003')) return;
-    var btn=document.createElement('button');
-    btn.id='sidebarHideToggleV3003';
-    btn.className='sidebarHideToggleV3003';
-    btn.type='button';
-    function render(){ btn.textContent=document.body.classList.contains('sectionsHiddenV3003')?'☰ Show Sections':'« Hide Sections'; }
-    btn.onclick=function(){
-      document.body.classList.toggle('sectionsHiddenV3003');
-      try{localStorage.setItem('jarvisSectionsHiddenV3003', document.body.classList.contains('sectionsHiddenV3003')?'1':'0');}catch(e){}
-      render();
-    };
-    try{ if(localStorage.getItem('jarvisSectionsHiddenV3003')==='1') document.body.classList.add('sectionsHiddenV3003'); }catch(e){}
-    render();
-    document.body.appendChild(btn);
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', ensureSidebarHideButtonV3003); else ensureSidebarHideButtonV3003();
-})();
-</script>
-
 </body>
 </html>
