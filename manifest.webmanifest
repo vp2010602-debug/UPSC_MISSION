@@ -1,9 +1,9 @@
 {
-  "id": "./?app=jarvis-upsc-v291",
+  "id": "./?app=jarvis-upsc-v292",
   "name": "Jarvis UPSC \u2014 AI Study OS",
   "short_name": "Jarvis UPSC",
   "description": "UPSC preparation operating system with a simplified Jarvis and Saarathi, consolidated notes, prelims, mains, revision, recall, focus and offline support.",
-  "start_url": "./index.html?app=v29.1",
+  "start_url": "./index.html?app=v29.2",
   "scope": "./",
   "display": "standalone",
   "display_override": [

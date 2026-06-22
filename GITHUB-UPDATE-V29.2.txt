@@ -1,0 +1,18 @@
+MISSION UPSC V29.2 GITHUB UPDATE
+
+Upload every file in the GitHub Update ZIP directly into your existing repository root.
+Replace matching files.
+
+Important updated files:
+- index.html
+- manifest.webmanifest
+- service-worker.js
+- v292-visual-notes.css
+- v292-visual-notes.js
+- README-V29.2.md
+
+Your existing Firebase data and configuration are not reset.
+After deployment:
+1. Wait for the GitHub Pages build to complete.
+2. Press Ctrl + Shift + R.
+3. If the old version remains, unregister the old service worker and clear site data once.
