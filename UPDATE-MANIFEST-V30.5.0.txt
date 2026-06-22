@@ -1,0 +1,13 @@
+MISSION UPSC AI OS V30.5.0 — GITHUB UPDATE MANIFEST
+
+Replace / add:
+1. index.html
+2. service-worker.js
+3. v3050-final-ca-voice.css
+4. v3050-final-ca-voice.js
+5. README-V30.5.0.md
+6. UPDATE-MANIFEST-V30.5.0.txt
+7. V30.5.0-QA-REPORT.txt
+
+No Firebase Functions redeployment is required.
+Do not delete older compatibility files.

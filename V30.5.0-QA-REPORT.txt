@@ -1,0 +1,19 @@
+MISSION UPSC AI OS V30.5.0 — STATIC QA REPORT
+
+PASS — All JavaScript files pass node --check.
+PASS — New V30.5 JavaScript passes syntax validation.
+PASS — New V30.5 CSS has balanced braces.
+PASS — index.html contains zero duplicate IDs.
+PASS — All local script/style/image references in index.html exist.
+PASS — service-worker cache version updated to v30.5.0.
+PASS — V30.5 assets included in service-worker application shell.
+PASS — No Gemini API key is present in frontend files.
+PASS — Daily CA generation has no automatic load trigger.
+PASS — Paid CA generation requires button press and confirmation.
+PASS — Voice permission errors use inline status instead of repeated alert/toast loops.
+
+MANUAL DEVICE CHECK REQUIRED AFTER DEPLOYMENT
+- Chrome/Edge microphone permission on the deployed HTTPS URL.
+- iPad/iPhone browser speech-recognition availability (text mode is the fallback).
+- One live Gemini Daily CA generation using pasted source excerpts.
+- PWA refresh after service-worker update.
