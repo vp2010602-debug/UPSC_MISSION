@@ -1,0 +1,13 @@
+MISSION UPSC AI OS V30.0 — GITHUB UPDATE
+
+Replace these files in the repository root:
+- index.html
+- manifest.webmanifest
+- service-worker.js
+
+Add these new files:
+- v300-smart-calendar.css
+- v300-smart-calendar.js
+- README-V30.0.md
+
+This update preserves all previous data and functionality.

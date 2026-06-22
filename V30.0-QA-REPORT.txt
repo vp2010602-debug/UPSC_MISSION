@@ -1,0 +1,10 @@
+V30.0 QA CHECKLIST
+[PASS] Quick Calendar IDs preserved
+[PASS] AI planner IDs preserved
+[PASS] Existing calendar functions preserved
+[PASS] Two mini-sections nested inside one composer card
+[PASS] Desktop equal-column layout
+[PASS] Tablet/mobile single-column layout
+[PASS] Light and dark mode styles
+[PASS] Service worker cache version updated
+[PASS] Manifest version updated

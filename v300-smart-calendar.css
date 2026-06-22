@@ -1,0 +1,227 @@
+/* Mission UPSC AI OS V30.0 — Smart Calendar Composer */
+
+#aiCalendarV4 .v30CalendarComposer{
+  padding:22px!important;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--line) 82%,transparent)!important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(37,99,235,.08),transparent 29%),
+    color-mix(in srgb,var(--card) 97%,#f8fbff)!important;
+}
+
+.v30CalendarComposerHead{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:18px;
+}
+.v30CalendarComposerHead h2{
+  margin:5px 0 4px;
+  font-size:clamp(24px,2.4vw,34px);
+  line-height:1.08;
+}
+.v30CalendarComposerHead .sub{max-width:780px;margin:0}
+.v30CalendarSyncBadge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:36px;
+  padding:8px 12px;
+  border:1px solid rgba(22,163,74,.23);
+  border-radius:999px;
+  background:rgba(22,163,74,.10);
+  color:#08723b;
+  font-size:12px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.v30CalendarMiniGrid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:16px;
+  align-items:stretch;
+}
+.v30CalendarMini{
+  min-width:0;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:13px;
+  padding:18px;
+  border:1px solid color-mix(in srgb,var(--line) 92%,transparent);
+  border-radius:20px;
+  background:color-mix(in srgb,var(--card) 98%,#fff);
+  box-shadow:0 10px 26px rgba(15,23,42,.055);
+}
+.v30QuickCalendar{
+  border-top:4px solid #15906f;
+  background:
+    linear-gradient(180deg,rgba(21,144,111,.045),transparent 120px),
+    color-mix(in srgb,var(--card) 98%,#fff);
+}
+.v30AiCalendar{
+  border-top:4px solid #6d4aff;
+  background:
+    linear-gradient(180deg,rgba(109,74,255,.05),transparent 120px),
+    color-mix(in srgb,var(--card) 98%,#fff);
+}
+.v30MiniHead{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  min-height:62px;
+}
+.v30MiniTitleWrap{display:flex;align-items:flex-start;gap:11px;min-width:0}
+.v30MiniIcon{
+  width:38px;
+  height:38px;
+  flex:0 0 38px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:rgba(21,144,111,.12);
+  border:1px solid rgba(21,144,111,.17);
+  font-size:18px;
+}
+.v30MiniIcon.ai{background:rgba(109,74,255,.12);border-color:rgba(109,74,255,.18)}
+.v30MiniHead h3{margin:0 0 4px;font-size:20px;line-height:1.15}
+.v30MiniHead p{margin:0;color:var(--muted);font-size:13px;line-height:1.42}
+
+.v30CalendarFields{display:grid;grid-template-columns:minmax(0,1fr);gap:11px}
+.v30CalendarFieldsTwo{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.v30Field{display:grid;gap:6px;min-width:0;margin:0!important}
+.v30Field>span{
+  color:var(--text);
+  font-size:12px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.15px;
+}
+.v30Field input,
+.v30Field select,
+.v30Field textarea{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  margin:0!important;
+  border-radius:13px!important;
+}
+.v30Field input,
+.v30Field select{
+  height:47px!important;
+  min-height:47px!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+.v30Field textarea{
+  min-height:118px!important;
+  height:118px;
+  resize:vertical;
+  line-height:1.5;
+}
+.v30DurationField{position:relative;min-width:0}
+.v30DurationField input{padding-right:52px!important}
+.v30DurationField em{
+  position:absolute;
+  right:13px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--muted);
+  font-size:12px;
+  font-style:normal;
+  font-weight:900;
+  pointer-events:none;
+}
+.v30GrowField{flex:1 1 auto}
+
+.v30CalendarActions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:auto;
+}
+.v30CalendarActions .btn{
+  min-height:43px;
+  margin:0!important;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1.1;
+}
+.v30CalendarActionsThree{display:grid;grid-template-columns:1.15fr .82fr 1fr;gap:9px}
+.v30CalendarActionsThree .btn{width:100%;padding-inline:10px}
+
+.v30AiResultLabel{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:2px;
+}
+.v30AiResultLabel span{font-size:12px;font-weight:950;color:var(--text)}
+.v30AiResultLabel small{font-size:11px;color:var(--muted);font-weight:750}
+.v30CalendarOutput{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  min-height:150px!important;
+  margin:0!important;
+  border-radius:15px!important;
+  overflow-wrap:anywhere;
+}
+
+/* Override legacy calendar spacing that caused the misalignment. */
+#aiCalendarV4 .calendarQuickPanelV289 input,
+#aiCalendarV4 .calendarQuickPanelV289 select,
+#aiCalendarV4 .calendarQuickPanelV289 textarea,
+#aiCalendarV4 .calendarAiPanelV289 input,
+#aiCalendarV4 .calendarAiPanelV289 select,
+#aiCalendarV4 .calendarAiPanelV289 textarea,
+#aiCalendarV4 .calendarAiPanelV289 .aiOutput{
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+html[data-theme="dark"] #aiCalendarV4 .v30CalendarComposer{
+  background:radial-gradient(circle at 100% 0%,rgba(59,130,246,.13),transparent 29%),#101d2f!important;
+  border-color:#2b4059!important;
+}
+html[data-theme="dark"] .v30CalendarMini{
+  background:#14243a;
+  border-color:#304760;
+  box-shadow:none;
+}
+html[data-theme="dark"] .v30QuickCalendar{background:linear-gradient(180deg,rgba(21,144,111,.10),transparent 120px),#14243a}
+html[data-theme="dark"] .v30AiCalendar{background:linear-gradient(180deg,rgba(109,74,255,.10),transparent 120px),#14243a}
+html[data-theme="dark"] .v30CalendarSyncBadge{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.22);color:#9ff1d2}
+html[data-theme="dark"] .v30Field>span,
+html[data-theme="dark"] .v30MiniHead h3,
+html[data-theme="dark"] .v30AiResultLabel span{color:#f2f7ff}
+
+@media (max-width:1180px){
+  .v30CalendarActionsThree{grid-template-columns:1fr 1fr}
+  .v30CalendarActionsThree .btn:first-child{grid-column:1/-1}
+}
+
+@media (max-width:920px){
+  .v30CalendarMiniGrid{grid-template-columns:1fr}
+  .v30CalendarComposerHead{align-items:flex-start}
+}
+
+@media (max-width:620px){
+  #aiCalendarV4 .v30CalendarComposer{padding:15px!important;border-radius:18px!important}
+  .v30CalendarComposerHead{display:grid;gap:10px;margin-bottom:14px}
+  .v30CalendarSyncBadge{justify-self:start}
+  .v30CalendarMini{padding:14px;border-radius:17px}
+  .v30CalendarFieldsTwo{grid-template-columns:1fr}
+  .v30CalendarActions,.v30CalendarActionsThree{display:grid;grid-template-columns:1fr}
+  .v30CalendarActions .btn,.v30CalendarActionsThree .btn{width:100%}
+  .v30CalendarActionsThree .btn:first-child{grid-column:auto}
+  .v30MiniHead{min-height:0}
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jarvis UPSC V29.2 — Visual + Notes Upgrade</title>
+  <title>Jarvis UPSC V30.0 — Smart Calendar Composer</title>
   <meta name="theme-color" content="#06264a" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -11,7 +11,7 @@
   <meta name="apple-mobile-web-app-title" content="Jarvis UPSC" />
   <meta name="application-name" content="Jarvis UPSC" />
   <meta name="format-detection" content="telephone=no" />
-  <link rel="manifest" href="./manifest.webmanifest?v=29.2" />
+  <link rel="manifest" href="./manifest.webmanifest?v=30.0" />
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/jarvis-favicon-v287.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/jarvis-apple-touch-v287.png" />
   <link rel="stylesheet" href="./styles.css" />
@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="./v290-jarvis-saarathi.css?v=29.0" />
   <link rel="stylesheet" href="./v291-clean-consolidated.css?v=29.1" />
   <link rel="stylesheet" href="./v292-visual-notes.css?v=29.2" />
+  <link rel="stylesheet" href="./v300-smart-calendar.css?v=30.0" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -1899,11 +1900,64 @@
       </div>
     </section>
     <section id="aiCalendarV4" class="section v266Workspace calendarProV266">
-      <div class="v266Hero calendarHeroV266"><div><span class="eyebrow blueEye">V26.6 • ONE CALENDAR • AI + MANUAL + REVISION</span><h1>AI Smart Calendar</h1><p class="sub">The old Calendar and AI Smart Calendar are now one workspace for manual events, AI time-block plans, revision dues, daily plans and exam milestones.</p></div><div class="heroIcon">📅</div></div>
+      <div class="v266Hero calendarHeroV266"><div><span class="eyebrow blueEye">V30.0 • SMART CALENDAR • MANUAL + AI + REVISION</span><h1>AI Smart Calendar</h1><p class="sub">The old Calendar and AI Smart Calendar are now one workspace for manual events, AI time-block plans, revision dues, daily plans and exam milestones.</p></div><div class="heroIcon">📅</div></div>
       <div class="v266MetricGrid"><div class="v266Metric"><span>This Month</span><b id="calendarMonthCountV266">0</b><small>Total items</small></div><div class="v266Metric"><span>Today</span><b id="calendarTodayCountV266">0</b><small>Scheduled</small></div><div class="v266Metric"><span>Revision Due</span><b id="calendarRevisionCountV266">0</b><small>Month view</small></div><div class="v266Metric"><span>Study Hours</span><b id="calendarHoursV266">0h</b><small>Planned</small></div></div>
-      <div class="grid two calendarComposerGridV289">
-        <div class="card v266Panel calendarQuickPanelV289"><div class="v266PanelHead"><div><h2>Quick Add</h2><p class="sub">Add a study block, test, revision, class or personal commitment.</p></div><span class="v266Pill">MANUAL</span></div><div class="v266FilterGrid calendarQuickGridV289"><input id="calendarQuickDateV266" type="date"><input id="calendarQuickTimeV266" type="time"><select id="calendarQuickTypeV266"><option>Study</option><option>Revision</option><option>Prelims Test</option><option>Mains Answer</option><option>Current Affairs</option><option>Class</option><option>Exam</option><option>Personal</option></select><input id="calendarQuickMinutesV266" type="number" min="10" step="5" value="60" placeholder="Minutes"></div><input id="calendarQuickTitleV266" placeholder="Task or event title"><textarea id="calendarQuickNoteV266" placeholder="Notes, source or completion criteria"></textarea><div class="actions"><button class="btn green" onclick="addCalendarItemV266()">＋ Add to Calendar</button><button class="btn ghost" onclick="setCalendarTodayV266()">Today</button></div></div>
-        <div class="card v266Panel calendarAiPanelV289"><div class="v266PanelHead"><div><h2>AI Time-Block Planner</h2><p class="sub">Uses your selected AI to build a realistic schedule.</p></div><span class="v266Pill">AI</span></div><input id="smartCalDateV4" type="date"><textarea id="smartCalPromptV4" placeholder="Available time, weak areas, fixed commitments, energy, pending targets..."></textarea><div class="actions"><button class="btn purple" onclick="generateSmartCalendarV4()">Generate AI Plan</button><button class="btn green" onclick="saveSmartCalendarV4()">Save Plan</button><button class="btn gold" onclick="calendarFromCommandV266()">Use Daily Mission</button></div><div id="smartCalOutputV4" class="aiOutput bigAI">AI plan will appear here.</div></div>
+      <div class="card v266Panel v30CalendarComposer" aria-labelledby="v30CalendarComposerTitle">
+        <div class="v30CalendarComposerHead">
+          <div>
+            <span class="eyebrow blueEye">V30.0 • QUICK CALENDAR + AI PLANNER</span>
+            <h2 id="v30CalendarComposerTitle">Build Your Calendar</h2>
+            <p class="sub">Add one event manually or let AI create a complete time-block plan. Both save into the same calendar below.</p>
+          </div>
+          <span class="v30CalendarSyncBadge">● One synced calendar</span>
+        </div>
+
+        <div class="v30CalendarMiniGrid">
+          <section class="v30CalendarMini v30QuickCalendar calendarQuickPanelV289" aria-labelledby="v30QuickCalendarTitle">
+            <div class="v30MiniHead">
+              <div class="v30MiniTitleWrap">
+                <span class="v30MiniIcon" aria-hidden="true">➕</span>
+                <div><h3 id="v30QuickCalendarTitle">Quick Calendar</h3><p>Add one study block, test, revision, class or personal commitment.</p></div>
+              </div>
+              <span class="v266Pill">MANUAL</span>
+            </div>
+
+            <div class="v30CalendarFields v30CalendarFieldsTwo">
+              <label class="v30Field"><span>Date</span><input id="calendarQuickDateV266" type="date"></label>
+              <label class="v30Field"><span>Start time</span><input id="calendarQuickTimeV266" type="time"></label>
+              <label class="v30Field"><span>Type</span><select id="calendarQuickTypeV266"><option>Study</option><option>Revision</option><option>Prelims Test</option><option>Mains Answer</option><option>Current Affairs</option><option>Class</option><option>Exam</option><option>Personal</option></select></label>
+              <label class="v30Field"><span>Duration</span><div class="v30DurationField"><input id="calendarQuickMinutesV266" type="number" min="10" step="5" value="60" placeholder="60"><em>min</em></div></label>
+            </div>
+            <label class="v30Field"><span>Task or event title</span><input id="calendarQuickTitleV266" placeholder="Example: Revise Fundamental Rights"></label>
+            <label class="v30Field v30GrowField"><span>Notes or completion target</span><textarea id="calendarQuickNoteV266" placeholder="Example: Read Laxmikanth chapter and solve 20 MCQs"></textarea></label>
+            <div class="v30CalendarActions">
+              <button class="btn green" onclick="addCalendarItemV266()">＋ Add to Calendar</button>
+              <button class="btn ghost" onclick="setCalendarTodayV266()">Set Today</button>
+            </div>
+          </section>
+
+          <section class="v30CalendarMini v30AiCalendar calendarAiPanelV289" aria-labelledby="v30AiPlannerTitle">
+            <div class="v30MiniHead">
+              <div class="v30MiniTitleWrap">
+                <span class="v30MiniIcon ai" aria-hidden="true">✨</span>
+                <div><h3 id="v30AiPlannerTitle">AI Time-Block Planner</h3><p>Describe your available time and priorities; Jarvis builds a realistic schedule.</p></div>
+              </div>
+              <span class="v266Pill">AI</span>
+            </div>
+
+            <div class="v30CalendarFields">
+              <label class="v30Field"><span>Plan date</span><input id="smartCalDateV4" type="date"></label>
+              <label class="v30Field v30GrowField"><span>Your day, priorities and constraints</span><textarea id="smartCalPromptV4" placeholder="Example: Available 6 AM–9 AM and 6 PM–10 PM. Polity is weak. Include current affairs, 25 MCQs, one mains answer and breaks."></textarea></label>
+            </div>
+            <div class="v30CalendarActions v30CalendarActionsThree">
+              <button class="btn purple" onclick="generateSmartCalendarV4()">✨ Generate AI Plan</button>
+              <button class="btn green" onclick="saveSmartCalendarV4()">💾 Save Plan</button>
+              <button class="btn gold" onclick="calendarFromCommandV266()">Use Daily Mission</button>
+            </div>
+            <div class="v30AiResultLabel"><span>AI plan preview</span><small>Review before saving</small></div>
+            <div id="smartCalOutputV4" class="aiOutput bigAI v30CalendarOutput">AI plan will appear here.</div>
+          </section>
+        </div>
       </div>
       <div class="card v266Panel"><div class="v266PanelHead"><div><h2>Integrated Month Calendar</h2><p class="sub">Double-click a day to add a task. Revision and Daily Command items appear automatically.</p></div><select id="calendarTypeFilterV266" onchange="renderCalendarAI()"><option>All Types</option><option>Study</option><option>Revision</option><option>Prelims Test</option><option>Mains Answer</option><option>Current Affairs</option><option>Plan</option><option>Exam</option><option>Personal</option></select></div><div id="calendarMonthControls" class="calendarHeader v266CalendarControls"></div><div id="calendarGridV4" class="calendarGrid v266CalendarGrid"></div></div>
       <div class="card v266Panel"><div class="v266PanelHead"><div><h2>Month Agenda</h2><p class="sub">All calendar, revision and saved-plan items in chronological order.</p></div><button class="btn ghost" onclick="exportCalendarV266()">⬇ Export</button></div><div id="calendarAgendaV4" class="list v266CalendarAgenda"></div></div>
@@ -2606,8 +2660,8 @@
         <div class="card">
           <h2>📦 Release Information</h2>
           <div class="v275ReleaseList">
-            <div><span>Version</span><b>Mission UPSC AI OS V29.2 Visual + Notes Upgrade</b></div>
-            <div><span>Build date</span><b>21 June 2026</b></div>
+            <div><span>Version</span><b>Mission UPSC AI OS V30.0 Smart Calendar Composer</b></div>
+            <div><span>Build date</span><b>22 June 2026</b></div>
             <div><span>Base</span><b>V28.6 Final UI + V28.5 Responsive Jarvis Pro</b></div>
             <div><span>Data policy</span><b>No automatic deletion or paid AI calls</b></div>
           </div>
@@ -2635,5 +2689,6 @@
 <script defer src="./v290-jarvis-saarathi.js?v=29.0"></script>
 <script defer src="./v291-clean-consolidated.js?v=29.1"></script>
 <script defer src="./v292-visual-notes.js?v=29.2"></script>
+<script defer src="./v300-smart-calendar.js?v=30.0"></script>
 </body>
 </html>
