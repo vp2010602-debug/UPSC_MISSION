@@ -1,5 +1,5 @@
 /* Mission UPSC AI OS V30.0 PWA service worker */
-const VERSION = 'v30.6.0';
+const VERSION = 'v30.6.1';
 const SHELL_CACHE = `mission-upsc-shell-${VERSION}`;
 const RUNTIME_CACHE = `mission-upsc-runtime-${VERSION}`;
 const CORE_ASSETS = [
@@ -27,6 +27,7 @@ const CORE_ASSETS = [
   './v3040-final-polish.css',
   './v3050-final-ca-voice.css',
   './v3060-easy-ca-microplanner.css',
+  './v3061-simple-ca-mentor.css',
   './app.js',
   './firebase-config.js',
   './jarvis-v2811.js',
@@ -49,6 +50,7 @@ const CORE_ASSETS = [
   './v3040-final-polish.js',
   './v3050-final-ca-voice.js',
   './v3060-easy-ca-microplanner.js',
+  './v3061-simple-ca-mentor.js',
   './pwa-v284.js',
   './manifest.webmanifest',
   './assets/icons/jarvis-icon-192-v287.png',
