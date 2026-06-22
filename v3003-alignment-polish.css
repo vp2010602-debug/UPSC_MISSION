@@ -1,0 +1,299 @@
+/* Mission UPSC V30.0.3 — Minimal Tablet Alignment Polish
+   Keeps the V30.0 design intact. Only fixes cramped inputs/buttons and adds optional sidebar hide. */
+
+/* Universal overflow guard for cards and form rows */
+.card,
+.v26Stat,
+.v26MissionBuilder,
+.v26BriefCard,
+.v266Panel,
+.v30CalendarCard,
+.v27Panel,
+.v24Panel,
+.pwaPanelV284,
+.v263Panel,
+.v262Panel,
+.v23Card,
+.cleanHero {
+  min-width: 0;
+}
+
+.two > *,
+.three > *,
+.grid > *,
+.twoInput > *,
+.threeInput > *,
+.v30CalendarFormGrid > *,
+.v30CalendarFields > *,
+.v30CalendarPlannerGrid > *,
+.v284Grid > *,
+.v263Grid > *,
+.v262Grid > *,
+.v271Grid > * {
+  min-width: 0;
+}
+
+input,
+select,
+textarea,
+.btn,
+button {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Give native date/time/select controls enough room so icons never escape */
+input[type="date"],
+input[type="time"],
+select {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+select {
+  padding-right: 34px;
+}
+
+input[type="date"],
+input[type="time"] {
+  padding-right: 18px;
+}
+
+/* Hide/show sections sidebar — default design remains unchanged */
+.sidebarHideToggleV3003 {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: calc(88px + env(safe-area-inset-bottom));
+  z-index: 80;
+  border: 1px solid rgba(15, 23, 42, .12);
+  border-radius: 18px;
+  padding: 12px 16px;
+  background: var(--card);
+  color: var(--text);
+  font-weight: 950;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, .18);
+  cursor: pointer;
+}
+body.sectionsHiddenV3003 aside.sidebar,
+body.sectionsHiddenV3003 #sidebar {
+  transform: translateX(-110%) !important;
+}
+body.sectionsHiddenV3003 main {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+body.sectionsHiddenV3003 .mobileTop {
+  display: flex;
+}
+body.sectionsHiddenV3003 .sidebarHideToggleV3003 {
+  background: #06264a;
+  color: #fff;
+}
+
+/* Tablet polish only — no redesign, just safer wrapping */
+@media (min-width: 761px) and (max-width: 1180px) {
+  main {
+    overflow-x: hidden;
+  }
+
+  .section {
+    padding-bottom: 112px;
+  }
+
+  .twoInput,
+  .threeInput,
+  .v30CalendarFormGrid,
+  .v30CalendarFields,
+  .v30CalendarPlannerGrid,
+  .v266FilterGrid,
+  .v271StrategyGrid,
+  .v263ImportGrid,
+  .v262LogGrid,
+  .v284ReminderGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px 12px !important;
+    align-items: end;
+  }
+
+  .threeInput > textarea,
+  .twoInput > textarea,
+  .v30CalendarFormGrid textarea,
+  .v30CalendarFields textarea,
+  .v30CalendarPlannerGrid textarea,
+  textarea.v26ShortArea,
+  #smartCalPromptV4,
+  #currentAffairsText,
+  #commandPriorityV261 {
+    grid-column: 1 / -1;
+  }
+
+  .actions,
+  .v30CalendarActions,
+  .v30CalendarActionsThree,
+  .outputActionsV231,
+  .v284ActionRow,
+  .voiceActionsV290 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    align-items: center !important;
+  }
+
+  .actions .btn,
+  .v30CalendarActions .btn,
+  .v30CalendarActionsThree .btn,
+  .outputActionsV231 .btn,
+  .v284ActionRow .btn {
+    flex: 1 1 160px;
+    margin: 0 !important;
+    min-height: 46px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    white-space: normal;
+  }
+
+  /* AI Daily Command Centre */
+  #dailyCommandV261 .threeInput,
+  #dailyCommandV261 .twoInput {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  #dailyCommandV261 #commandDateV261 {
+    min-width: 0;
+  }
+  #dailyCommandV261 .actions .btn {
+    flex-basis: 180px;
+  }
+  #dailyCommandV261 .actions .btn.ghost {
+    flex-basis: 100%;
+  }
+
+  /* Focus & Habit Intelligence manual log */
+  #timeHabitV262 .threeInput,
+  #timeHabitV262 .twoInput,
+  #timeHabitV262 .v262LogGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  #timeHabitV262 input[type="date"],
+  #timeHabitV262 input[type="time"],
+  #timeHabitV262 select {
+    min-width: 0;
+  }
+
+  /* Smart Calendar V30.0 — keep two cards but fix form controls */
+  #aiCalendarV4 .v30CalendarComposerGrid {
+    gap: 16px !important;
+  }
+  #aiCalendarV4 .v30CalendarFormGrid,
+  #aiCalendarV4 .v30CalendarFields,
+  #aiCalendarV4 .v30CalendarPlannerGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  #aiCalendarV4 input[type="date"],
+  #aiCalendarV4 input[type="time"] {
+    text-align: center;
+  }
+  #aiCalendarV4 .v30CalendarActionsThree .btn:first-child {
+    flex-basis: 100%;
+  }
+
+  /* Strategy Room date/select row */
+  #strategyRoomV271 .threeInput,
+  #strategyRoomV271 .twoInput,
+  #strategyRoomV271 .v271StrategyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  /* Current Affairs Engine */
+  #currentAffairsAI .threeInput,
+  #currentAffairsAI .twoInput {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  #currentAffairsAI .actions .btn {
+    flex-basis: 180px;
+  }
+  #currentAffairsAI input[type="date"] {
+    text-align: center;
+  }
+
+  /* App & Offline Centre reminder spacing */
+  #appOfflineV284 .threeInput,
+  #appOfflineV284 .twoInput,
+  #appOfflineV284 .v284ReminderGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-items: end;
+  }
+  #appOfflineV284 .card,
+  #appOfflineV284 .v284Panel {
+    overflow: hidden;
+  }
+  #appOfflineV284 .actions .btn,
+  #appOfflineV284 .v284ActionRow .btn {
+    flex-basis: 170px;
+  }
+
+  /* AI Voice Saarthi alignment */
+  #voiceSaarthi .threeInput,
+  #voiceSaarthi .twoInput {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  #voiceSaarthi .actions .btn:nth-child(1),
+  #voiceSaarthi .actions .btn:nth-child(2),
+  #voiceSaarthi .actions .btn:nth-child(3) {
+    flex: 1 1 135px;
+  }
+  #voiceSaarthi .actions .btn:nth-child(4) {
+    flex: 1 1 100%;
+  }
+
+  /* Smart Recall upload / memory bank */
+  #memoryEngineV263 .actions .btn,
+  #memoryEngineV263 button {
+    max-width: 100%;
+  }
+  #memoryEngineV263 .twoInput,
+  #memoryEngineV263 .threeInput,
+  #memoryEngineV263 .v263ImportGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .sidebarHideToggleV3003 {
+    display: block;
+  }
+}
+
+@media (max-width: 760px) {
+  .sidebarHideToggleV3003 {
+    display: none;
+  }
+
+  .twoInput,
+  .threeInput,
+  .v30CalendarFormGrid,
+  .v30CalendarFields,
+  .v30CalendarPlannerGrid,
+  .v266FilterGrid,
+  .v271StrategyGrid,
+  .v263ImportGrid,
+  .v262LogGrid,
+  .v284ReminderGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .actions .btn,
+  .v30CalendarActions .btn,
+  .v30CalendarActionsThree .btn,
+  .outputActionsV231 .btn {
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .section {
+    padding-bottom: 120px;
+  }
+}
