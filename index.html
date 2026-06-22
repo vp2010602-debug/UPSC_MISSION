@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="./v3050-final-ca-voice.css?v=30.5.0" />
   <link rel="stylesheet" href="./v3060-easy-ca-microplanner.css?v=30.6.0" />
   <link rel="stylesheet" href="./v3061-simple-ca-mentor.css?v=30.6.1" />
+  <link rel="stylesheet" href="./v3070-unified-mission.css?v=30.7.0" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -71,14 +72,11 @@
       <div class="navGroupV304"><span>START & TODAY</span></div>
       <button class="active" onclick="show('dashboard',this)">🏠 Home Dashboard</button>
       <button class="jarvisNavV281" onclick="openJarvisV2811(this)">✨ Jarvis Command Centre</button>
-      <button onclick="show('dailyCommandV261',this)">☀️ AI Daily Command Centre</button>
-      <button onclick="show('aiCalendarV4',this)">📅 AI Smart Calendar</button>
-      <button id="saarthiNavV303" onclick="show('saarthiMentorHubV303',this)">🧑‍🏫 Saarthi Mentorship Hub</button>
-      <button onclick="show('timeHabitV262',this)">⏱️ Focus & Habit Intelligence</button>
+      <button id="unifiedMissionNavV307" onclick="show('studyMissionV307',this)">🧭 My Study Mission</button>
       <button onclick="show('memoryEngineV263',this)">🧠 Smart Recall & Spaced Revision</button>
 
       <div class="navGroupV304"><span>LEARN & RESEARCH</span></div>
-      <button onclick="show('currentAffairsAI',this)">📰 Easy Daily Current Affairs</button>
+      <button onclick="show('currentAffairsAI',this)">📰 Daily Current Affairs Desk</button>
       <button onclick="show('upscNotesHubV291',this)">📒 UPSC Notes Hub</button>
       <button onclick="show('youtubeNotesV302',this)">▶️ YouTube Video → Notes</button>
       <button onclick="show('aiPdfAnalyzer',this)">📄 AI PDF Analyzer</button>
@@ -102,12 +100,11 @@
       <button onclick="show('aiMentorPage',this)">🤖 AI Personal Mentor</button>
       <button onclick="show('revisionPlannerV291',this)">🧠 Weak Topics & Revision Planner</button>
       <button onclick="show('strategyRoomV271',this)">🧭 AI Strategy Room</button>
-      <button onclick="show('rankReadinessV272',this)">📊 UPSC Readiness Dashboard</button>
-      <button onclick="show('progressAutomationV274',this)">🌐 AI Progress & Automation Hub</button>
+      <button id="simpleProgressNavV307" onclick="show('simpleProgressV307',this)">📊 Progress & Improvement</button>
       <button onclick="show('countdownPage',this)">⏳ Exam Countdown</button>
 
       <div class="navGroupV304"><span>LIBRARY & OUTPUT</span></div>
-      <button onclick="show('libraryShelf',this)">🏛️ AI Digital Library Pro</button>
+      <button onclick="show('libraryShelf',this)">📚 Study Library & Reader</button>
       <button onclick="show('fileVault',this)">📁 File Vault</button>
       <button onclick="show('docLinksHub',this)">🔗 Google Docs & Links</button>
       <button onclick="show('voiceSaarthi',this)">🎙️ AI Voice Saarthi</button>
@@ -123,7 +120,7 @@
   <main>
     <div class="topbar">
       <div>
-        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V30.5.0 • Voice + Daily CA</span></h1>
+        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V30.7.0 • Unified Mission</span></h1>
         <p class="sub">Plan today, revise smarter and keep your UPSC journey organised in one place.</p>
       </div>
       <button type="button" class="topToolsToggleV286" onclick="toggleTopToolsV286()" aria-label="Show or hide page tools">⚙ Tools</button>
@@ -2886,5 +2883,6 @@
 <script defer src="./v3050-final-ca-voice.js?v=30.5.0"></script>
 <script defer src="./v3060-easy-ca-microplanner.js?v=30.6.0"></script>
 <script defer src="./v3061-simple-ca-mentor.js?v=30.6.1"></script>
+<script defer src="./v3070-unified-mission.js?v=30.7.0"></script>
 </body>
 </html>
