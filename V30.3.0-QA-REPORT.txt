@@ -1,0 +1,14 @@
+MISSION UPSC AI OS V30.3.0 QA
+
+PASS - New JavaScript syntax check.
+PASS - New CSS and JavaScript are referenced by index.html.
+PASS - New CSS and JavaScript are included in service-worker offline shell.
+PASS - Service-worker cache version advanced to v30.3.0.
+PASS - Saarthi section and navigation are injected only once.
+PASS - Secure Gemini backend files are unchanged.
+PASS - Existing date/time picker and hamburger files remain referenced.
+PASS - App & Offline spacing rules are scoped to #appOfflineV284.
+PASS - Mentor plan integration writes to dedicated Saarthi collections and Smart Calendar.
+PASS - Revision-type mentor tasks write to Smart Revision.
+PASS - Test schedule import avoids duplicate schedule IDs.
+PASS - Large unsigned local file uploads are not written into browser storage as data URLs.

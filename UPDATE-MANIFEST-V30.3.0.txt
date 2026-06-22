@@ -1,0 +1,14 @@
+MISSION UPSC AI OS V30.3.0 UPDATE FILES
+
+Replace/add:
+- index.html
+- service-worker.js
+- v3030-saarthi-mentor.css
+- v3030-saarthi-mentor.js
+- README-V30.3.0.md
+- UPDATE-MANIFEST-V30.3.0.txt
+- V30.3.0-QA-REPORT.txt
+
+No Firebase Functions redeployment is required.
+Do not change the secure Gemini Function URL or secret configuration.
+After GitHub Pages deploys, use Ctrl+Shift+R and reopen the installed app.

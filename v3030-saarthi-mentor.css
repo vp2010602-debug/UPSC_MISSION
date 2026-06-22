@@ -1,0 +1,70 @@
+/* Mission UPSC AI OS V30.3.0 — Saarthi Mentorship Hub + App/Offline spacing */
+:root{
+  --s303-navy:#092f57;
+  --s303-blue:#0f6ea9;
+  --s303-cyan:#16a8c7;
+  --s303-gold:#f4bd32;
+  --s303-green:#0b8c70;
+  --s303-red:#c84a4a;
+  --s303-soft:#f5f9fd;
+  --s303-line:#d9e7f2;
+  --s303-text:#17324a;
+}
+#saarthiMentorHubV303{padding-bottom:60px}
+.s303Hero{background:linear-gradient(135deg,#082d54,#0c5f8d 60%,#0b8c70);color:#fff;border:0!important;overflow:hidden;position:relative}
+.s303Hero:after{content:"";position:absolute;right:-110px;top:-130px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.08)}
+.s303Hero h1,.s303Hero h2{color:#fff}.s303Hero .sub{color:#d9edfb}.s303Hero .heroIcon{position:relative;z-index:1}
+.s303HeroActions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative;z-index:1}
+.s303Timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px;position:relative;z-index:1}
+.s303Phase{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);padding:14px;border-radius:16px;backdrop-filter:blur(8px)}
+.s303Phase b,.s303Phase span{display:block}.s303Phase span{font-size:12px;color:#d8ecfb;margin-bottom:5px}.s303Phase b{color:#fff}
+.s303Tabs{display:flex;gap:8px;overflow:auto;padding:4px 2px 12px;margin:4px 0 18px;scrollbar-width:thin}
+.s303Tab{border:1px solid var(--s303-line);background:#fff;color:var(--s303-navy);border-radius:999px;padding:10px 14px;font-weight:850;white-space:nowrap;cursor:pointer}
+.s303Tab.active{background:var(--s303-navy);color:#fff;border-color:var(--s303-navy)}
+[data-theme="dark"] .s303Tab{background:#142a3d;border-color:#35516a;color:#e8f3fb}
+.s303Panel{display:none}.s303Panel.active{display:block}
+.s303Stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.s303Stat{padding:18px;border-radius:18px;border:1px solid var(--s303-line);background:#fff;box-shadow:0 10px 26px rgba(18,60,92,.06)}
+.s303Stat span{display:block;font-size:12px;color:#658097;font-weight:750}.s303Stat b{display:block;margin-top:5px;font-size:26px;color:var(--s303-navy)}
+[data-theme="dark"] .s303Stat{background:#142739;border-color:#31506a}.s303Grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.s303Grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.s303Card{border:1px solid var(--s303-line)!important;border-radius:20px!important;padding:22px!important;background:#fff;box-shadow:0 12px 30px rgba(21,67,101,.06)}
+[data-theme="dark"] .s303Card{background:#142739;border-color:#31506a!important}
+.s303CardHead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:16px}.s303CardHead h2,.s303CardHead h3{margin:0}.s303CardHead p{margin:5px 0 0}
+.s303FormGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.s303FormGrid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.s303Full{grid-column:1/-1}
+#saarthiMentorHubV303 label{display:grid;gap:7px;font-weight:750;color:var(--s303-text);min-width:0}
+[data-theme="dark"] #saarthiMentorHubV303 label{color:#d9e8f5}
+#saarthiMentorHubV303 input,#saarthiMentorHubV303 select,#saarthiMentorHubV303 textarea{width:100%;min-width:0;box-sizing:border-box}
+#saarthiMentorHubV303 textarea{min-height:130px;resize:vertical}
+.s303Status{padding:13px 14px;border-radius:14px;background:var(--s303-soft);border:1px solid var(--s303-line);line-height:1.5;margin-top:12px}
+[data-theme="dark"] .s303Status{background:#0f2030;border-color:#2d4961}
+.s303Actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.s303Actions .btn{margin:0}
+.s303PlanPreview{min-height:160px;white-space:pre-wrap;overflow:auto;max-height:500px}
+.s303TaskPreview{display:grid;gap:10px;margin-top:14px}.s303TaskRow{border:1px solid var(--s303-line);border-radius:14px;padding:13px;background:var(--s303-soft);display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start}
+[data-theme="dark"] .s303TaskRow{background:#0f2030;border-color:#2d4961}.s303TaskMeta{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}.s303MiniPill{font-size:11px;font-weight:800;padding:5px 8px;border-radius:999px;background:#e7f2fb;color:#15547c}.s303MiniPill.gold{background:#fff0bf;color:#765200}.s303MiniPill.green{background:#dff4ed;color:#0b6b58}.s303MiniPill.red{background:#ffe3e3;color:#9a2f2f}
+.s303Board{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:12px;overflow:auto;padding-bottom:8px}.s303Column{background:var(--s303-soft);border:1px solid var(--s303-line);border-radius:18px;padding:12px;min-height:320px}.s303Column h3{margin:0 0 10px;color:var(--s303-navy);font-size:16px}.s303ColumnCount{float:right;background:#fff;border-radius:999px;padding:3px 8px;font-size:11px}.s303BoardItem{background:#fff;border:1px solid var(--s303-line);border-radius:14px;padding:12px;margin-bottom:10px;box-shadow:0 7px 18px rgba(20,60,92,.05)}
+[data-theme="dark"] .s303Column{background:#102333;border-color:#2e4a62}.s303BoardItem{color:var(--s303-text)}[data-theme="dark"] .s303BoardItem{background:#172c3e;border-color:#35546e;color:#e8f2f9}.s303BoardItem h4{margin:0 0 6px}.s303ItemBtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.s303ItemBtns button{border:0;border-radius:9px;padding:7px 9px;font-weight:800;cursor:pointer;background:#e9f2f8;color:#16466a}.s303ItemBtns button.done{background:#dff4ed;color:#0a6c58}.s303ItemBtns button.danger{background:#ffe5e5;color:#942f2f}
+.s303List{display:grid;gap:10px}.s303ListItem{border:1px solid var(--s303-line);border-radius:15px;padding:14px;background:#fff;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}.s303ListItem h4{margin:0 0 5px}.s303ListItem small{display:block;color:#667f94;margin-top:4px}.s303ListItem .s303Actions{margin-top:8px}
+[data-theme="dark"] .s303ListItem{background:#152a3c;border-color:#35516a}
+.s303Empty{padding:26px;text-align:center;border:1px dashed #bfd0df;border-radius:15px;color:#6c8498;background:#f8fbfe}
+[data-theme="dark"] .s303Empty{background:#0f2030;border-color:#35516a}
+.s303AccountRow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}.s303Check{display:flex!important;align-items:center;gap:9px!important;padding:12px;border:1px solid var(--s303-line);border-radius:13px;background:var(--s303-soft)}.s303Check input{width:auto!important}.s303Rating{display:flex;gap:8px;flex-wrap:wrap}.s303Rating button{border:1px solid var(--s303-line);background:#fff;border-radius:10px;padding:9px 12px;cursor:pointer;font-weight:800}.s303Rating button.active{background:var(--s303-gold);border-color:var(--s303-gold)}
+.s303Report{line-height:1.65}.s303Report h2,.s303Report h3{color:var(--s303-navy)}.s303Report table{width:100%;border-collapse:collapse;margin:12px 0}.s303Report th,.s303Report td{border:1px solid var(--s303-line);padding:9px;text-align:left}
+.s303DashWidget{margin-top:18px;border-left:5px solid var(--s303-cyan)!important}.s303DashTasks{display:grid;gap:8px;margin-top:10px}.s303DashTask{padding:10px 12px;border-radius:12px;background:#f4f9fd;border:1px solid #d8e8f3;display:flex;justify-content:space-between;gap:10px}
+.s303Alert{padding:12px 14px;border-radius:14px;background:#fff6d8;border:1px solid #f1d479;color:#674c00;margin:12px 0}.s303Good{background:#e3f7ef;border-color:#b6e7d7;color:#096451}.s303Danger{background:#ffe8e8;border-color:#f0baba;color:#8a2929}
+/* App & Offline spacing polish */
+#appOfflineV284{padding-bottom:64px}
+#appOfflineV284>.pwaHeroV284{margin-bottom:24px!important;padding:28px!important}
+#appOfflineV284>.pwaGridV284{gap:24px!important;margin-bottom:24px!important}
+#appOfflineV284>.pwaCardV284{margin-top:24px!important}
+#appOfflineV284 .pwaCardV284{padding:24px!important}
+#appOfflineV284 .pwaStatusGridV284{gap:14px!important;margin-top:22px!important}
+#appOfflineV284 .pwaMetricRowV284{gap:12px!important;margin-bottom:16px!important}
+#appOfflineV284 .pwaActionGridV284{gap:12px!important;margin-top:16px!important}
+#appOfflineV284 .pwaCardHeadV284{margin-bottom:18px!important}
+#appOfflineV284 .pwaReminderFormV284{gap:14px!important;margin-top:14px!important}
+#appOfflineV284 .pwaReminderListV284{margin-top:18px!important}
+#appOfflineV284 .pwaAuditGridV284{gap:12px!important;margin-top:18px!important}
+#appOfflineV284 input,#appOfflineV284 select{min-height:48px}
+@media(max-width:1180px){.s303Stats{grid-template-columns:repeat(2,minmax(0,1fr))}.s303Grid3{grid-template-columns:1fr 1fr}.s303AccountRow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:820px){.s303Grid2,.s303Grid3,.s303Timeline{grid-template-columns:1fr}.s303FormGrid,.s303FormGrid.three{grid-template-columns:1fr}.s303Stats{grid-template-columns:1fr 1fr}.s303AccountRow{grid-template-columns:1fr 1fr}.s303Card{padding:18px!important}.s303HeroActions .btn{flex:1 1 190px}.s303ListItem,.s303TaskRow{grid-template-columns:1fr}}
+@media(max-width:520px){.s303Stats{grid-template-columns:1fr}.s303AccountRow{grid-template-columns:1fr}.s303CardHead{flex-direction:column}.s303Actions{display:grid;grid-template-columns:1fr}.s303Actions .btn{width:100%}.s303Hero{padding:20px!important}#appOfflineV284 .pwaCardV284{padding:18px!important}#appOfflineV284>.pwaGridV284{gap:18px!important;margin-bottom:18px!important}}
