@@ -1,0 +1,13 @@
+Mission UPSC V30.0.1 Responsive QA
+
+PASS - responsive CSS linked
+PASS - service worker cache bumped
+PASS - responsive CSS cached
+PASS - tablet sidebar breakpoint
+PASS - bottom safe-area spacing
+PASS - memory checkbox fix
+PASS - current affairs stack fix
+PASS - voice stack fix
+PASS - calendar tablet fix
+PASS - offline centre fix
+PASS - balanced CSS braces

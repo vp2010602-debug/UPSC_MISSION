@@ -1,0 +1,12 @@
+MISSION UPSC V30.0.1 GITHUB UPDATE
+
+Upload and replace these files in the repository root:
+- index.html
+- v3001-responsive-fix.css
+- service-worker.js
+- README-V30.0.1.md
+
+After GitHub Pages deploys:
+1. Open the site.
+2. Press Ctrl + Shift + R on laptop.
+3. On iPad/iPhone, close and reopen the installed app. If needed, use App & Offline Centre → Check App Update.

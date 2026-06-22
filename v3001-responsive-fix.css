@@ -1,0 +1,180 @@
+/* Mission UPSC AI OS V30.0.1 — Tablet & Phone Responsive Fix
+   Built over V30.0 Smart Calendar without changing storage, Firebase, AI or study logic. */
+
+html,body{max-width:100%;overflow-x:hidden}
+.app,main,.section,.card,.two,.three,.grid,.v24Panel,.v30CalendarMini,.pwaCardV284{min-width:0}
+img,svg,canvas,video,iframe,object,embed{max-width:100%}
+input[type="checkbox"],input[type="radio"]{
+  width:20px!important;height:20px!important;min-width:20px!important;max-width:20px!important;
+  margin:0!important;padding:0!important;flex:0 0 20px!important;
+}
+
+/* Keep fixed dock from covering the final controls. */
+@media(max-width:1180px){
+  body{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
+  body.pwaStandaloneV284{padding-bottom:calc(118px + env(safe-area-inset-bottom))!important}
+  main{
+    margin-left:0!important;width:100%!important;max-width:100%!important;
+    padding:16px clamp(12px,2.5vw,24px) calc(132px + env(safe-area-inset-bottom))!important;
+    overflow-x:clip;
+  }
+  .section{width:100%!important;max-width:100%!important;padding-bottom:10px}
+
+  /* Treat iPad landscape as tablet instead of desktop. */
+  .mobileTop{display:flex!important;position:sticky!important;top:0;z-index:61!important}
+  aside.sidebar{
+    width:min(320px,88vw)!important;max-width:88vw!important;
+    transform:translateX(-105%)!important;transition:transform .24s ease!important;
+    z-index:64!important;padding-bottom:calc(24px + env(safe-area-inset-bottom))!important;
+  }
+  aside.sidebar.open{transform:translateX(0)!important}
+  .v2754SidebarOverlay{
+    display:block!important;position:fixed!important;inset:0!important;z-index:63!important;
+    background:rgba(2,6,23,.54)!important;opacity:0;pointer-events:none;transition:.2s ease;
+  }
+  .v2754SidebarOverlay.open{opacity:1!important;pointer-events:auto!important}
+
+  /* Core tablet grid behaviour. */
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .two,.three,.grid.two,.grid.three{grid-template-columns:1fr!important}
+  .checks{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .topbar{display:flex!important;align-items:flex-start!important;flex-wrap:wrap!important}
+  .topbar>.actions{width:auto;max-width:100%}
+  .card{max-width:100%;overflow-wrap:anywhere}
+  .card>.actions,.v26CardTitle+.actions{max-width:100%}
+  .actions>.btn{min-width:0!important;max-width:100%;white-space:normal}
+  .threeInput,.twoInput{min-width:0}
+  .threeInput>* ,.twoInput>*{min-width:0;max-width:100%}
+  .aiOutput,.aiBox,.bigAI{max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+
+  /* Bottom app dock and network pill. */
+  .pwaBottomDockV284{
+    display:grid!important;width:min(720px,calc(100% - 22px))!important;
+    bottom:calc(9px + env(safe-area-inset-bottom))!important;
+    padding:8px!important;border-radius:22px!important;z-index:70!important;
+  }
+  .pwaBottomDockV284 button{min-width:0!important;min-height:58px!important;padding:7px 3px!important}
+  .pwaOnlinePillV284{bottom:calc(94px + env(safe-area-inset-bottom))!important;z-index:71!important}
+  .pwaToastV284{bottom:calc(96px + env(safe-area-inset-bottom))!important}
+
+  /* Daily Command Centre: planner then brief, full width. */
+  #dailyCommandV261 .v26StatsGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #dailyCommandV261 .v26CommandGrid,
+  #dailyCommandV261 .v26EveningGrid{grid-template-columns:1fr!important}
+  #dailyCommandV261 .v26BriefOutput{max-height:none!important;min-height:220px}
+  #dailyCommandV261 .threeInput{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  #dailyCommandV261 .twoInput{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #dailyCommandV261 .v26CardTitle{align-items:flex-start}
+
+  /* Memory Engine: remove cut-off right card and align checkboxes. */
+  #memoryEngineV263 .v263BuilderGrid{grid-template-columns:1fr!important}
+  #memoryEngineV263 .v263SourceChecks{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;
+  }
+  #memoryEngineV263 .v263SourceChecks label{
+    display:flex!important;align-items:center!important;justify-content:flex-start!important;
+    gap:10px!important;min-height:50px!important;padding:12px 14px!important;text-align:left!important;
+  }
+  #memoryEngineV263 .twoInput{grid-template-columns:1fr!important}
+  #memoryEngineV263 .aiRoomImportGridV254{
+    display:grid!important;grid-template-columns:minmax(0,1fr) minmax(150px,.65fr)!important;
+    gap:12px!important;align-items:stretch!important;
+  }
+  #memoryEngineV263 .aiRoomFilePickerV254,
+  #memoryEngineV263 .aiRoomImportGridV254 .btn{width:100%!important;min-height:54px!important;margin:0!important}
+  #memoryEngineV263 .v263SourceArea{min-height:210px!important}
+
+  /* Current Affairs: input first, actions second; no right-side clipping. */
+  #currentAffairsAI>.two{grid-template-columns:1fr!important}
+  #currentAffairsAI .caQuickSourcesV243{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  #currentAffairsAI .stackedActionsV243{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;
+  }
+  #currentAffairsAI .stackedActionsV243 .btn,
+  #currentAffairsAI .v24Panel>.actions .btn{width:100%!important;margin:0!important}
+  #currentAffairsAI .caTextareaV243{min-height:250px!important}
+
+  /* Saarathi: controls wrap cleanly; response moves below command panel. */
+  #voiceSaarthi>.two{grid-template-columns:1fr!important}
+  #voiceSaarthi .v24Panel>.actions{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;
+  }
+  #voiceSaarthi .v24Panel>.actions .btn{width:100%!important;margin:0!important;min-height:48px}
+  #voiceSaarthi .voiceTextareaV244{min-height:190px!important}
+  #voiceSaarthi .bigAI{min-height:300px!important;max-height:none!important}
+  #voiceSaarthi .voiceChipsV244{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #voiceSaarthi .voiceChipsV244 button{white-space:normal;min-height:44px}
+
+  /* Smart Calendar: retain two mini sections only when sufficient width exists. */
+  #aiCalendarV4 .v30CalendarComposer{padding-bottom:24px!important}
+  #aiCalendarV4 .v30CalendarMiniGrid{gap:14px!important}
+  #aiCalendarV4 .v30CalendarMini{min-height:0!important}
+  #aiCalendarV4 .v30CalendarOutput{min-height:180px!important}
+
+  /* App & Offline Centre: cards stack and buttons remain visible. */
+  #appOfflineV284 .pwaGridV284{grid-template-columns:1fr!important}
+  #appOfflineV284 .pwaHeroGridV284{grid-template-columns:minmax(0,1fr) auto!important}
+  #appOfflineV284 .pwaStatusGridV284{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #appOfflineV284 .pwaMetricRowV284{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  #appOfflineV284 .pwaCardHeadV284{flex-wrap:wrap}
+  #appOfflineV284 .pwaActionGridV284{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #appOfflineV284 .pwaActionBtnV284{min-width:0;white-space:normal;text-align:center}
+}
+
+/* Portrait tablets and large phones. */
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr!important}
+  #dailyCommandV261 .threeInput,
+  #dailyCommandV261 .twoInput{grid-template-columns:1fr!important}
+  #currentAffairsAI .threeInput{grid-template-columns:1fr!important}
+  #currentAffairsAI .caQuickSourcesV243{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #aiCalendarV4 .v30CalendarMiniGrid{grid-template-columns:1fr!important}
+  #appOfflineV284 .pwaHeroGridV284{grid-template-columns:1fr!important}
+  #appOfflineV284 .pwaAppIconV284{justify-self:start}
+  #appOfflineV284 .pwaMetricRowV284{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+
+/* Phone-specific refinements. */
+@media(max-width:640px){
+  body{padding-bottom:calc(104px + env(safe-area-inset-bottom))!important}
+  main{padding:12px 10px calc(120px + env(safe-area-inset-bottom))!important}
+  .mobileTop{min-height:62px!important;padding:8px 10px!important}
+  aside.sidebar{width:min(300px,90vw)!important;max-width:90vw!important}
+  .card{padding:14px!important;border-radius:17px!important}
+  .cleanHero,.hero,.formalHero{padding:16px!important;border-radius:18px!important}
+  .heroIcon{display:none!important}
+  .actions{display:grid!important;grid-template-columns:1fr!important;width:100%}
+  .actions>.btn{width:100%!important;margin:0!important}
+  .checks{grid-template-columns:1fr!important}
+  .v26StatsGrid,#dailyCommandV261 .v26StatsGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  .v26Stat{padding:12px!important}.v26Stat b{font-size:1.25rem!important}
+  .v26CardTitle{flex-direction:column!important;gap:8px!important}
+
+  #memoryEngineV263 .v263SourceChecks{grid-template-columns:1fr!important}
+  #memoryEngineV263 .aiRoomImportGridV254{grid-template-columns:1fr!important}
+  #currentAffairsAI .stackedActionsV243,
+  #voiceSaarthi .v24Panel>.actions,
+  #voiceSaarthi .voiceChipsV244{grid-template-columns:1fr!important}
+
+  #appOfflineV284 .pwaStatusGridV284,
+  #appOfflineV284 .pwaMetricRowV284,
+  #appOfflineV284 .pwaActionGridV284,
+  #appOfflineV284 .pwaAuditGridV284{grid-template-columns:1fr!important}
+  #appOfflineV284 .pwaAppIconV284{width:78px;height:78px}
+
+  .pwaBottomDockV284{
+    width:calc(100% - 12px)!important;bottom:calc(6px + env(safe-area-inset-bottom))!important;
+    padding:6px 4px!important;border-radius:18px!important;
+  }
+  .pwaBottomDockV284 button{font-size:10px!important;min-height:55px!important}
+  .pwaBottomDockV284 button span{font-size:19px!important}
+  .pwaOnlinePillV284{right:8px!important;bottom:calc(86px + env(safe-area-inset-bottom))!important}
+}
+
+/* Very narrow phones: prevent labels and dock text from forcing overflow. */
+@media(max-width:390px){
+  .pwaBottomDockV284 button{font-size:9px!important;padding-inline:1px!important}
+  .pwaBottomDockV284 button span{font-size:18px!important}
+  #dailyCommandV261 .v26StatsGrid{grid-template-columns:1fr!important}
+  #currentAffairsAI .caQuickSourcesV243{grid-template-columns:1fr 1fr!important}
+}
