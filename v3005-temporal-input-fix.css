@@ -1,0 +1,114 @@
+/* Mission UPSC AI OS V30.0.5 — iPad Date/Time Containment Fix
+   This patch changes only native temporal inputs. All other layout and design stay intact.
+
+   iOS/iPadOS WebKit can over-calculate the width of date/time inputs when horizontal
+   padding is applied to the input itself. Keep the native picker, remove outer inline
+   padding, and place visual spacing on the internal value/indicator instead. */
+
+:where(
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"]
+){
+  box-sizing:border-box!important;
+  display:inline-block!important;
+  inline-size:100%!important;
+  width:100%!important;
+  min-inline-size:0!important;
+  min-width:0!important;
+  max-inline-size:100%!important;
+  max-width:100%!important;
+  padding-inline:0!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+  vertical-align:middle!important;
+  -webkit-appearance:auto!important;
+  appearance:auto!important;
+}
+
+/* Allow grid/flex wrappers containing temporal inputs to shrink inside their cards. */
+:where(label,div):has(> :where(
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"]
+)){
+  min-inline-size:0!important;
+  min-width:0!important;
+  max-inline-size:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+
+/* iOS WebKit internal value: never claim the full width beside the picker icon. */
+:where(
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"]
+)::-webkit-date-and-time-value{
+  box-sizing:border-box!important;
+  inline-size:auto!important;
+  width:auto!important;
+  min-inline-size:0!important;
+  min-width:0!important;
+  max-inline-size:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding-inline-start:12px!important;
+  padding-inline-end:2px!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  text-align:left!important;
+}
+
+:where(
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"]
+)::-webkit-datetime-edit{
+  min-inline-size:0!important;
+  min-width:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+}
+
+:where(
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="month"],
+  input[type="week"]
+)::-webkit-calendar-picker-indicator{
+  box-sizing:content-box!important;
+  flex:0 0 auto!important;
+  inline-size:18px!important;
+  width:18px!important;
+  min-inline-size:18px!important;
+  min-width:18px!important;
+  max-inline-size:18px!important;
+  max-width:18px!important;
+  margin:0 10px 0 4px!important;
+  padding:0!important;
+}
+
+/* Keep the value comfortably legible and prevent focus zoom on phone/iPad Safari. */
+@media (max-width:1180px){
+  :where(
+    input[type="date"],
+    input[type="time"],
+    input[type="datetime-local"],
+    input[type="month"],
+    input[type="week"]
+  ){
+    font-size:16px!important;
+  }
+}
