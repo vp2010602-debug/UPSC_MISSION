@@ -1,0 +1,27 @@
+/* Mission UPSC AI OS V30.1.2 — native temporal picker activation hotfix
+   Keeps the centred V30.0.7 display while restoring reliable date/time opening. */
+
+.v3007TemporalShell > input[type="date"],
+.v3007TemporalShell > input[type="time"],
+.v3007TemporalShell > input[type="datetime-local"],
+.v3007TemporalShell > input[type="month"],
+.v3007TemporalShell > input[type="week"]{
+  -webkit-appearance:auto!important;
+  appearance:auto!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  cursor:pointer!important;
+  opacity:1!important;
+}
+
+/* The native control remains the real tap target. The custom centred value and
+   icon stay visual-only so they can never block the picker. */
+.v3007TemporalShell .v3007TemporalValue,
+.v3007TemporalShell::after{
+  pointer-events:none!important;
+}
+
+.v3007TemporalShell{
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:rgba(23,105,224,.12);
+}

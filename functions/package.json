@@ -1,0 +1,13 @@
+{
+  "name": "mission-upsc-ai-functions",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "engines": {
+    "node": "20"
+  },
+  "dependencies": {
+    "firebase-functions": "^5.1.1",
+    "firebase-admin": "^12.5.0"
+  }
+}

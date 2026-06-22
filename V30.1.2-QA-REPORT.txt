@@ -1,0 +1,17 @@
+Mission UPSC AI OS V30.1.2 — QA REPORT
+Date: 22 June 2026
+
+PASS — Temporal picker hotfix JavaScript syntax
+PASS — Existing V30.0.7 temporal-centering JavaScript syntax
+PASS — V30.1 secure AI JavaScript syntax
+PASS — Firebase function JavaScript syntax
+PASS — All local CSS/JS references in index.html exist
+PASS — No duplicate HTML IDs detected
+PASS — Date, time and datetime controls covered by the hotfix
+PASS — Service worker cache bumped to V30.1.2
+PASS — Secure Gemini backend files preserved unchanged
+
+Fix scope:
+- Restored opening of date/time native selectors.
+- Preserved centred text, field containment and hamburger behaviour.
+- Frontend deployment only; no Firebase Functions redeployment needed.

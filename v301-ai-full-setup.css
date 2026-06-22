@@ -1,0 +1,44 @@
+/* V30.1 Complete AI Setup — scoped to AI Control Centre */
+#aiControlCentre .v301SecurityNote{margin-top:10px;padding:11px 13px;border-radius:12px;background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.28);font-size:.86rem;line-height:1.45}
+#aiControlCentre .v301InlineField{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+#aiControlCentre .v301InlineField input{min-width:0}
+#aiControlCentre .v301TinyBtn{min-height:42px;padding:0 14px;border-radius:11px;border:1px solid var(--line,#d8e1eb);background:var(--panel,#fff);font-weight:800;cursor:pointer}
+#aiControlCentre .v301ConfigGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+#aiControlCentre .v301ConfigGrid>label{display:flex;flex-direction:column;gap:6px}
+#aiControlCentre .v301ConfigGrid small{opacity:.72;line-height:1.35}
+#aiControlCentre .v301ProviderTests{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+#aiControlCentre .v301ProviderHint{margin-top:10px;font-size:.84rem;opacity:.76;line-height:1.45}
+#aiControlCentre .v301PromptWorkspace{overflow:hidden}
+#aiControlCentre .v301WorkspaceHead{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:14px}
+#aiControlCentre .v301WorkspaceHead h2{margin:2px 0 5px}
+#aiControlCentre .v301WorkspaceBadge{white-space:nowrap;padding:7px 10px;border-radius:999px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);font-size:.76rem;font-weight:900;letter-spacing:.04em}
+#aiControlCentre .v301WorkspaceGrid{display:grid;grid-template-columns:minmax(240px,.78fr) minmax(320px,1.22fr);gap:14px}
+#aiControlCentre .v301FormStack{display:flex;flex-direction:column;gap:10px}
+#aiControlCentre .v301FormStack label{display:flex;flex-direction:column;gap:6px;font-weight:750}
+#aiControlCentre .v301FormStack label span{font-size:.86rem}
+#aiControlCentre .v301FormStack textarea{min-height:118px;resize:vertical}
+#aiControlCentre #chatgptQuestionV301{min-height:92px}
+#aiControlCentre #chatgptPromptV301{min-height:330px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;line-height:1.5}
+#aiControlCentre #chatgptResponseV301{min-height:260px}
+#aiControlCentre .v301PromptPane{display:flex;flex-direction:column;gap:10px}
+#aiControlCentre .v301PaneTitle{display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:900}
+#aiControlCentre .v301WorkspaceActions{display:flex;flex-wrap:wrap;gap:8px}
+#aiControlCentre .v301WorkspaceStatus{margin-top:10px;padding:10px 12px;border-radius:11px;background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.22);font-size:.86rem;line-height:1.4}
+#aiControlCentre .v301Ok{border-color:rgba(34,197,94,.36)!important;background:rgba(34,197,94,.08)!important}
+#aiControlCentre .v301Warn{border-color:rgba(245,158,11,.36)!important;background:rgba(245,158,11,.08)!important}
+#aiControlCentre .v301Error{border-color:rgba(239,68,68,.36)!important;background:rgba(239,68,68,.08)!important}
+#aiControlCentre .v301ErrorText{padding:12px;border-radius:10px;background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.3)}
+#aiControlCentre [hidden]{display:none!important}
+#aiControlCentre .aiRadio:has(input:checked){outline:2px solid rgba(37,99,235,.3);background:rgba(37,99,235,.06)}
+@media(max-width:900px){
+  #aiControlCentre .v301WorkspaceGrid,#aiControlCentre .v301ConfigGrid{grid-template-columns:1fr}
+  #aiControlCentre .v301WorkspaceHead{flex-direction:column}
+  #aiControlCentre .v301WorkspaceBadge{white-space:normal}
+  #aiControlCentre #chatgptPromptV301{min-height:260px}
+}
+@media(max-width:560px){
+  #aiControlCentre .v301WorkspaceActions,#aiControlCentre .v301ProviderTests{display:grid;grid-template-columns:1fr 1fr}
+  #aiControlCentre .v301WorkspaceActions .btn,#aiControlCentre .v301ProviderTests .btn{width:100%;min-width:0}
+  #aiControlCentre .v301InlineField{grid-template-columns:1fr}
+  #aiControlCentre .v301TinyBtn{width:100%}
+}

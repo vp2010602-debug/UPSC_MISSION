@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jarvis UPSC V30.0.7 — Centered Temporal + Hamburger Fix</title>
+  <title>Jarvis UPSC V30.1.2 — Secure AI + Temporal Picker Fix</title>
   <meta name="theme-color" content="#06264a" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -28,6 +28,8 @@
   <link rel="stylesheet" href="./v3004-targeted-ipad-fix.css?v=30.0.4" />
   <link rel="stylesheet" href="./v3006-temporal-ui-fix.css?v=30.0.6" />
   <link rel="stylesheet" href="./v3007-centered-temporal-hamburger.css?v=30.0.7" />
+  <link rel="stylesheet" href="./v301-ai-full-setup.css?v=30.1.1" />
+  <link rel="stylesheet" href="./v3012-temporal-picker-hotfix.css?v=30.1.2" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -102,7 +104,7 @@
   <main>
     <div class="topbar">
       <div>
-        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V29.2 • Visual + Notes Upgrade</span></h1>
+        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V30.1.1 • Secure AI Setup</span></h1>
         <p class="sub">Plan today, revise smarter and keep your UPSC journey organised in one place.</p>
       </div>
       <button type="button" class="topToolsToggleV286" onclick="toggleTopToolsV286()" aria-label="Show or hide page tools">⚙ Tools</button>
@@ -117,33 +119,60 @@
 
     <section id="aiControlCentre" class="section lightStudySection">
       <div class="cleanHero">
-        <div><span class="eyebrow blueEye">V28.2 • SMART ROUTER • OLLAMA • GEMINI • CHATGPT PROMPT</span><h1>AI Control Centre</h1><p class="sub">Choose a manual AI or enable Smart Auto routing. Mission UPSC can use Ollama for free local tasks, Gemini for cloud and complex work, and ChatGPT Prompt Mode as the safe manual fallback.</p></div>
+        <div><span class="eyebrow blueEye">V30.1.1 • SECURE GEMINI • OLLAMA • CHATGPT PROMPT • HYBRID</span><h1>AI Control Centre</h1><p class="sub">Choose Gemini, Ollama, ChatGPT Prompt Mode, or Smart Hybrid. The same selection powers AI Notes, PDFs, Current Affairs, Mains evaluation, mentorship, PYQ tools and the rest of JARVIS.</p></div>
         <div class="heroIcon">🤖</div>
       </div>
       <div class="grid two">
         <div class="card aiModeCard">
           <h2>Choose AI Mode</h2>
-          <label class="aiRadio"><input type="radio" name="aiModeV23" value="ollama" onchange="saveAISettingsV23()"> <b>🖥 Ollama Local</b><span>Default free local AI using your laptop</span></label>
-          <label class="aiRadio"><input type="radio" name="aiModeV23" value="gemini" onchange="saveAISettingsV23()"> <b>☁ Gemini Free API</b><span>Cloud backup using Gemini free tier key</span></label>
-          <label class="aiRadio"><input type="radio" name="aiModeV23" value="chatgpt" onchange="saveAISettingsV23()"> <b>📋 ChatGPT Prompt Mode</b><span>No API cost. Creates prompt to copy into ChatGPT</span></label>
-          <label class="aiRadio"><input type="radio" name="aiModeV23" value="hybrid" onchange="saveAISettingsV23()"> <b>⭐ Smart Hybrid</b><span>Try Ollama first, then Gemini if Ollama fails</span></label>
+          <label class="aiRadio"><input type="radio" name="aiModeV23" value="ollama" onchange="saveAISettingsV23()"> <b>🖥 Ollama Local</b><span>Private local AI on your laptop; best for offline and quick tasks</span></label>
+          <label class="aiRadio"><input type="radio" name="aiModeV23" value="gemini" onchange="saveAISettingsV23()"> <b>☁ Gemini API</b><span>Primary cloud AI using your paid Gemini API credits</span></label>
+          <label class="aiRadio"><input type="radio" name="aiModeV23" value="chatgpt" onchange="saveAISettingsV23()"> <b>📋 ChatGPT Prompt Mode</b><span>Creates exam-oriented prompts, opens ChatGPT, and imports pasted responses</span></label>
+          <label class="aiRadio"><input type="radio" name="aiModeV23" value="hybrid" onchange="saveAISettingsV23()"> <b>⭐ Smart Hybrid</b><span>Routes demanding work to Gemini, quick/private work to Ollama, then ChatGPT fallback</span></label>
         </div>
         <div class="card aiModeCard">
           <h2>Connection Settings</h2>
           <label>Ollama URL</label>
           <input id="ollamaUrlV23" placeholder="http://localhost:11434" onchange="saveAISettingsV23()">
           <label>Ollama Model</label>
-          <input id="ollamaModelV23" placeholder="gemma3:4b" onchange="saveAISettingsV23()">
-          <label>Gemini API Key</label>
-          <input id="geminiKeyV23" type="password" placeholder="Paste Gemini API key here" onchange="saveAISettingsV23()">
-          <div class="actions"><button class="btn green" onclick="testAIConnectionV23()">Test Selected AI</button><button class="btn blue" onclick="saveAISettingsV23()">Save AI Settings</button></div>
+          <input id="ollamaModelV23" list="ollamaModelsV301" placeholder="gemma3:4b" onchange="saveAISettingsV23()">
+          <datalist id="ollamaModelsV301"></datalist>
+
+          <label>Gemini connection</label>
+          <select id="geminiTransportV301" onchange="updateTransportVisibilityV301();saveAISettingsV23()">
+            <option value="direct">Direct key on this device — easiest</option>
+            <option value="proxy">Firebase secure proxy — recommended for production</option>
+          </select>
+          <div id="geminiDirectFieldsV301">
+            <label>Gemini API Key</label>
+            <div class="v301InlineField"><input id="geminiKeyV23" type="password" autocomplete="off" placeholder="Paste Gemini API key here" onchange="saveAISettingsV23()"><button id="toggleGeminiKeyBtnV301" type="button" class="v301TinyBtn" onclick="toggleGeminiKeyV301()">Show</button></div>
+          </div>
+          <div id="geminiProxyFieldsV301" hidden>
+            <label>Firebase Function URL</label>
+            <input id="geminiProxyUrlV301" type="url" placeholder="https://REGION-PROJECT.cloudfunctions.net/upscAI" onchange="saveAISettingsV23()">
+          </div>
+          <label>Gemini Model</label>
+          <select id="geminiModelV301" onchange="saveAISettingsV23()">
+            <option value="gemini-3.5-flash">Gemini 3.5 Flash — latest</option>
+            <option value="gemini-2.5-flash">Gemini 2.5 Flash — stable recommended</option>
+            <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash Lite — lower cost</option>
+          </select>
+
+          <div class="v301ConfigGrid">
+            <label><span>Hybrid priority</span><select id="hybridPriorityV301" onchange="saveAISettingsV23()"><option value="smart">Smart by task</option><option value="gemini-first">Gemini first</option><option value="ollama-first">Ollama first</option></select></label>
+            <label><span>Response depth</span><select id="aiMaxTokensV301" onchange="saveAISettingsV23()"><option value="4096">Normal</option><option value="8192">Detailed</option><option value="16384">Very detailed</option></select></label>
+            <label><span>Creativity / temperature</span><input id="aiTemperatureV301" type="number" min="0" max="1" step="0.1" value="0.2" onchange="saveAISettingsV23()"></label>
+            <label class="v282Toggle"><input id="hybridFallbackChatGPTV301" type="checkbox" checked onchange="saveAISettingsV23()"><span><b>ChatGPT fallback</b><small>Prepare prompt when both APIs fail.</small></span></label>
+          </div>
+          <div class="v301ProviderTests"><button class="btn green" onclick="testAIConnectionV23()">Test Selected Mode</button><button class="btn blue" onclick="testGeminiV301()">Test Gemini</button><button class="btn ghost" onclick="testOllamaV301()">Test Ollama</button><button class="btn gold" onclick="detectOllamaModelsV301()">Detect Models</button><button class="btn blue" onclick="saveAISettingsV23()">Save AI Settings</button></div>
+          <div class="v301SecurityNote"><b>Production safety:</b> use the Firebase proxy. Gemini requests require your Google sign-in and the authorised owner email. Direct-key mode is only for temporary private localhost testing.</div>
           <div id="aiConnectionStatusV23" class="aiOutput smallAI">AI status will appear here.</div>
         </div>
       </div>
 
       <div class="card v282RouterCard">
         <div class="v282CardHead">
-          <div><span class="v282Eyebrow">V28.2 SMART AI ROUTER</span><h2>Automatic Provider Selection</h2><p class="sub">Routes each request by device, task complexity, privacy, provider availability and your cloud-call guard. Manual AI selection still remains available.</p></div>
+          <div><span class="v282Eyebrow">V30.1 HYBRID ROUTER</span><h2>Hybrid Provider Selection</h2><p class="sub">Used when Smart Hybrid is selected. Demanding evaluation, current affairs, long PDFs and strategy favour Gemini; quick/private tasks can use Ollama; ChatGPT remains the manual fallback.</p></div>
           <span id="smartRouterStateV282" class="pill blue">Loading</span>
         </div>
         <div class="v282RouterGrid">
@@ -164,6 +193,36 @@
         </div>
         <div class="actions"><button type="button" class="btn blue" onclick="saveSmartRouterV282()">Save Smart Router</button><button type="button" class="btn green" onclick="testSmartRouterV282()">Test Available Providers</button><button type="button" class="btn ghost" onclick="clearRouterUsageV282()">Clear Usage Log</button></div>
         <div id="smartRouterStatusV282" class="aiOutput smallAI">Smart Router status will appear here.</div>
+      </div>
+
+
+      <div class="card v301PromptWorkspace">
+        <div class="v301WorkspaceHead">
+          <div><span class="v282Eyebrow">CHATGPT PLUS • MANUAL EXPERT MODE</span><h2>ChatGPT UPSC Prompt Workspace</h2><p class="sub">Generate the strict exam-oriented prompt, copy it, open ChatGPT, then paste the response back into JARVIS and save it.</p></div>
+          <span class="v301WorkspaceBadge">COPY → OPEN → PASTE → SAVE</span>
+        </div>
+        <div class="v301WorkspaceGrid">
+          <div class="v301FormStack">
+            <label><span>UPSC task</span><select id="chatgptTaskV301" onchange="updateChatGPTTemplateV301()"><option value="mains-evaluator">Strict Mains Answer Evaluator</option><option value="topper-answer">Topper-Style Model Answer</option><option value="current-affairs">Current Affairs Deep Analysis</option><option value="prelims">Prelims / PYQ Analysis</option><option value="ethics">GS4 Ethics Case Study</option><option value="essay">Essay Framework</option><option value="saarathi">Saarathi Weekly Plan Extractor</option><option value="notes">UPSC Notes & Revision</option></select></label>
+            <div class="v301ConfigGrid">
+              <label><span>Marks</span><select id="chatgptMarksV301" onchange="generateChatGPTPromptV301()"><option value="10">10 marker</option><option value="15">15 marker</option></select></label>
+              <label><span>Paper / Subject</span><input id="chatgptPaperV301" placeholder="GS2 / Polity / Ethics"></label>
+            </div>
+            <label><span>Question / Topic</span><textarea id="chatgptQuestionV301" placeholder="Paste the exact UPSC question or topic"></textarea></label>
+            <label id="chatgptAnswerWrapV301"><span>My Answer</span><textarea id="chatgptAnswerV301" placeholder="Paste your typed answer or extracted handwritten answer text"></textarea></label>
+            <label><span id="chatgptSourceLabelV301">Source material / notes (optional)</span><textarea id="chatgptSourceV301" placeholder="Paste article, mentor plan, PDF extracted text, notes or supporting material"></textarea></label>
+            <div class="v301WorkspaceActions"><button class="btn purple" type="button" onclick="generateChatGPTPromptV301()">Generate Exam Prompt</button><button class="btn ghost" type="button" onclick="clearChatGPTWorkspaceV301()">Clear</button></div>
+          </div>
+          <div class="v301PromptPane">
+            <div class="v301PaneTitle"><span>Prepared Prompt</span><small>Editable before copying</small></div>
+            <textarea id="chatgptPromptV301" placeholder="Your exam-oriented ChatGPT prompt will appear here"></textarea>
+            <div class="v301WorkspaceActions"><button class="btn gold" type="button" onclick="copyChatGPTPromptV301()">📋 Copy Prompt</button><button class="btn blue" type="button" onclick="openChatGPTV301()">↗ Open ChatGPT</button></div>
+            <div class="v301PaneTitle"><span>Paste ChatGPT Response</span><small>Manual or clipboard paste</small></div>
+            <textarea id="chatgptResponseV301" placeholder="Copy ChatGPT's response and paste it here"></textarea>
+            <div class="v301WorkspaceActions"><button class="btn purple" type="button" onclick="pasteChatGPTResponseV301()">📥 Paste from Clipboard</button><button class="btn green" type="button" onclick="saveChatGPTResponseV301()">💾 Save Response</button><button class="btn blue" type="button" onclick="sendChatGPTResponseToModuleV301()">Send to Relevant Module</button></div>
+            <div id="chatgptWorkspaceStatusV301" class="v301WorkspaceStatus">Choose a task and generate the prompt.</div>
+          </div>
+        </div>
       </div>
 
       <div class="card">
@@ -376,7 +435,7 @@
         <div>
           <span class="eyebrow blueEye">V23.1 • REAL AI NOTES STUDIO</span>
           <h1>AI Notes Studio</h1>
-          <p class="sub">Generate UPSC-ready notes using your selected AI engine: Ollama Local, Gemini Free API, or ChatGPT Prompt Mode.</p>
+          <p class="sub">Generate UPSC-ready notes using your selected AI engine: Ollama Local, Gemini API, or ChatGPT Prompt Mode.</p>
           <div class="aiModeMiniV231" id="aiNotesModeBadgeV231">Selected AI: Loading...</div>
         </div>
         <div class="heroIcon">📝</div>
@@ -443,7 +502,7 @@
 
           <div class="aiHelpStripV231">
             <span>🖥 Ollama = free local</span>
-            <span>☁ Gemini = free API backup</span>
+            <span>☁ Gemini = paid cloud AI</span>
             <span>📋 ChatGPT Prompt = manual expert mode</span>
           </div>
         </div>
@@ -2542,7 +2601,7 @@
     <section id="settings" class="section">
       <div class="card">
         <h2>Setup</h2>
-        <p class="sub">Keep your Firebase config and Gemini API key in firebase-config.js.</p>
+        <p class="sub">Keep only public Firebase configuration in firebase-config.js. Add Gemini in AI Control Centre or use the Firebase secret proxy.</p>
         <pre class="setupBox">Firebase connected for V13 Cloud Pro. Keep only public firebaseConfig here. Never paste service account/private key.</pre>
         <div id="cloudStatusLine" class="miniStats"><span class="pill gold">Checking cloud status...</span></div>
       </div>
@@ -2663,10 +2722,10 @@
         <div class="card">
           <h2>📦 Release Information</h2>
           <div class="v275ReleaseList">
-            <div><span>Version</span><b>Mission UPSC AI OS V30.0.7 Centered Temporal + Hamburger Fix</b></div>
+            <div><span>Version</span><b>Mission UPSC AI OS V30.1.2 Secure AI + Temporal Picker Fix</b></div>
             <div><span>Build date</span><b>22 June 2026</b></div>
             <div><span>Base</span><b>V28.6 Final UI + V28.5 Responsive Jarvis Pro</b></div>
-            <div><span>Data policy</span><b>No automatic deletion or paid AI calls</b></div>
+            <div><span>Data policy</span><b>Paid Gemini calls only when you select Gemini/Hybrid and run an AI action</b></div>
           </div>
           <p class="sub">Use Chrome for local Ollama testing. Gemini/ChatGPT Prompt modes remain available for phone and tablet use.</p>
         </div>
@@ -2695,5 +2754,7 @@
 <script defer src="./v300-smart-calendar.js?v=30.0"></script>
 <script defer src="./v3004-sidebar-toggle.js?v=30.0.4"></script>
 <script defer src="./v3007-centered-temporal-hamburger.js?v=30.0.7"></script>
+<script defer src="./v301-ai-full-setup.js?v=30.1.1"></script>
+<script defer src="./v3012-temporal-picker-hotfix.js?v=30.1.2"></script>
 </body>
 </html>

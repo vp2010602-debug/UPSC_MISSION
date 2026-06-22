@@ -1,0 +1,15 @@
+Replace/add these files in the GitHub repository root:
+- index.html
+- app.js
+- service-worker.js
+- v301-ai-full-setup.css
+- v301-ai-full-setup.js
+- v3012-temporal-picker-hotfix.css
+- v3012-temporal-picker-hotfix.js
+- firebase.json
+- .firebaserc
+- functions/index.js
+- functions/package.json
+- functions/package-lock.json
+
+The Firebase function already deployed for V30.1.1 remains compatible. Do not redeploy it only for the temporal picker fix.

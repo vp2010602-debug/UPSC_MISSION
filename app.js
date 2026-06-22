@@ -43,6 +43,13 @@ function setCloudBadge(msg,cls=''){
 
 let app, auth, db, storage, user=null, cloudEnabled=false;
 
+// V30.1.1: provide a short-lived Firebase ID token to the secure Gemini proxy.
+window.getFirebaseIdTokenV301 = async (forceRefresh=false) => {
+  if(!user) throw new Error('Sign in with Google before using the secure Gemini proxy.');
+  return await user.getIdToken(Boolean(forceRefresh));
+};
+window.getFirebaseUserEmailV301 = () => user?.email || '';
+
 try{
   if(firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('PASTE')){
     app=initializeApp(firebaseConfig);
@@ -2545,7 +2552,7 @@ renderAIIntegrated = async function(){
     try{return {...AI_DEFAULTS_V23,...JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}')}}catch(e){return {...AI_DEFAULTS_V23}}
   }
   function setAIStatusV23(msg){const el=document.getElementById('aiConnectionStatusV23'); if(el) el.innerHTML=window.formatAI?formatAI(msg):String(msg)}
-  function selectedModeLabelV23(mode){return mode==='ollama'?'🖥 Ollama Local':mode==='gemini'?'☁ Gemini Free API':mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'}
+  function selectedModeLabelV23(mode){return mode==='ollama'?'🖥 Ollama Local':mode==='gemini'?'☁ Gemini API':mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'}
   window.loadAISettingsV23=function(){
     const s=getAISettingsV23();
     document.querySelectorAll('input[name="aiModeV23"]').forEach(r=>r.checked=r.value===s.mode);
@@ -2641,7 +2648,7 @@ renderAIIntegrated = async function(){
   function val(id,def=''){const x=el(id); return x ? String(x.value||def).trim() : def}
   function checked(id){return !!el(id)?.checked}
   function settings(){try{return {...AI_DEFAULTS,...JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}')}}catch(e){return {...AI_DEFAULTS}}}
-  function modeLabel(mode){return mode==='ollama'?'🖥 Ollama Local':mode==='gemini'?'☁ Gemini Free API':mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'}
+  function modeLabel(mode){return mode==='ollama'?'🖥 Ollama Local':mode==='gemini'?'☁ Gemini API':mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'}
   function safeText(s){return String(s||'').replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))}
   function updateModeBadge(){
     const s=settings();
@@ -2650,7 +2657,7 @@ renderAIIntegrated = async function(){
     const hint=el('aiRouteHintV231');
     if(hint){
       hint.innerHTML = s.mode==='ollama' ? '🖥 <b>Ollama Local</b> selected. Best for daily notes, flashcards, mindmaps and revision. Keep Ollama running on your laptop.' :
-        s.mode==='gemini' ? '☁ <b>Gemini Free API</b> selected. Best for longer context, current affairs text and deeper explanation. Add API key in AI Control Centre.' :
+        s.mode==='gemini' ? '☁ <b>Gemini API</b> selected. Best for longer context, current affairs text and deeper explanation. Add API key in AI Control Centre.' :
         s.mode==='chatgpt' ? '📋 <b>ChatGPT Prompt Mode</b> selected. No API cost. This page prepares a perfect prompt to copy into ChatGPT.' :
         '⭐ <b>Smart Hybrid</b> selected. It will try Ollama first, then Gemini, then ChatGPT prompt mode if needed.';
     }
@@ -2781,7 +2788,7 @@ renderAIIntegrated = async function(){
   function q(id){return document.getElementById(id)}
   function esc232(v){return String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
   function getAISettingsV232(){try{return {...AI_DEFAULTS_V232,...JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}')}}catch(e){return {...AI_DEFAULTS_V232}}}
-  function modeLabelV232(mode){return mode==='ollama'?'🖥 Ollama Local':mode==='gemini'?'☁ Gemini Free API':mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'}
+  function modeLabelV232(mode){return mode==='ollama'?'🖥 Ollama Local':mode==='gemini'?'☁ Gemini API':mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'}
   function fmt232(text){try{return typeof formatAI==='function'?formatAI(text):`<pre>${esc232(text)}</pre>`}catch(e){return `<pre>${esc232(text)}</pre>`}}
   function setStatusV232(msg,active=true){const el=q('aiGenerationStatusV232'); if(el){el.classList.toggle('active',!!active); el.innerHTML=msg||'';}}
   function setCancelVisibleV232(show){const btn=q('cancelAINotesBtnV232'); if(btn) btn.style.display=show?'inline-flex':'none';}
@@ -2876,7 +2883,7 @@ renderAIIntegrated = async function(){
       if(e.name==='AbortError'){
         setStatusV232('⛔ Generation cancelled. Partial notes are preserved.',true);
       }else{
-        const msg=`AI error: ${e.message}\n\nFor Ollama: keep Ollama running, check model name gemma3:4b, and use local address 127.0.0.1. On phone/tablet GitHub Pages, use Gemini Free or ChatGPT Prompt Mode.`;
+        const msg=`AI error: ${e.message}\n\nFor Ollama: keep Ollama running, check model name gemma3:4b, and use local address 127.0.0.1. On phone/tablet GitHub Pages, use Gemini or ChatGPT Prompt Mode.`;
         setOutputV232(msg,'⚠ AI Error',false);
         setStatusV232('⚠ AI generation failed. Check AI Control Centre settings.',true);
       }
@@ -2942,7 +2949,7 @@ renderAIIntegrated = async function(){
   const textV=(id)=>String($v(id)?.value||'').trim();
   let pdfAbortV234=null;
   function aiSettingsV(){try{return {mode:'ollama',ollamaUrl:'http://localhost:11434',ollamaModel:'gemma3:4b',geminiKey:'',...JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}')}}catch(e){return {mode:'ollama',ollamaUrl:'http://localhost:11434',ollamaModel:'gemma3:4b',geminiKey:''}}}
-  function modeLabelV(mode){return mode==='ollama'?'🖥 Ollama Local':mode==='gemini'?'☁ Gemini Free API':mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'}
+  function modeLabelV(mode){return mode==='ollama'?'🖥 Ollama Local':mode==='gemini'?'☁ Gemini API':mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'}
   function fmtV(t){try{return typeof formatAI==='function'?formatAI(t):`<pre>${escV(t)}</pre>`}catch(e){return `<pre>${escV(t)}</pre>`}}
   function setHtml(id,html){const el=$v(id); if(el) el.innerHTML=html;}
   function setStatus(id,msg,active=true){const el=$v(id); if(el){el.classList.toggle('active',!!active); el.innerHTML=msg||'';}}
@@ -3533,7 +3540,7 @@ renderAIIntegrated = async function(){
   const getV244=async(col)=>{try{ if(typeof safeGetColV4==='function') return await safeGetColV4(col); }catch(e){} try{ if(typeof getCol==='function') return await getCol(col); }catch(e){} try{return JSON.parse(localStorage.getItem(col)||'[]')}catch(e){return []}};
   const askV244=async(prompt)=>{ if(typeof window.aiAskRouterV23==='function') return await window.aiAskRouterV23(prompt); if(typeof window.aiAsk==='function') return await window.aiAsk(prompt); if(typeof window.aiAskV4==='function') return await window.aiAskV4(prompt); throw new Error('AI router not found. Open AI Control Centre and save settings.'); };
   function fmtV244(text){try{return typeof formatAI==='function'?formatAI(text):`<pre>${escV244(text)}</pre>`}catch(e){return `<pre>${escV244(text)}</pre>`}}
-  function modeLabelV244(){try{const s=JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}'); const m=s.mode||'ollama'; return m==='ollama'?'🖥 Ollama Local':m==='gemini'?'☁ Gemini Free API':m==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid';}catch(e){return 'Selected AI';}}
+  function modeLabelV244(){try{const s=JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}'); const m=s.mode||'ollama'; return m==='ollama'?'🖥 Ollama Local':m==='gemini'?'☁ Gemini API':m==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid';}catch(e){return 'Selected AI';}}
   function setHtmlV244(id,html){const el=$v(id); if(el)el.innerHTML=html;}
   function setStatusV244(id,msg){const el=$v(id); if(el){el.innerHTML=msg||''; el.classList.toggle('active',!!msg);}}
 
@@ -3693,7 +3700,7 @@ renderAIIntegrated = async function(){
   const clamp25=(n,a,b)=>Math.max(a,Math.min(b,Number(n)||0));
   const round25=(n,d=1)=>Number(Number(n||0).toFixed(d));
   const settings25=()=>{try{return {mode:'ollama',ollamaModel:'gemma3:4b',...JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}')}}catch(e){return {mode:'ollama',ollamaModel:'gemma3:4b'}}};
-  const modeLabel25=()=>{const s=settings25();return s.mode==='ollama'?'🖥 Ollama Local':s.mode==='gemini'?'☁ Gemini Free API':s.mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'};
+  const modeLabel25=()=>{const s=settings25();return s.mode==='ollama'?'🖥 Ollama Local':s.mode==='gemini'?'☁ Gemini API':s.mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'};
   const fmt25=t=>{try{return typeof window.formatAI==='function'?window.formatAI(String(t||'')):`<pre>${esc25(t)}</pre>`}catch(e){return `<pre>${esc25(t)}</pre>`}};
   async function ask25(prompt){
     if(typeof window.aiAskRouterV23==='function') return await window.aiAskRouterV23(prompt);
@@ -3918,7 +3925,7 @@ renderAIIntegrated = async function(){
   const fmt=t=>{try{return typeof window.formatAI==='function'?window.formatAI(String(t||'')):`<pre>${esc(t)}</pre>`}catch(e){return `<pre>${esc(t)}</pre>`}};
   const status=msg=>{const e=$i('interviewStatusV253');if(e){e.classList.toggle('active',!!msg);e.innerHTML=msg||''}};
   const settings=()=>{try{return {mode:'ollama',ollamaModel:'gemma3:4b',...JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}')}}catch(e){return {mode:'ollama',ollamaModel:'gemma3:4b'}}};
-  const modeLabel=()=>{const m=settings().mode;return m==='ollama'?'🖥 Ollama Local':m==='gemini'?'☁ Gemini Free API':m==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'};
+  const modeLabel=()=>{const m=settings().mode;return m==='ollama'?'🖥 Ollama Local':m==='gemini'?'☁ Gemini API':m==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'};
   async function ask(prompt){if(typeof window.aiAskRouterV23==='function')return await window.aiAskRouterV23(prompt);if(typeof window.aiAsk==='function')return await window.aiAsk(prompt);throw new Error('AI router unavailable. Save an AI mode in AI Control Centre.');}
   async function getCol(name){try{if(typeof window.getCol==='function')return await window.getCol(name)}catch(e){}try{return JSON.parse(localStorage.getItem(name)||'[]')}catch(e){return []}}
   async function saveCol(name,obj){try{if(typeof window.saveCol==='function')return await window.saveCol(name,obj)}catch(e){}const a=await getCol(name);const item={...obj,id:'local_'+Date.now()+'_'+Math.random().toString(36).slice(2)};a.unshift(item);localStorage.setItem(name,JSON.stringify(a));return item}
@@ -4094,7 +4101,7 @@ renderAIIntegrated = async function(){
   const clamp26=(n,a,b)=>Math.max(a,Math.min(b,Number(n)||0));
   const fmt26=t=>{try{return typeof window.formatAI==='function'?window.formatAI(String(t||'')):`<pre>${esc26(t)}</pre>`}catch(e){return `<pre>${esc26(t)}</pre>`}};
   const settings26=()=>{try{return {mode:'ollama',ollamaModel:'gemma3:4b',...JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}')}}catch(e){return {mode:'ollama',ollamaModel:'gemma3:4b'}}};
-  const modeLabel26=()=>{const s=settings26();return s.mode==='ollama'?'🖥 Ollama Local':s.mode==='gemini'?'☁ Gemini Free API':s.mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'};
+  const modeLabel26=()=>{const s=settings26();return s.mode==='ollama'?'🖥 Ollama Local':s.mode==='gemini'?'☁ Gemini API':s.mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'};
   async function ask26(prompt){if(typeof window.aiAskRouterV23==='function')return await window.aiAskRouterV23(prompt);throw new Error('AI router unavailable. Save AI settings in AI Control Centre.');}
   async function get26(col){try{if(typeof window.getCol==='function')return await window.getCol(col)}catch(e){}try{return JSON.parse(localStorage.getItem(col)||'[]')}catch(e){return []}}
   async function save26(col,obj){try{if(typeof window.saveCol==='function')return await window.saveCol(col,obj)}catch(e){}const a=await get26(col);a.unshift({...obj,id:'local_'+Date.now()});localStorage.setItem(col,JSON.stringify(a));}
@@ -4228,7 +4235,7 @@ renderAIIntegrated = async function(){
   const clampM=(n,a,b)=>Math.max(a,Math.min(b,Number(n)||0));
   const fmtM=t=>{try{return typeof window.formatAI==='function'?window.formatAI(String(t||'')):`<pre>${escM(t)}</pre>`}catch(e){return `<pre>${escM(t)}</pre>`}};
   const settingsM=()=>{try{return {mode:'ollama',ollamaModel:'gemma3:4b',...JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}')}}catch(e){return {mode:'ollama',ollamaModel:'gemma3:4b'}}};
-  const modeLabelM=()=>{const s=settingsM();return s.mode==='ollama'?'🖥 Ollama Local':s.mode==='gemini'?'☁ Gemini Free API':s.mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'};
+  const modeLabelM=()=>{const s=settingsM();return s.mode==='ollama'?'🖥 Ollama Local':s.mode==='gemini'?'☁ Gemini API':s.mode==='chatgpt'?'📋 ChatGPT Prompt Mode':'⭐ Smart Hybrid'};
   async function askM(prompt){if(typeof window.aiAskRouterV23==='function')return await window.aiAskRouterV23(prompt);throw new Error('AI router unavailable. Save AI settings in AI Control Centre.');}
   async function getM(col){try{return typeof window.getCol==='function'?await window.getCol(col):JSON.parse(localStorage.getItem(col)||'[]')}catch(e){return []}}
   async function saveM(col,obj){if(typeof window.saveCol==='function')return await window.saveCol(col,obj);const a=await getM(col);a.unshift({...obj,id:'local_'+Date.now()+'_'+Math.random().toString(36).slice(2)});localStorage.setItem(col,JSON.stringify(a));}
@@ -4369,7 +4376,7 @@ renderAIIntegrated = async function(){
   const g=id=>document.getElementById(id);
   const esc265=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const today265=()=>new Date().toISOString().slice(0,10);
-  const mode265=()=>{try{const s=JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}');return s.mode==='gemini'?'Gemini Free':s.mode==='chatgpt'?'ChatGPT Prompt':s.mode==='hybrid'?'Smart Hybrid':'Ollama Local'}catch(e){return 'Selected AI'}};
+  const mode265=()=>{try{const s=JSON.parse(localStorage.getItem('mission_ai_settings_v23')||'{}');return s.mode==='gemini'?'Gemini':s.mode==='chatgpt'?'ChatGPT Prompt':s.mode==='hybrid'?'Smart Hybrid':'Ollama Local'}catch(e){return 'Selected AI'}};
   const priorityRank265={High:0,Medium:1,Low:2};
   let lastSyllabusPlanV265='';
   let editingSyllabusIdV265=null;
