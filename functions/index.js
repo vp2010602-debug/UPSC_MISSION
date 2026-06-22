@@ -14,6 +14,77 @@ const ALLOWED_MODELS = new Set([
   "gemini-2.5-flash-lite"
 ]);
 
+// Feed URLs are fixed server-side. The browser cannot ask this function to fetch
+// arbitrary URLs, which prevents SSRF while still making the daily CA workflow easy.
+const NEWS_FEEDS = Object.freeze({
+  "hindu-national": {
+    name: "The Hindu — National",
+    category: "Newspaper",
+    url: "https://www.thehindu.com/news/national/feeder/default.rss",
+    homepage: "https://www.thehindu.com/news/national/"
+  },
+  "hindu-editorial": {
+    name: "The Hindu — Editorial",
+    category: "Editorial",
+    url: "https://www.thehindu.com/opinion/editorial/feeder/default.rss",
+    homepage: "https://www.thehindu.com/opinion/editorial/"
+  },
+  "ie-explained": {
+    name: "Indian Express — Explained",
+    category: "Explainer",
+    url: "https://indianexpress.com/section/explained/feed/",
+    homepage: "https://indianexpress.com/section/explained/"
+  },
+  "ie-editorials": {
+    name: "Indian Express — Editorials",
+    category: "Editorial",
+    url: "https://indianexpress.com/section/opinion/editorials/feed/",
+    homepage: "https://indianexpress.com/section/opinion/editorials/"
+  },
+  "ie-economy": {
+    name: "Indian Express — Economy",
+    category: "Economy",
+    url: "https://indianexpress.com/section/business/economy/feed/",
+    homepage: "https://indianexpress.com/section/business/economy/"
+  },
+  "ie-climate": {
+    name: "Indian Express — Climate",
+    category: "Environment",
+    url: "https://indianexpress.com/section/explained/explained-climate/feed/",
+    homepage: "https://indianexpress.com/section/explained/explained-climate/"
+  },
+  "ie-scitech": {
+    name: "Indian Express — Science & Tech",
+    category: "Science & Tech",
+    url: "https://indianexpress.com/section/explained/explained-sci-tech/feed/",
+    homepage: "https://indianexpress.com/section/explained/explained-sci-tech/"
+  },
+  "pib-releases": {
+    name: "PIB — Press Releases",
+    category: "Government",
+    url: "https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3",
+    homepage: "https://www.pib.gov.in/"
+  },
+  "rbi-press": {
+    name: "RBI — Press Releases",
+    category: "Economy",
+    url: "https://www.rbi.org.in/pressreleases_rss.xml",
+    homepage: "https://www.rbi.org.in/Scripts/BS_PressreleaseDisplay.aspx"
+  },
+  "rbi-notifications": {
+    name: "RBI — Notifications",
+    category: "Economy",
+    url: "https://www.rbi.org.in/notifications_rss.xml",
+    homepage: "https://www.rbi.org.in/Scripts/NotificationUser.aspx"
+  },
+  "niti-updates": {
+    name: "NITI Aayog — Updates",
+    category: "Reports",
+    url: "https://www.niti.gov.in/rss.xml",
+    homepage: "https://www.niti.gov.in/whats-new"
+  }
+});
+
 function buildLegacyPrompt(type, payload = {}, stats = {}) {
   if (type === "newspaper") {
     return `Analyze this article for UPSC. Give GS paper, syllabus link, prelims facts, mains dimensions, keywords, a possible MCQ, a possible mains question, and a concise revision summary. Do not fabricate facts or sources.\n\nArticle:\n${payload.text || payload.article || ""}`;
@@ -31,7 +102,7 @@ async function verifyOwner(req) {
   const authHeader = String(req.headers.authorization || "");
   const match = authHeader.match(/^Bearer\s+(.+)$/i);
   if (!match) {
-    const error = new Error("Google sign-in is required before using Gemini.");
+    const error = new Error("Google sign-in is required before using JARVIS cloud tools.");
     error.status = 401;
     throw error;
   }
@@ -46,12 +117,142 @@ async function verifyOwner(req) {
     throw error;
   }
   if (!decoded.email_verified || signedInEmail !== allowedEmail) {
-    const error = new Error("This Google account is not authorised to use the Gemini proxy.");
+    const error = new Error("This Google account is not authorised to use the JARVIS backend.");
     error.status = 403;
     throw error;
   }
 
   return decoded;
+}
+
+function decodeEntities(value = "") {
+  return String(value)
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/gi, "$1")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCharCode(parseInt(n, 16)));
+}
+
+function cleanText(value = "") {
+  return decodeEntities(value)
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function firstTag(block, names) {
+  for (const name of names) {
+    const safe = name.replace(":", "\\:");
+    const match = block.match(new RegExp(`<${safe}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${safe}>`, "i"));
+    if (match) return match[1];
+  }
+  return "";
+}
+
+function extractLink(block) {
+  const raw = firstTag(block, ["link", "guid"]);
+  if (raw && /^https?:\/\//i.test(cleanText(raw))) return cleanText(raw);
+  const href = block.match(/<link[^>]+href=["']([^"']+)["'][^>]*\/?\s*>/i);
+  return href ? decodeEntities(href[1]).trim() : cleanText(raw);
+}
+
+function toIsoDate(value = "") {
+  const d = new Date(cleanText(value));
+  return Number.isNaN(d.getTime()) ? "" : d.toISOString();
+}
+
+function parseFeed(xml, feedId, feed) {
+  const blocks = [
+    ...(String(xml).match(/<item(?:\s[^>]*)?>[\s\S]*?<\/item>/gi) || []),
+    ...(String(xml).match(/<entry(?:\s[^>]*)?>[\s\S]*?<\/entry>/gi) || [])
+  ];
+  const base = new URL(feed.homepage || feed.url);
+  return blocks.slice(0, 40).map((block, index) => {
+    const title = cleanText(firstTag(block, ["title"]));
+    let link = extractLink(block);
+    try { link = new URL(link || feed.homepage, base).href; } catch { link = feed.homepage; }
+    const description = cleanText(firstTag(block, ["description", "summary", "content:encoded", "content"]));
+    const publishedAt = toIsoDate(firstTag(block, ["pubDate", "published", "updated", "dc:date"]));
+    return {
+      id: `${feedId}-${index}-${Buffer.from(title).toString("base64url").slice(0, 16)}`,
+      feedId,
+      source: feed.name,
+      category: feed.category,
+      title,
+      url: link,
+      excerpt: description.slice(0, 1400),
+      publishedAt,
+      homepage: feed.homepage
+    };
+  }).filter(item => item.title && item.url);
+}
+
+async function fetchText(url, timeoutMs = 12000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      redirect: "follow",
+      headers: {
+        "User-Agent": "Mission-UPSC-JARVIS/30.6 (personal RSS reader)",
+        "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.8"
+      }
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const text = await response.text();
+    if (text.length > 3_000_000) throw new Error("Feed response was too large");
+    return text;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function fetchDailySources(body) {
+  const requested = Array.isArray(body.feedIds) && body.feedIds.length
+    ? body.feedIds.map(String).filter(id => NEWS_FEEDS[id])
+    : Object.keys(NEWS_FEEDS);
+  const perFeed = Math.max(3, Math.min(20, Number(body.perFeed || 10)));
+  const settled = await Promise.allSettled(requested.map(async feedId => {
+    const feed = NEWS_FEEDS[feedId];
+    const xml = await fetchText(feed.url);
+    return { feedId, feed, items: parseFeed(xml, feedId, feed).slice(0, perFeed) };
+  }));
+
+  const statuses = [];
+  const items = [];
+  settled.forEach((result, index) => {
+    const feedId = requested[index];
+    const feed = NEWS_FEEDS[feedId];
+    if (result.status === "fulfilled") {
+      items.push(...result.value.items);
+      statuses.push({ feedId, source: feed.name, ok: true, count: result.value.items.length });
+    } else {
+      statuses.push({ feedId, source: feed.name, ok: false, count: 0, error: result.reason?.message || String(result.reason) });
+    }
+  });
+
+  const seen = new Set();
+  const unique = items.filter(item => {
+    const key = item.title.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt)));
+
+  return {
+    fetchedAt: new Date().toISOString(),
+    items: unique.slice(0, 120),
+    statuses,
+    feeds: requested.map(id => ({ id, ...NEWS_FEEDS[id] }))
+  };
 }
 
 export const upscAI = onRequest(
@@ -75,6 +276,16 @@ export const upscAI = onRequest(
     try {
       const owner = await verifyOwner(req);
       const body = req.body || {};
+
+      // Free source collection: this branch never calls Gemini and therefore
+      // does not consume model tokens. The user still controls the later
+      // Generate button in the frontend.
+      if (body.action === "fetchDailySources") {
+        const result = await fetchDailySources(body);
+        res.json({ ...result, provider: "rss", tokenUsage: 0, uid: owner.uid });
+        return;
+      }
+
       const rawPrompt = String(
         body.prompt || buildLegacyPrompt(body.type, body.payload, body.stats)
       ).trim();

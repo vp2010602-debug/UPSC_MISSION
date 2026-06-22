@@ -1,0 +1,13 @@
+Mission UPSC AI OS V30.6.0 — Easy CA + Microtopic Planner
+
+Changed / added:
+- index.html
+- service-worker.js
+- v3050-final-ca-voice.js
+- v3060-easy-ca-microplanner.css
+- v3060-easy-ca-microplanner.js
+- functions/index.js
+- README-V30.6.0.md
+- UPDATE-MANIFEST-V30.6.0.txt
+
+Firebase Functions redeployment required once for zero-token RSS source collection.
