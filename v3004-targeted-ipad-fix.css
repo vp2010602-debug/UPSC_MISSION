@@ -1,0 +1,229 @@
+/* Mission UPSC AI OS V30.0.4 — Targeted iPad Alignment Fix
+   Scope is intentionally limited to the exact sections reported by the user. */
+
+/* Native date/time controls can keep a large intrinsic width on iPad Safari.
+   These exact controls are constrained without changing other fields. */
+#calendarQuickDateV266,
+#calendarQuickTimeV266,
+#smartCalDateV4,
+#strategyDateV271,
+#caDateV243,
+#manualDateV262,
+#manualTimeV262,
+#commandDateV261,
+#pwaReminderTimeV284{
+  box-sizing:border-box!important;
+  display:block!important;
+  inline-size:100%!important;
+  min-inline-size:0!important;
+  max-inline-size:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  padding-inline:12px 34px!important;
+}
+
+#calendarQuickDateV266::-webkit-date-and-time-value,
+#calendarQuickTimeV266::-webkit-date-and-time-value,
+#smartCalDateV4::-webkit-date-and-time-value,
+#strategyDateV271::-webkit-date-and-time-value,
+#caDateV243::-webkit-date-and-time-value,
+#manualDateV262::-webkit-date-and-time-value,
+#manualTimeV262::-webkit-date-and-time-value,
+#commandDateV261::-webkit-date-and-time-value,
+#pwaReminderTimeV284::-webkit-date-and-time-value{
+  min-width:0!important;
+  width:100%!important;
+  text-align:left!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+#calendarQuickDateV266::-webkit-calendar-picker-indicator,
+#calendarQuickTimeV266::-webkit-calendar-picker-indicator,
+#smartCalDateV4::-webkit-calendar-picker-indicator,
+#strategyDateV271::-webkit-calendar-picker-indicator,
+#caDateV243::-webkit-calendar-picker-indicator,
+#manualDateV262::-webkit-calendar-picker-indicator,
+#manualTimeV262::-webkit-calendar-picker-indicator,
+#commandDateV261::-webkit-calendar-picker-indicator,
+#pwaReminderTimeV284::-webkit-calendar-picker-indicator{
+  margin:0!important;
+  padding:0!important;
+  width:18px!important;
+  min-width:18px!important;
+  max-width:18px!important;
+}
+
+/* Exact grid children that must be allowed to shrink. */
+#aiCalendarV4 .v30CalendarMini,
+#aiCalendarV4 .v30Field,
+#dailyCommandV261 .v26MissionBuilder,
+#dailyCommandV261 .v26MissionBuilder .threeInput > *,
+#currentAffairsAI .v24Panel,
+#currentAffairsAI .threeInput > *,
+#strategyRoomV271 .v27FormGrid > *,
+#studyLogV264 .twoInput > *,
+#appOfflineV284 .pwaReminderFormV284 > *{
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+
+/* Sidebar hide/show control. Desktop and iPad landscape only. */
+.v3004SidebarToggle{white-space:nowrap}
+@media (min-width:981px){
+  #sidebar,
+  main{
+    transition:transform .22s ease,margin-left .22s ease,width .22s ease!important;
+  }
+  body.v3004SidebarHidden #sidebar{
+    transform:translateX(-105%)!important;
+    pointer-events:none!important;
+  }
+  body.v3004SidebarHidden main{
+    margin-left:0!important;
+    width:100%!important;
+  }
+}
+@media (max-width:980px){
+  .v3004SidebarToggle{display:none!important}
+}
+
+/* iPad landscape / small laptop surgical fixes. */
+@media (min-width:981px) and (max-width:1180px){
+  /* Smart Calendar: keep both mini sections, only give native fields room. */
+  #aiCalendarV4 .v30CalendarMiniGrid{gap:12px!important}
+  #aiCalendarV4 .v30CalendarMini{padding:15px!important}
+  #aiCalendarV4 .v30CalendarFieldsTwo{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  }
+  #aiCalendarV4 .v30CalendarFieldsTwo > .v30Field:nth-child(1),
+  #aiCalendarV4 .v30CalendarFieldsTwo > .v30Field:nth-child(2){
+    grid-column:1/-1!important;
+  }
+  #aiCalendarV4 .v30CalendarActions{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    gap:8px!important;
+  }
+  #aiCalendarV4 .v30CalendarActions .btn{
+    width:100%!important;
+    min-width:0!important;
+    margin:0!important;
+  }
+  #aiCalendarV4 .v30CalendarActionsThree .btn:first-child{
+    grid-column:1/-1!important;
+  }
+
+  /* Daily Command: date gets a full row; buttons align 2 + 1. */
+  #dailyCommandV261 .v26MissionBuilder .threeInput{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    gap:9px!important;
+  }
+  #dailyCommandV261 #commandDateV261{grid-column:1/-1!important}
+  #dailyCommandV261 .v26MissionBuilder .actions{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    gap:9px!important;
+  }
+  #dailyCommandV261 .v26MissionBuilder .actions .btn{
+    width:100%!important;
+    min-width:0!important;
+    margin:0!important;
+  }
+  #dailyCommandV261 .v26MissionBuilder .actions .btn:last-child{
+    grid-column:1/-1!important;
+  }
+
+  /* Current Affairs: retain the two main panels, reflow only the cramped input rows. */
+  #currentAffairsAI .v24Panel:first-child > .threeInput{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    gap:9px!important;
+  }
+  #currentAffairsAI #caTitleAI,
+  #currentAffairsAI #caModeV243{
+    grid-column:1/-1!important;
+  }
+
+  /* Focus Manual Study Log: narrow card fields stack cleanly. */
+  #studyLogV264 .twoInput{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:8px!important;
+  }
+  #studyLogV264 .twoInput input,
+  #studyLogV264 .twoInput select{
+    width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+
+  /* App & Offline reminders: title and date/time full width, type + Schedule aligned. */
+  #appOfflineV284 .pwaCardHeadV284{
+    gap:12px!important;
+    flex-wrap:wrap!important;
+  }
+  #appOfflineV284 .pwaCardHeadV284 > .btn{
+    margin-left:auto!important;
+    flex:0 0 auto!important;
+  }
+  #appOfflineV284 .pwaReminderFormV284{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(150px,.58fr)!important;
+    gap:10px!important;
+    align-items:end!important;
+  }
+  #appOfflineV284 .pwaReminderFormV284 > .pwaFullV284,
+  #appOfflineV284 .pwaReminderFormV284 > label:nth-child(2){
+    grid-column:1/-1!important;
+  }
+  #appOfflineV284 .pwaReminderFormV284 > label:nth-child(3){grid-column:1!important}
+  #appOfflineV284 .pwaReminderFormV284 > button{
+    grid-column:2!important;
+    width:100%!important;
+    min-width:0!important;
+    margin:0 0 10px!important;
+  }
+  #appOfflineV284 .pwaReminderFormV284 input,
+  #appOfflineV284 .pwaReminderFormV284 select{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+  }
+
+  /* Voice Saarathi: preserve the existing card layout; align five controls in two rows. */
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel > .actions{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.15fr) minmax(0,.78fr) minmax(0,1.15fr)!important;
+    gap:8px!important;
+  }
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel > .actions .btn{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    margin:0!important;
+  }
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel > .actions .v290ReadVoice{
+    grid-column:1/2!important;
+  }
+  #voiceSaarthi.v290Voice .v290VoiceCommandPanel > .actions .btn:last-child{
+    grid-column:2/4!important;
+  }
+}
+
+/* Small phone safety for the exact native controls only. */
+@media (max-width:640px){
+  #calendarQuickDateV266,
+  #calendarQuickTimeV266,
+  #smartCalDateV4,
+  #strategyDateV271,
+  #caDateV243,
+  #manualDateV262,
+  #manualTimeV262,
+  #commandDateV261,
+  #pwaReminderTimeV284{
+    font-size:16px!important;
+  }
+}
