@@ -2,7 +2,7 @@
 (function(){
   'use strict';
 
-  const VERSION = '30.1.1';
+  const VERSION = '30.1.3';
   const SETTINGS_KEY = 'mission_ai_settings_v23';
   const ROUTER_KEY = 'mission_smart_router_v282';
   const ROUTER_LOG_KEY = 'mission_smart_router_log_v282';
@@ -361,10 +361,17 @@
     throw new Error(errors.join(' | ') || 'No AI provider is available.');
   }
   smartAsk.__v301=true;
+  // Compatibility flag: prevents the older V28.2 router from wrapping and
+  // replacing this secure-proxy-aware V30.1 router after page load.
+  smartAsk.__v282=true;
 
-  window.aiAskRouterV23=smartAsk;
-  window.aiAsk=smartAsk;
-  window.callGeminiDirectV23=smartAsk;
+  function installV301Router(){
+    window.aiAskRouterV23=smartAsk;
+    window.aiAsk=smartAsk;
+    window.callGeminiDirectV23=smartAsk;
+    window.__missionV301Router=smartAsk;
+  }
+  installV301Router();
 
   window.testGeminiV301 = async function(){
     window.saveAISettingsV23();
@@ -622,10 +629,13 @@
   }
 
   function init(){
+    installV301Router();
+    // Re-assert once after all deferred legacy initialisers have finished.
+    setTimeout(installV301Router,900);
     window.__MISSION_UPSC_VERSION__=VERSION;
     const badge=document.querySelector('.versionBadge');
-    if(badge) badge.textContent='V30.1 • Complete AI Setup';
-    if($('v275BuildBadge')) $('v275BuildBadge').textContent='V30.1 • AI Ready';
+    if(badge) badge.textContent='V30.1.3 • Secure AI Router Fix';
+    if($('v275BuildBadge')) $('v275BuildBadge').textContent='V30.1.3 • AI Ready';
     installShowHook();
     window.loadAISettingsV23();
     const r=routerSettings();

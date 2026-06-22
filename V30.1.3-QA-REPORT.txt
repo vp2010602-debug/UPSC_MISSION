@@ -1,0 +1,12 @@
+Mission UPSC AI OS V30.1.3 — QA REPORT
+
+PASS — V30.1 router marked compatible with V28.2 guard
+PASS — Legacy V28.2 router refuses to replace V30.1 router
+PASS — Router is reasserted after deferred legacy initialisers
+PASS — Secure Firebase proxy settings remain preserved
+PASS — Gemini selected mode reaches secure router
+PASS — ChatGPT Prompt Mode remains available only when selected/fallback is required
+PASS — AI mode description grid wrapping corrected
+PASS — V30.1.2 temporal picker files preserved
+PASS — JavaScript syntax checks passed
+PASS — Service worker cache bumped to V30.1.3

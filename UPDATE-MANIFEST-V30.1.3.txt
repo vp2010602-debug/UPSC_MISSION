@@ -1,0 +1,10 @@
+V30.1.3 GitHub update files:
+- index.html
+- jarvis-v2823.js
+- v301-ai-full-setup.js
+- v301-ai-full-setup.css
+- service-worker.js
+- README-V30.1.3.md
+- V30.1.3-QA-REPORT.txt
+
+No Firebase Functions redeployment required.
