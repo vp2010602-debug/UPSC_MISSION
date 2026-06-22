@@ -1,5 +1,5 @@
 /* Mission UPSC AI OS V30.0 PWA service worker */
-const VERSION = 'v30.1.3';
+const VERSION = 'v30.1.5';
 const SHELL_CACHE = `mission-upsc-shell-${VERSION}`;
 const RUNTIME_CACHE = `mission-upsc-runtime-${VERSION}`;
 const CORE_ASSETS = [
@@ -38,6 +38,7 @@ const CORE_ASSETS = [
   './v3007-centered-temporal-hamburger.js',
   './v301-ai-full-setup.js',
   './v3012-temporal-picker-hotfix.js',
+  './v3015-ai-route-lock.js',
   './pwa-v284.js',
   './manifest.webmanifest',
   './assets/icons/jarvis-icon-192-v287.png',

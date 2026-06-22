@@ -2,7 +2,7 @@
 (function(){
   'use strict';
 
-  const VERSION = '30.1.3';
+  const VERSION = '30.1.5';
   const SETTINGS_KEY = 'mission_ai_settings_v23';
   const ROUTER_KEY = 'mission_smart_router_v282';
   const ROUTER_LOG_KEY = 'mission_smart_router_log_v282';
