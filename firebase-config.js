@@ -9,5 +9,5 @@ export const firebaseConfig = {
   measurementId: "G-TVB1VL4022"
 };
 
-export const AI_FUNCTION_URL = "";
-export const GEMINI_API_KEY = "";
+export const AI_FUNCTION_URL = "https://upscai-6p5eaebvfa-uc.a.run.app";
+export const GEMINI_API_KEY = '';

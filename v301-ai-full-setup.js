@@ -16,7 +16,7 @@
     geminiKey: '',
     geminiModel: 'gemini-2.5-flash',
     geminiTransport: 'proxy',
-    geminiProxyUrl: '',
+    geminiProxyUrl: 'https://upscai-6p5eaebvfa-uc.a.run.app',
     hybridPriority: 'smart',
     hybridFallbackChatGPT: true,
     temperature: 0.2,
@@ -42,7 +42,11 @@
   let lastProvider = '';
 
   function settings(){
-    return {...DEFAULTS, ...readJSON(SETTINGS_KEY,{})};
+    const value={...DEFAULTS, ...readJSON(SETTINGS_KEY,{})};
+    value.geminiProxyUrl=String(value.geminiProxyUrl||DEFAULTS.geminiProxyUrl).trim().replace(/\/$/,'');
+    value.geminiTransport='proxy';
+    value.geminiKey='';
+    return value;
   }
 
   function routerSettings(){
@@ -93,9 +97,9 @@
       mode: document.querySelector('input[name="aiModeV23"]:checked')?.value || old.mode,
       ollamaUrl: ($('ollamaUrlV23')?.value || old.ollamaUrl || DEFAULTS.ollamaUrl).trim().replace(/\/$/,''),
       ollamaModel: ($('ollamaModelV23')?.value || old.ollamaModel || DEFAULTS.ollamaModel).trim(),
-      geminiKey: ($('geminiKeyV23')?.value || old.geminiKey || '').trim(),
+      geminiKey: '',
       geminiModel: ($('geminiModelV301')?.value || old.geminiModel || DEFAULTS.geminiModel).trim(),
-      geminiTransport: $('geminiTransportV301')?.value || old.geminiTransport || 'direct',
+      geminiTransport: 'proxy',
       geminiProxyUrl: ($('geminiProxyUrlV301')?.value || old.geminiProxyUrl || '').trim().replace(/\/$/,''),
       hybridPriority: $('hybridPriorityV301')?.value || old.hybridPriority || 'smart',
       hybridFallbackChatGPT: $('hybridFallbackChatGPTV301') ? $('hybridFallbackChatGPTV301').checked : old.hybridFallbackChatGPT,
@@ -121,9 +125,9 @@
     document.querySelectorAll('input[name="aiModeV23"]').forEach(r => r.checked = r.value===s.mode);
     if($('ollamaUrlV23')) $('ollamaUrlV23').value = s.ollamaUrl;
     if($('ollamaModelV23')) $('ollamaModelV23').value = s.ollamaModel;
-    if($('geminiKeyV23')) $('geminiKeyV23').value = s.geminiKey || '';
+    if($('geminiKeyV23')) $('geminiKeyV23').value = ''; // production key is never stored in the browser
     if($('geminiModelV301')) $('geminiModelV301').value = s.geminiModel;
-    if($('geminiTransportV301')) $('geminiTransportV301').value = s.geminiTransport;
+    if($('geminiTransportV301')) $('geminiTransportV301').value = 'proxy';
     if($('geminiProxyUrlV301')) $('geminiProxyUrlV301').value = s.geminiProxyUrl || '';
     if($('hybridPriorityV301')) $('hybridPriorityV301').value = s.hybridPriority;
     if($('hybridFallbackChatGPTV301')) $('hybridFallbackChatGPTV301').checked = s.hybridFallbackChatGPT!==false;
@@ -132,7 +136,7 @@
     updateModeVisibility();
     updateTransportVisibilityV301();
     updateBadges();
-    setStatus(`Selected AI: ${modeLabel(s.mode)}\nGemini: ${s.geminiTransport==='proxy'?(s.geminiProxyUrl?'Secure proxy configured':'Proxy URL not added'):(s.geminiKey?'API key saved on this device':'API key not added')}\nOllama: ${s.ollamaModel}`);
+    setStatus(`Selected AI: ${modeLabel(s.mode)}\nGemini: ${s.geminiProxyUrl?'Secure Firebase proxy configured':'Secure proxy URL not added'}\nOllama: ${s.ollamaModel}`);
     loadChatGPTWorkspace();
   };
 
@@ -145,10 +149,10 @@
   };
 
   window.updateTransportVisibilityV301 = function(){
-    const transport = $('geminiTransportV301')?.value || settings().geminiTransport;
+    const transport = 'proxy';
     const direct = $('geminiDirectFieldsV301');
     const proxy = $('geminiProxyFieldsV301');
-    if(direct) direct.hidden = transport!=='direct';
+    if(direct) direct.hidden = true;
     if(proxy) proxy.hidden = transport!=='proxy';
   };
 
@@ -230,27 +234,7 @@
     return [...new Set(list.filter(Boolean))];
   }
 
-  async function askGeminiDirect(prompt, model){
-    const s=settings();
-    if(!s.geminiKey) throw new Error('Gemini API key missing. Paste it in AI Control Centre.');
-    const response=await timeoutFetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-goog-api-key':s.geminiKey},
-      body:JSON.stringify({
-        system_instruction:{parts:[{text:'You are JARVIS, a rigorous UPSC CSE assistant. Follow requested formats exactly and never invent facts, sources, reports, judgments or PYQs.'}]},
-        contents:[{role:'user',parts:[{text:String(prompt||'')}]}],
-        generationConfig:{temperature:s.temperature,maxOutputTokens:s.maxOutputTokens}
-      })
-    },210000);
-    const data=await response.json().catch(()=>({}));
-    if(!response.ok) throw new Error(data?.error?.message || `Gemini HTTP ${response.status}`);
-    const out=data?.candidates?.[0]?.content?.parts?.map(x=>x.text||'').join('\n').trim();
-    if(!out){
-      const reason=data?.promptFeedback?.blockReason || data?.candidates?.[0]?.finishReason || 'Empty response';
-      throw new Error(`Gemini returned no text: ${reason}`);
-    }
-    return out;
-  }
+  async function askGeminiDirect(prompt, model){return await askGeminiProxy(prompt,model);}
 
   async function askGeminiProxy(prompt, model){
     const s=settings();
@@ -283,7 +267,7 @@
     let lastError='Gemini unavailable';
     for(const model of geminiModels(s)){
       try{
-        const out=s.geminiTransport==='proxy' ? await askGeminiProxy(examEnvelope(prompt),model) : await askGeminiDirect(examEnvelope(prompt),model);
+        const out=await askGeminiProxy(examEnvelope(prompt),model);
         return out;
       }catch(error){ lastError=`${model}: ${error.message}`; }
     }
@@ -380,7 +364,7 @@
       const out=await runProvider('gemini','Reply exactly: Gemini connection is working for Mission UPSC.');
       setStatus(`Gemini connected ✅\n${out}`,'ok');
     }catch(error){
-      setStatus(`Gemini test failed ❌\n${error.message}\n\nCheck the key, billing/project, API restriction and selected model.`,'error');
+      setStatus(`Gemini test failed ❌\n${error.message}\n\nCheck Google sign-in, the secure Firebase Function URL, Firebase deployment, Gemini billing/project and selected model.`,'error');
     }
   };
 

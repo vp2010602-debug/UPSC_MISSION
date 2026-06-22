@@ -98,6 +98,26 @@ export const upscAI = onRequest(
         Math.min(65536, Number(body.maxOutputTokens ?? 8192))
       );
 
+      const parts = [{ text: rawPrompt }];
+      const uploadedFile = body.file && typeof body.file === "object" ? body.file : null;
+      if (uploadedFile) {
+        const mimeType = String(uploadedFile.mimeType || "application/octet-stream").trim();
+        const dataBase64 = String(uploadedFile.dataBase64 || "").replace(/^data:[^,]+,/, "").trim();
+        if (!dataBase64) {
+          res.status(400).json({ error: "Uploaded file data is empty." });
+          return;
+        }
+        if (dataBase64.length > 17_000_000) {
+          res.status(413).json({ error: "Uploaded file is too large. Compress it below about 12 MB." });
+          return;
+        }
+        if (!/^(image\/|application\/pdf$)/i.test(mimeType)) {
+          res.status(415).json({ error: "Secure visual reading supports images and PDF files only." });
+          return;
+        }
+        parts.push({ inline_data: { mime_type: mimeType, data: dataBase64 } });
+      }
+
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
         {
@@ -110,14 +130,14 @@ export const upscAI = onRequest(
             system_instruction: {
               parts: [
                 {
-                  text: "You are JARVIS, a rigorous UPSC Civil Services Examination assistant. Follow requested formats exactly. Be factual and source-conscious. Never invent data, reports, judgments, constitutional provisions, schemes or PYQs."
+                  text: "You are JARVIS, a rigorous UPSC Civil Services Examination assistant. Follow requested formats exactly. Be factual and source-conscious. Never invent data, reports, judgments, constitutional provisions, schemes or PYQs. When a file is attached, read only what is visible and clearly separate extraction from interpretation."
                 }
               ]
             },
             contents: [
               {
                 role: "user",
-                parts: [{ text: rawPrompt }]
+                parts
               }
             ],
             generationConfig: {

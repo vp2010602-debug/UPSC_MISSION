@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jarvis UPSC V30.3.0 — Saarthi Mentor Hub</title>
+  <title>Jarvis UPSC V30.4.0 — Final Polish</title>
   <meta name="theme-color" content="#06264a" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="./v3012-temporal-picker-hotfix.css?v=30.1.2" />
   <link rel="stylesheet" href="./v3020-prompt-youtube.css?v=30.2.0" />
   <link rel="stylesheet" href="./v3030-saarthi-mentor.css?v=30.3.0" />
+  <link rel="stylesheet" href="./v3040-final-polish.css?v=30.4.0" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -63,44 +64,55 @@
       <button class="signOutBtnV288" id="logoutBtn" type="button" style="display:none">Sign out</button>
     </div>
 
-    <div class="nav">
+    <div class="nav navV304">
+      <div class="navGroupV304"><span>START & TODAY</span></div>
       <button class="active" onclick="show('dashboard',this)">🏠 Home Dashboard</button>
       <button class="jarvisNavV281" onclick="openJarvisV2811(this)">✨ Jarvis Command Centre</button>
       <button onclick="show('dailyCommandV261',this)">☀️ AI Daily Command Centre</button>
+      <button onclick="show('aiCalendarV4',this)">📅 AI Smart Calendar</button>
+      <button id="saarthiNavV303" onclick="show('saarthiMentorHubV303',this)">🧑‍🏫 Saarthi Mentorship Hub</button>
       <button onclick="show('timeHabitV262',this)">⏱️ Focus & Habit Intelligence</button>
       <button onclick="show('memoryEngineV263',this)">🧠 Smart Recall & Spaced Revision</button>
-      <button onclick="show('aiControlCentre',this)">🤖 AI Control Centre</button>
-      <button onclick="show('chatgptPromptHubV302',this)">📋 ChatGPT Prompt Hub</button>
-      <button onclick="show('youtubeNotesV302',this)">▶️ YouTube Video → Notes</button>
-      <button onclick="show('aiMentorPage',this)">🤖 AI Personal Mentor</button>
-      <button onclick="show('revisionPlannerV291',this)">🧠 Weak Topics & Revision Planner</button>
-      <button onclick="show('aiLibraryAssistant',this)">🔎 Smart Library Assistant</button>
+
+      <div class="navGroupV304"><span>LEARN & RESEARCH</span></div>
       <button onclick="show('currentAffairsAI',this)">📰 AI Current Affairs Engine</button>
       <button onclick="show('upscNotesHubV291',this)">📒 UPSC Notes Hub</button>
-      <button onclick="show('syllabusCommand',this)">📘 Syllabus Command</button>
-      <button onclick="show('countdownPage',this)">⏳ Exam Countdown</button>
-      <button onclick="show('strategyRoomV271',this)">🧭 AI Strategy Room</button>
-      <button onclick="show('rankReadinessV272',this)">📊 UPSC Readiness Dashboard</button>
-      <button onclick="show('progressAutomationV274',this)">🌐 AI Progress & Automation Hub</button>
+      <button onclick="show('youtubeNotesV302',this)">▶️ YouTube Video → Notes</button>
       <button onclick="show('aiPdfAnalyzer',this)">📄 AI PDF Analyzer</button>
-      <button onclick="show('prelimsTestCentreV291',this)">🧪 AI Prelims Test Centre</button>
+      <button onclick="show('aiLibraryAssistant',this)">🔎 Smart Library Assistant</button>
+      <button onclick="show('syllabusCommand',this)">📘 Syllabus Command</button>
+      <button onclick="show('knowledgeGraphProV273',this)">🕸️ Knowledge Graph Pro</button>
+      <button onclick="show('mapsCommand',this)">🗺️ UPSC Maps Command</button>
+
+      <div class="navGroupV304"><span>ANSWER & PRACTICE</span></div>
       <button onclick="show('mainsAnswerCentreV291',this)">✍️ AI Mains Answer Writing Centre</button>
-      <button onclick="show('interviewRoomV253',this)">🎙️ AI Interview Room</button>
+      <button onclick="show('prelimsTestCentreV291',this)">🧪 AI Prelims Test Centre</button>
       <button onclick="show('pyqIntelligence',this)">🔬 PYQ Intelligence Pro</button>
+      <button onclick="show('wrongAnswerNotebook',this)">❌ Wrong Answer Notebook</button>
+      <button onclick="show('topperAnswers',this)">🏆 Topper Answer Bank</button>
       <button onclick="show('onePagerAI',this)">📄 One Pager AI</button>
       <button onclick="show('mindMapStudio',this)">🧠 Mind Map Studio</button>
       <button onclick="show('smartFlashcards',this)">🃏 Smart Flashcards</button>
-      <button onclick="show('wrongAnswerNotebook',this)">❌ Wrong Answer Notebook</button>
-      <button onclick="show('topperAnswers',this)">🏆 Topper Answer Bank</button>
-      <button onclick="show('docLinksHub',this)">🔗 Google Docs & Links</button>
-      <button onclick="show('fileVault',this)">📁 File Vault</button>
-      <button onclick="show('libraryShelf',this)">🏛️ AI Digital Library Pro</button>
-      <button onclick="show('mapsCommand',this)">🗺️ UPSC Maps Command</button>
-      <button onclick="show('voiceSaarthi',this)">🎙️ AI Voice Saarthi</button>
-      <button onclick="show('aiCalendarV4',this)">📅 AI Smart Calendar</button>
-      <button onclick="show('knowledgeGraphProV273',this)">🕸️ Knowledge Graph Pro</button>
-      <button class="pwaNavV284" onclick="openAppOfflineV284(this)">📱 App & Offline</button>
+      <button onclick="show('interviewRoomV253',this)">🎙️ AI Interview Room</button>
 
+      <div class="navGroupV304"><span>MENTOR & ANALYTICS</span></div>
+      <button onclick="show('aiMentorPage',this)">🤖 AI Personal Mentor</button>
+      <button onclick="show('revisionPlannerV291',this)">🧠 Weak Topics & Revision Planner</button>
+      <button onclick="show('strategyRoomV271',this)">🧭 AI Strategy Room</button>
+      <button onclick="show('rankReadinessV272',this)">📊 UPSC Readiness Dashboard</button>
+      <button onclick="show('progressAutomationV274',this)">🌐 AI Progress & Automation Hub</button>
+      <button onclick="show('countdownPage',this)">⏳ Exam Countdown</button>
+
+      <div class="navGroupV304"><span>LIBRARY & OUTPUT</span></div>
+      <button onclick="show('libraryShelf',this)">🏛️ AI Digital Library Pro</button>
+      <button onclick="show('fileVault',this)">📁 File Vault</button>
+      <button onclick="show('docLinksHub',this)">🔗 Google Docs & Links</button>
+      <button onclick="show('voiceSaarthi',this)">🎙️ AI Voice Saarthi</button>
+
+      <div class="navGroupV304"><span>AI & SYSTEM</span></div>
+      <button onclick="show('chatgptPromptHubV302',this)">📋 ChatGPT Prompt Hub</button>
+      <button onclick="show('aiControlCentre',this)">🤖 AI Control Centre</button>
+      <button class="pwaNavV284" onclick="openAppOfflineV284(this)">📱 App & Offline</button>
       <button onclick="show('settings',this)">⚙️ Setup</button>
     </div>
   </aside>
@@ -108,7 +120,7 @@
   <main>
     <div class="topbar">
       <div>
-        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V30.3.0 • Saarthi Mentor Hub</span></h1>
+        <h1 id="pageTitle">Welcome to Jarvis <span class="versionBadge">V30.4.0 • Final Polish</span></h1>
         <p class="sub">Plan today, revise smarter and keep your UPSC journey organised in one place.</p>
       </div>
       <button type="button" class="topToolsToggleV286" onclick="toggleTopToolsV286()" aria-label="Show or hide page tools">⚙ Tools</button>
@@ -123,7 +135,7 @@
 
     <section id="aiControlCentre" class="section lightStudySection">
       <div class="cleanHero">
-        <div><span class="eyebrow blueEye">V30.1.1 • SECURE GEMINI • OLLAMA • CHATGPT PROMPT • HYBRID</span><h1>AI Control Centre</h1><p class="sub">Choose Gemini, Ollama, ChatGPT Prompt Mode, or Smart Hybrid. The same selection powers AI Notes, PDFs, Current Affairs, Mains evaluation, mentorship, PYQ tools and the rest of JARVIS.</p></div>
+        <div><span class="eyebrow blueEye">V30.4.0 • UNIFIED GEMINI • OLLAMA • CHATGPT • HYBRID</span><h1>AI Control Centre</h1><p class="sub">Choose Gemini, Ollama, ChatGPT Prompt Mode, or Smart Hybrid. The same selection powers AI Notes, PDFs, Current Affairs, Mains evaluation, mentorship, PYQ tools and the rest of JARVIS.</p></div>
         <div class="heroIcon">🤖</div>
       </div>
       <div class="grid two">
@@ -144,13 +156,9 @@
 
           <label>Gemini connection</label>
           <select id="geminiTransportV301" onchange="updateTransportVisibilityV301();saveAISettingsV23()">
-            <option value="direct">Direct key on this device — easiest</option>
-            <option value="proxy">Firebase secure proxy — recommended for production</option>
+            <option value="proxy" selected>Firebase secure proxy — production safe</option>
           </select>
-          <div id="geminiDirectFieldsV301">
-            <label>Gemini API Key</label>
-            <div class="v301InlineField"><input id="geminiKeyV23" type="password" autocomplete="off" placeholder="Paste Gemini API key here" onchange="saveAISettingsV23()"><button id="toggleGeminiKeyBtnV301" type="button" class="v301TinyBtn" onclick="toggleGeminiKeyV301()">Show</button></div>
-          </div>
+          
           <div id="geminiProxyFieldsV301" hidden>
             <label>Firebase Function URL</label>
             <input id="geminiProxyUrlV301" type="url" placeholder="https://REGION-PROJECT.cloudfunctions.net/upscAI" onchange="saveAISettingsV23()">
@@ -169,7 +177,7 @@
             <label class="v282Toggle"><input id="hybridFallbackChatGPTV301" type="checkbox" checked onchange="saveAISettingsV23()"><span><b>ChatGPT fallback</b><small>Prepare prompt when both APIs fail.</small></span></label>
           </div>
           <div class="v301ProviderTests"><button class="btn green" onclick="testAIConnectionV23()">Test Selected Mode</button><button class="btn blue" onclick="testGeminiV301()">Test Gemini</button><button class="btn ghost" onclick="testOllamaV301()">Test Ollama</button><button class="btn gold" onclick="detectOllamaModelsV301()">Detect Models</button><button class="btn blue" onclick="saveAISettingsV23()">Save AI Settings</button></div>
-          <div class="v301SecurityNote"><b>Production safety:</b> use the Firebase proxy. Gemini requests require your Google sign-in and the authorised owner email. Direct-key mode is only for temporary private localhost testing.</div>
+          <div class="v301SecurityNote"><b>Production safety:</b> use the Firebase proxy. Gemini requests require your Google sign-in and the authorised owner email. The paid Gemini key remains in Firebase Secret Manager and is never entered into this website.</div>
           <div id="aiConnectionStatusV23" class="aiOutput smallAI">AI status will appear here.</div>
         </div>
       </div>
@@ -200,34 +208,7 @@
       </div>
 
 
-      <div class="card v301PromptWorkspace">
-        <div class="v301WorkspaceHead">
-          <div><span class="v282Eyebrow">CHATGPT PLUS • MANUAL EXPERT MODE</span><h2>ChatGPT UPSC Prompt Workspace</h2><p class="sub">Generate the strict exam-oriented prompt, copy it, open ChatGPT, then paste the response back into JARVIS and save it.</p></div>
-          <span class="v301WorkspaceBadge">COPY → OPEN → PASTE → SAVE</span>
-        </div>
-        <div class="v301WorkspaceGrid">
-          <div class="v301FormStack">
-            <label><span>UPSC task</span><select id="chatgptTaskV301" onchange="updateChatGPTTemplateV301()"><option value="mains-evaluator">Strict Mains Answer Evaluator</option><option value="topper-answer">Topper-Style Model Answer</option><option value="current-affairs">Current Affairs Deep Analysis</option><option value="prelims">Prelims / PYQ Analysis</option><option value="ethics">GS4 Ethics Case Study</option><option value="essay">Essay Framework</option><option value="saarathi">Saarathi Weekly Plan Extractor</option><option value="notes">UPSC Notes & Revision</option></select></label>
-            <div class="v301ConfigGrid">
-              <label><span>Marks</span><select id="chatgptMarksV301" onchange="generateChatGPTPromptV301()"><option value="10">10 marker</option><option value="15">15 marker</option></select></label>
-              <label><span>Paper / Subject</span><input id="chatgptPaperV301" placeholder="GS2 / Polity / Ethics"></label>
-            </div>
-            <label><span>Question / Topic</span><textarea id="chatgptQuestionV301" placeholder="Paste the exact UPSC question or topic"></textarea></label>
-            <label id="chatgptAnswerWrapV301"><span>My Answer</span><textarea id="chatgptAnswerV301" placeholder="Paste your typed answer or extracted handwritten answer text"></textarea></label>
-            <label><span id="chatgptSourceLabelV301">Source material / notes (optional)</span><textarea id="chatgptSourceV301" placeholder="Paste article, mentor plan, PDF extracted text, notes or supporting material"></textarea></label>
-            <div class="v301WorkspaceActions"><button class="btn purple" type="button" onclick="generateChatGPTPromptV301()">Generate Exam Prompt</button><button class="btn ghost" type="button" onclick="clearChatGPTWorkspaceV301()">Clear</button></div>
-          </div>
-          <div class="v301PromptPane">
-            <div class="v301PaneTitle"><span>Prepared Prompt</span><small>Editable before copying</small></div>
-            <textarea id="chatgptPromptV301" placeholder="Your exam-oriented ChatGPT prompt will appear here"></textarea>
-            <div class="v301WorkspaceActions"><button class="btn gold" type="button" onclick="copyChatGPTPromptV301()">📋 Copy Prompt</button><button class="btn blue" type="button" onclick="openChatGPTV301()">↗ Open ChatGPT</button></div>
-            <div class="v301PaneTitle"><span>Paste ChatGPT Response</span><small>Manual or clipboard paste</small></div>
-            <textarea id="chatgptResponseV301" placeholder="Copy ChatGPT's response and paste it here"></textarea>
-            <div class="v301WorkspaceActions"><button class="btn purple" type="button" onclick="pasteChatGPTResponseV301()">📥 Paste from Clipboard</button><button class="btn green" type="button" onclick="saveChatGPTResponseV301()">💾 Save Response</button><button class="btn blue" type="button" onclick="sendChatGPTResponseToModuleV301()">Send to Relevant Module</button></div>
-            <div id="chatgptWorkspaceStatusV301" class="v301WorkspaceStatus">Choose a task and generate the prompt.</div>
-          </div>
-        </div>
-      </div>
+      
 
       <div class="card">
         <h2>AI Prompt Test</h2>
@@ -2609,24 +2590,53 @@
         <div>
           <span class="eyebrow blueEye">CHATGPT PLUS • MANUAL EXPERT WORKFLOW</span>
           <h1>ChatGPT Prompt Hub</h1>
-          <p class="sub">Prepare a strict UPSC prompt, open ChatGPT in a compact window, paste the response back into JARVIS, then save, print or download it.</p>
+          <p class="sub">Build an exam-ready prompt, work with ChatGPT in a compact companion window, and manage the copied response inside one clean JARVIS workspace.</p>
         </div>
         <div class="heroIcon">📋</div>
       </div>
 
       <div class="card v302MiniLaunchCard">
         <div>
-          <h2>ChatGPT Mini Workspace</h2>
-          <p class="sub">Keep this JARVIS section open. ChatGPT opens in a compact companion window on laptop and a new tab on phone or iPad.</p>
+          <h2>ChatGPT Companion Workspace</h2>
+          <p class="sub">ChatGPT blocks direct website embedding for account security. JARVIS therefore keeps the prompt, response editor, history, comparison and exports inside this section while opening ChatGPT in a compact companion window.</p>
         </div>
         <div class="actions">
-          <button type="button" class="btn purple" onclick="openChatGPTV301()">↗ Open ChatGPT Mini Window</button>
+          <button type="button" class="btn purple" onclick="openChatGPTV301()">↗ Copy Prompt & Open Companion</button>
           <button type="button" class="btn ghost" onclick="openChatGPTFullV302()">Open Full ChatGPT</button>
         </div>
         <div id="chatgptMiniStatusV302" class="v302Status">Generate and copy a prompt below, then open ChatGPT.</div>
       </div>
 
-      <div id="chatgptPromptMountV302"></div>
+      <div id="chatgptPromptMountV302">
+<div class="card v301PromptWorkspace">
+        <div class="v301WorkspaceHead">
+          <div><span class="v282Eyebrow">CHATGPT PLUS • MANUAL EXPERT MODE</span><h2>ChatGPT UPSC Prompt Workspace</h2><p class="sub">Generate the strict exam-oriented prompt, copy it, open ChatGPT, then paste the response back into JARVIS and save it.</p></div>
+          <span class="v301WorkspaceBadge">COPY → OPEN → PASTE → SAVE</span>
+        </div>
+        <div class="v301WorkspaceGrid">
+          <div class="v301FormStack">
+            <label><span>UPSC task</span><select id="chatgptTaskV301" onchange="updateChatGPTTemplateV301()"><option value="mains-evaluator">Strict Mains Answer Evaluator</option><option value="topper-answer">Topper-Style Model Answer</option><option value="current-affairs">Current Affairs Deep Analysis</option><option value="prelims">Prelims / PYQ Analysis</option><option value="ethics">GS4 Ethics Case Study</option><option value="essay">Essay Framework</option><option value="saarathi">Saarathi Weekly Plan Extractor</option><option value="notes">UPSC Notes & Revision</option></select></label>
+            <div class="v301ConfigGrid">
+              <label><span>Marks</span><select id="chatgptMarksV301" onchange="generateChatGPTPromptV301()"><option value="10">10 marker</option><option value="15">15 marker</option></select></label>
+              <label><span>Paper / Subject</span><input id="chatgptPaperV301" placeholder="GS2 / Polity / Ethics"></label>
+            </div>
+            <label><span>Question / Topic</span><textarea id="chatgptQuestionV301" placeholder="Paste the exact UPSC question or topic"></textarea></label>
+            <label id="chatgptAnswerWrapV301"><span>My Answer</span><textarea id="chatgptAnswerV301" placeholder="Paste your typed answer or extracted handwritten answer text"></textarea></label>
+            <label><span id="chatgptSourceLabelV301">Source material / notes (optional)</span><textarea id="chatgptSourceV301" placeholder="Paste article, mentor plan, PDF extracted text, notes or supporting material"></textarea></label>
+            <div class="v301WorkspaceActions"><button class="btn purple" type="button" onclick="generateChatGPTPromptV301()">Generate Exam Prompt</button><button class="btn ghost" type="button" onclick="clearChatGPTWorkspaceV301()">Clear</button></div>
+          </div>
+          <div class="v301PromptPane">
+            <div class="v301PaneTitle"><span>Prepared Prompt</span><small>Editable before copying</small></div>
+            <textarea id="chatgptPromptV301" placeholder="Your exam-oriented ChatGPT prompt will appear here"></textarea>
+            <div class="v301WorkspaceActions"><button class="btn gold" type="button" onclick="copyChatGPTPromptV301()">📋 Copy Prompt</button><button class="btn blue" type="button" onclick="openChatGPTV301()">↗ Open ChatGPT</button></div>
+            <div class="v301PaneTitle"><span>Paste ChatGPT Response</span><small>Manual or clipboard paste</small></div>
+            <textarea id="chatgptResponseV301" placeholder="Copy ChatGPT's response and paste it here"></textarea>
+            <div class="v301WorkspaceActions"><button class="btn purple" type="button" onclick="pasteChatGPTResponseV301()">📥 Paste from Clipboard</button><button class="btn green" type="button" onclick="saveChatGPTResponseV301()">💾 Save Response</button><button class="btn blue" type="button" onclick="sendChatGPTResponseToModuleV301()">Send to Relevant Module</button></div>
+            <div id="chatgptWorkspaceStatusV301" class="v301WorkspaceStatus">Choose a task and generate the prompt.</div>
+          </div>
+        </div>
+      </div>
+</div>
     </section>
 
     <section id="youtubeNotesV302" class="section lightStudySection v302YoutubeSection">
@@ -2832,7 +2842,7 @@
         <div class="card">
           <h2>📦 Release Information</h2>
           <div class="v275ReleaseList">
-            <div><span>Version</span><b>Mission UPSC AI OS V30.3.0 Saarthi Mentor Hub</b></div>
+            <div><span>Version</span><b>Mission UPSC AI OS V30.4.0 Final Polish</b></div>
             <div><span>Build date</span><b>22 June 2026</b></div>
             <div><span>Base</span><b>V28.6 Final UI + V28.5 Responsive Jarvis Pro</b></div>
             <div><span>Data policy</span><b>Paid Gemini calls only when you select Gemini/Hybrid and run an AI action</b></div>
@@ -2869,5 +2879,6 @@
 <script defer src="./v3015-ai-route-lock.js?v=30.1.5"></script>
 <script defer src="./v3020-prompt-youtube.js?v=30.2.0"></script>
 <script defer src="./v3030-saarthi-mentor.js?v=30.3.0"></script>
+<script defer src="./v3040-final-polish.js?v=30.4.0"></script>
 </body>
 </html>

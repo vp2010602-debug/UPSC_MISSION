@@ -69,10 +69,10 @@
     try{const r=await fetchTimeout(url+'/api/tags',{method:'GET'},2600);if(!r.ok)throw new Error('HTTP '+r.status);ollamaState={ok:true,at:Date.now(),message:'Connected'};return true}catch(e){ollamaState={ok:false,at:Date.now(),message:e.name==='AbortError'?'Timed out':e.message};return false}finally{renderRouterUsage()}
   }
   async function askOllama(prompt){const ai=baseAI(),url=String(ai.ollamaUrl||'http://localhost:11434').replace(/\/$/,'');const r=await fetchTimeout(url+'/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:ai.ollamaModel||'gemma3:4b',prompt:wrapPrompt(prompt),stream:false,options:{temperature:.3}})},180000);if(!r.ok)throw new Error('Ollama error: '+await r.text());const d=await r.json();if(!d.response)throw new Error('Ollama returned no response.');return d.response}
-  async function askGemini(prompt){const ai=baseAI(),key=String(ai.geminiKey||'').trim();if(!key)throw new Error('Gemini API key missing.');const models=['gemini-2.0-flash','gemini-2.5-flash','gemini-2.5-flash-lite'];let last='Gemini unavailable';for(const model of models){try{const r=await fetchTimeout(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:wrapPrompt(prompt)}]}],generationConfig:{temperature:.3}})},150000);const d=await r.json();const out=d?.candidates?.[0]?.content?.parts?.map(x=>x.text||'').join('\n').trim();if(out)return out;last=d?.error?.message||`No response from ${model}`}catch(e){last=e.message}}throw new Error(last)}
+  async function askGemini(prompt){if(typeof window.__missionV301Router==='function')return await window.__missionV301Router(prompt);if(typeof window.missionAskAI==='function')return await window.missionAskAI(prompt);throw new Error('Secure Gemini router is still loading.');}
   async function chatGPTPrompt(prompt){const full=wrapPrompt(prompt);try{await navigator.clipboard.writeText(full)}catch(e){}return `# ChatGPT Prompt Mode\n\nThe prompt has been prepared${navigator.clipboard?' and copied':''}. Open ChatGPT and paste it.\n\n## Prompt\n\n${full}`}
   async function decideRoute(prompt,meta={}){
-    const rs=routerSettings(),ai=baseAI(),c=classifyPrompt(prompt),cloudAllowed=cloudCallsThisMonth()<Number(rs.cloudCap||150),hasGemini=!!String(ai.geminiKey||'').trim();
+    const rs=routerSettings(),ai=baseAI(),c=classifyPrompt(prompt),cloudAllowed=cloudCallsThisMonth()<Number(rs.cloudCap||150),hasGemini=!!String(ai.geminiProxyUrl||'').trim()||!!String(ai.geminiKey||'').trim();
     if(!rs.enabled||rs.policy==='manual')return {provider:ai.mode==='hybrid'?'auto':ai.mode,reason:'Manual AI policy selected',classification:c};
     const localPossible=rs.preferLocal&&await testOllama(false);
     if(c.privateContext&&!rs.allowMemoryCloud&&localPossible)return {provider:'ollama',reason:'Private workspace context stays local',classification:c};
@@ -97,10 +97,10 @@
   }
   async function smartAsk(prompt,meta={}){
     if(!routerSettings().enabled&&legacyRouter)return legacyRouter(prompt);
-    let d=await decideRoute(prompt,meta);if(d.provider==='auto'){const ai=baseAI();d.provider=ai.mode==='hybrid'?(await testOllama()?'ollama':(ai.geminiKey?'gemini':'chatgpt')):ai.mode}
+    let d=await decideRoute(prompt,meta);if(d.provider==='auto'){const ai=baseAI();d.provider=ai.mode==='hybrid'?(await testOllama()?'ollama':((ai.geminiProxyUrl||ai.geminiKey)?'gemini':'chatgpt')):ai.mode}
     const order=[d.provider,...(['ollama','gemini','chatgpt'].filter(x=>x!==d.provider))],started=Date.now();let lastErr='';
     for(const provider of order){
-      if(provider==='gemini'&&(!baseAI().geminiKey||cloudCallsThisMonth()>=routerSettings().cloudCap))continue;
+      if(provider==='gemini'&&(!(baseAI().geminiProxyUrl||baseAI().geminiKey)||cloudCallsThisMonth()>=routerSettings().cloudCap))continue;
       if(provider==='ollama'&&!(await testOllama(false)))continue;
       try{routeToast(provider,d.reason);const out=provider==='ollama'?await askOllama(prompt):provider==='gemini'?await askGemini(prompt):await chatGPTPrompt(prompt);logRoute({provider,task:d.classification.task,reason:d.reason,ok:true,ms:Date.now()-started,promptChars:String(prompt).length});window.__lastAIRouteV282={provider,reason:d.reason,time:new Date().toISOString()};document.dispatchEvent(new CustomEvent('mission-ai-route',{detail:window.__lastAIRouteV282}));return out}catch(e){lastErr=e.message;logRoute({provider,task:d.classification.task,reason:d.reason,ok:false,ms:Date.now()-started,error:e.message,promptChars:String(prompt).length})}
     }
@@ -109,7 +109,7 @@
   smartAsk.__v282=true;
 
   window.saveSmartRouterV282=function(){const s={enabled:$('smartRouterEnabledV282')?.checked!==false,policy:$('smartRouterPolicyV282')?.value||'auto',cloudCap:clamp($('smartRouterCloudCapV282')?.value||150,1,5000),allowMemoryCloud:!!$('smartRouterAllowMemoryCloudV282')?.checked,showRoute:$('smartRouterShowRouteV282')?.checked!==false,preferLocal:$('smartRouterPreferLocalV282')?.checked!==false};saveJSON(ROUTER_KEY,s);renderRouterUsage();if($('smartRouterStatusV282'))$('smartRouterStatusV282').textContent='Smart Router settings saved.'};
-  window.testSmartRouterV282=async function(){window.saveSmartRouterV282();const box=$('smartRouterStatusV282');if(box)box.textContent='Testing Ollama and checking cloud settings…';const local=await testOllama(true),ai=baseAI(),d=await decideRoute('Create 10 UPSC flashcards on Fundamental Rights');if(box)box.innerHTML=`<b>Ollama:</b> ${local?'Connected':'Unavailable — '+esc(ollamaState.message)}<br><b>Gemini:</b> ${ai.geminiKey?'Key saved':'Key missing'}<br><b>ChatGPT Prompt:</b> Ready<br><b>Example route:</b> ${esc(d.provider)} — ${esc(d.reason)}`;renderRouterUsage()};
+  window.testSmartRouterV282=async function(){window.saveSmartRouterV282();const box=$('smartRouterStatusV282');if(box)box.textContent='Testing Ollama and checking cloud settings…';const local=await testOllama(true),ai=baseAI(),d=await decideRoute('Create 10 UPSC flashcards on Fundamental Rights');if(box)box.innerHTML=`<b>Ollama:</b> ${local?'Connected':'Unavailable — '+esc(ollamaState.message)}<br><b>Gemini:</b> ${(ai.geminiProxyUrl||ai.geminiKey)?'Secure proxy ready':'Secure proxy URL missing'}<br><b>ChatGPT Prompt:</b> Ready<br><b>Example route:</b> ${esc(d.provider)} — ${esc(d.reason)}`;renderRouterUsage()};
   window.clearRouterUsageV282=function(){if(!confirm('Clear the local AI routing usage log? This does not remove API keys or study data.'))return;localStorage.removeItem(ROUTER_LOG_KEY);renderRouterUsage();if($('smartRouterStatusV282'))$('smartRouterStatusV282').textContent='Routing usage log cleared.'};
   window.smartAIRouteDecisionV282=decideRoute;
 

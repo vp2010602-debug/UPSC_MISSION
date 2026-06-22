@@ -1,0 +1,19 @@
+MISSION UPSC AI OS V30.4.0 — STATIC QA REPORT
+Date: 22 June 2026
+
+PASS — JavaScript syntax for every project JS file outside node_modules.
+PASS — 0 duplicate HTML IDs.
+PASS — 0 missing local script, stylesheet, image or manifest references.
+PASS — 363 unique inline onclick functions checked; 0 unresolved handlers.
+PASS — CSS brace validation; 0 unbalanced project stylesheets.
+PASS — 44 application sections detected.
+PASS — 38 sidebar navigation buttons organised into 6 logical groups.
+PASS — ChatGPT workspace mounted inside the dedicated Prompt Hub section.
+PASS — No direct Gemini REST endpoint exists in frontend JavaScript.
+PASS — Gemini API call exists only in functions/index.js behind Firebase authentication and OWNER_EMAIL verification.
+PASS — Service-worker cache advanced to V30.4.0 and includes final-polish assets.
+PASS — Date/time picker, top hamburger, Saarthi Hub and prior modules remain referenced.
+
+LIMITATION — Automated browser runtime rendering was not available in the build environment. Final deployment should be smoke-tested in the user’s Chrome/iPad PWA.
+PLATFORM CONSTRAINT — ChatGPT blocks iframe embedding. The build uses an in-section workspace plus a compact companion window.
+BACKEND NOTE — Redeploy included Firebase Functions once to activate the new secure image/scanned-PDF payload support.

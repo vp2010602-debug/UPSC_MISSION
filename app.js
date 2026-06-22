@@ -1,8 +1,9 @@
-import { firebaseConfig, AI_FUNCTION_URL, GEMINI_API_KEY } from './firebase-config.js';
+import { firebaseConfig, AI_FUNCTION_URL } from './firebase-config.js'; // All production AI calls use the authenticated Firebase proxy.
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, setPersistence, browserLocalPersistence, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js';
+window.MISSION_AI_FUNCTION_URL = AI_FUNCTION_URL; // Public endpoint only; Gemini secret remains in Firebase Secret Manager.
 
 const subjects=['Polity','History','Geography','Economy','Environment','Science & Tech','Ethics','Essay','Current Affairs','CSAT','Optional','General'];
 const $=id=>document.getElementById(id);
@@ -358,49 +359,35 @@ window.saveExamDates=()=>{localStorage.setItem('prelimsDate',$('prelimsDate').va
 function renderCountdown(){if(!$('prelimsCountdown'))return;const p=localStorage.getItem('prelimsDate'),m=localStorage.getItem('mainsDate');$('prelimsDate').value=p||'';$('mainsDate').value=m||'';const diff=d=>Math.ceil((new Date(d)-new Date())/(1000*60*60*24));$('prelimsCountdown').innerText=p?`${diff(p)} days to Prelims`:'Set Prelims date';$('mainsCountdown').innerText=m?`${diff(m)} days to Mains`:'Set Mains date'}
 function renderHeatmap(logs,habits,revision){if(!$('heatmapGrid'))return;const map={};logs.forEach(l=>map[l.date]=(map[l.date]||0)+(+l.hours||0));habits.forEach(h=>map[h.date]=(map[h.date]||0)+1);revision.forEach(r=>map[r.date]=(map[r.date]||0)+1);let html='';for(let i=83;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const key=d.toISOString().slice(0,10);const val=map[key]||0;const cls=val>=6?'heat4':val>=3?'heat3':val>=1?'heat2':'';html+=`<div class="heatCell ${cls}" title="${key}: ${val}">${d.getDate()}</div>`}$('heatmapGrid').innerHTML=html}
 
+async function missionUnifiedAI(prompt, options={}){
+  const clean=String(prompt||'').trim();
+  if(!clean) throw new Error('Enter a question, topic or source text first.');
+  const started=Date.now();
+  while(typeof window.aiAskRouterV23!=='function' && Date.now()-started<10000){await new Promise(r=>setTimeout(r,120));}
+  if(typeof window.ensureSecureAIRouterV3015==='function') window.ensureSecureAIRouterV3015();
+  if(typeof window.aiAskRouterV23!=='function') throw new Error('Unified AI router is not ready. Open AI Control Centre, save Gemini/Hybrid settings, then refresh once.');
+  return await window.aiAskRouterV23(clean,options);
+}
 async function callAI(type,payload){
-  let prompt="";
+  let prompt='';
+  if(type==='newspaper') prompt=`Act as a senior UPSC Current Affairs analyst. Analyse the article with: GS paper and exact syllabus linkage, simple explanation, background, Prelims facts and traps, Mains dimensions, stakeholders, data/reports only when defensible, related PYQ themes, one MCQ, one Mains question and a revision capsule. Never invent a source.
 
-  if(type==="newspaper"){
-    prompt=`Analyze this article for UPSC. Give GS paper, syllabus link, prelims facts, mains points, keywords, possible MCQ, possible mains question, and 100-word summary.
+ARTICLE:
+${payload?.text||''}`;
+  else if(type==='notes') prompt=`Create rigorous UPSC-ready notes.
+Topic: ${payload?.topic||'UPSC Topic'}
 
-Article:
-${payload?.text||""}`;
-  }else if(type==="notes"){
-    prompt=`Create UPSC-ready notes.
+SOURCE/CONTEXT:
+${payload?.text||''}
 
-Topic: ${payload?.topic||""}
+Include: core concept, syllabus linkage, Prelims facts/traps, Mains dimensions, constitutional/legal or report value-additions where relevant, PYQ themes, examples, a text flowchart, flashcards, five MCQs and a revision checklist. Never fabricate.`;
+  else if(type==='mentor') prompt=`Act as a strict but supportive UPSC mentor.
+REQUEST:
+${payload?.question||''}
 
-Content:
-${payload?.text||""}
-
-Give intro, bullet notes, prelims facts, mains dimensions, PYQ angle, flashcards and 5 MCQs.`;
-  }else if(type==="mentor"){
-    prompt=`Act as a strict but supportive UPSC mentor.
-
-Question:
-${payload?.question||""}
-
-Give diagnosis, mistakes, 7-day plan, daily routine and motivation.`;
-  }
-
-  if(!GEMINI_API_KEY) return demoAI(type,payload);
-
-  try{
-    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
-    });
-
-    const data=await r.json();
-
-    return data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-           data?.error?.message ||
-           "No AI response";
-  }catch(e){
-    return "AI error: "+e.message;
-  }
+Give diagnosis, highest-priority mistake, a realistic 7-day plan, daily accountability, answer-writing/MCQ/revision targets and red flags. Do not invent preparation data.`;
+  else prompt=payload?.question||payload?.text||JSON.stringify(payload||{});
+  return await missionUnifiedAI(prompt,{task:type});
 }
 function demoAI(type,payload){if(type==='mentor')return `Diagnosis:\nYou may be weak because revision, PYQ practice and mock analysis are not yet tracked deeply.\n\n7-day Polity plan:\nDay 1: Fundamental Rights + PYQs\nDay 2: Parliament\nDay 3: President + Governor\nDay 4: Judiciary + cases\nDay 5: Constitutional bodies\nDay 6: Mock + wrong book\nDay 7: Revision + flashcards`;return `UPSC Analysis:\nGS Paper: GS2/GS3 depending on issue.\n\nPrelims facts:\n- Key institution / Act / scheme\n- Important terms\n\nMains points:\n- Background\n- Significance\n- Challenges\n- Way forward\n\nPossible question:\nDiscuss the issue and suggest a way forward.`}
 window.aiNewspaper=async()=>{$('articleOutput').innerText='Analyzing...';$('articleOutput').innerText=await callAI('newspaper',{text:$('articleInput').value})};
@@ -1012,7 +999,7 @@ setupAuth();renderAll();
 
 /* ===== ULTIMATE UPSC WAR ROOM UPGRADES ===== */
 window.formatAI=function(text){if(!text)return"No response";let safe=String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");safe=safe.replace(/^### (.*$)/gim,"<h3>$1</h3>").replace(/^## (.*$)/gim,"<h2>$1</h2>").replace(/^# (.*$)/gim,"<h1>$1</h1>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/^\s*[-*]\s+(.*$)/gim,"<li>$1</li>").replace(/\n\n/g,"</p><p>").replace(/\n/g,"<br>");return `<div class="aiFormatted"><p>${safe}</p></div>`};
-async function callGeminiDirect(prompt){if(typeof GEMINI_API_KEY==="undefined"||!GEMINI_API_KEY)return"Gemini API key not found. Add GEMINI_API_KEY in firebase-config.js.";const models=["gemini-2.0-flash","gemini-2.5-flash","gemini-2.5-flash-lite"];let last="";for(const model of models){try{const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});const data=await r.json();const result=data?.candidates?.[0]?.content?.parts?.[0]?.text;if(result)return result;last=data?.error?.message||"No AI response"}catch(e){last=e.message}}return"AI error: "+last}
+async function callGeminiDirect(prompt){return await missionUnifiedAI(prompt,{task:'legacy-gemini'});}
 window.callAI=async function(type,payload){let prompt="";if(type==="newspaper"){prompt=`Analyze this article for UPSC with clean headings:\n# UPSC Newspaper Analysis\n## GS Paper and syllabus link\n## Core issue\n## Prelims facts\n## Mains dimensions\n## Keywords\n## Possible MCQ\n## Possible mains question\n## 100-word summary\n\nArticle:\n${payload?.text||payload?.article||""}`}else if(type==="notes"){prompt=`Create UPSC-ready notes:\n# ${payload?.topic||"UPSC Notes"}\n## Introduction\n## Core concepts\n## Prelims facts\n## Mains dimensions\n## PYQ angle\n## Flashcards\n## 5 MCQs\n## Revision checklist\n\nContent:\n${payload?.text||""}`}else if(type==="mentor"){prompt=`Act as a strict but supportive UPSC mentor.\nQuestion/request:\n${payload?.question||""}\n# Mentor Diagnosis\n## Mistakes\n## 7-day plan\n## Daily routine\n## Motivation`}else{prompt=payload?.question||JSON.stringify(payload||{})}return await callGeminiDirect(prompt)};
 window.aiNewspaper=async function(){const input=$("articleInput")||$("articleText"),out=$("articleOutput");if(!out)return alert("articleOutput not found");out.classList.add("aiOutput","bigAI");out.innerHTML='<div class="aiLoading">Analyzing newspaper...</div>';out.innerHTML=formatAI(await callAI("newspaper",{text:input?.value||""}))};
 window.aiNotes=async function(){const topic=$("aiTopic"),text=$("chapterInput")||$("aiText"),out=$("notesOutput");if(!out)return alert("notesOutput not found");out.classList.add("aiOutput","bigAI");out.innerHTML='<div class="aiLoading">Generating UPSC notes...</div>';out.innerHTML=formatAI(await callAI("notes",{topic:topic?.value||"UPSC Topic",text:text?.value||""}))};
@@ -1033,7 +1020,7 @@ setTimeout(()=>{try{renderAll(activeSectionIdV225())}catch(e){}},1000);
 
 /* ===== AI-FIRST INTEGRATED WAR ROOM LOGIC ===== */
 window.formatAI=function(text){if(!text)return"No response";let safe=String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");safe=safe.replace(/^### (.*$)/gim,"<h3>$1</h3>").replace(/^## (.*$)/gim,"<h2>$1</h2>").replace(/^# (.*$)/gim,"<h1>$1</h1>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/^\s*[-*]\s+(.*$)/gim,"<li>$1</li>").replace(/\n\n/g,"</p><p>").replace(/\n/g,"<br>");return `<div class="aiFormatted"><p>${safe}</p></div>`};
-async function aiAsk(prompt){if(typeof GEMINI_API_KEY==="undefined"||!GEMINI_API_KEY)return"Add GEMINI_API_KEY in firebase-config.js";const models=["gemini-2.0-flash","gemini-2.5-flash","gemini-2.5-flash-lite"];let last="";for(const model of models){try{const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});if(!r.ok){last=await r.text();continue;}const data=await r.json();return data.candidates?.[0]?.content?.parts?.[0]?.text||"No response received.";}catch(e){last=e.message;continue;}}return"AI error: "+last;}
+async function aiAsk(prompt){return await missionUnifiedAI(prompt,{task:'module'});}
 window.callAI=async(type,payload)=>aiAsk(payload?.question||payload?.text||JSON.stringify(payload||{}));
 async function addCalendarItemAuto(title,date,type="AI Task"){await saveCol("calendarItems",{title,date:date||today(),type});}
 async function addWeakTopic(topic,subject,source){await saveCol("weakTopics",{topic,subject,source,date:today(),status:"active"});}
@@ -1209,26 +1196,7 @@ window.formatAI = window.formatAI || function(text){
   return `<div class="aiFormatted"><p>${safe}</p></div>`;
 };
 
-window.aiAskV4 = async function(prompt){
-  if(typeof aiAsk === "function") return await aiAsk(prompt);
-  if(typeof callGeminiDirect === "function") return await callGeminiDirect(prompt);
-  if(typeof GEMINI_API_KEY === "undefined" || !GEMINI_API_KEY) return "Add GEMINI_API_KEY in firebase-config.js";
-  const models=["gemini-2.0-flash","gemini-2.5-flash","gemini-2.5-flash-lite"];
-  let last="";
-  for(const model of models){
-    try{
-      const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,{
-        method:"POST",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
-      });
-      const d=await r.json();
-      const out=d?.candidates?.[0]?.content?.parts?.[0]?.text;
-      if(out) return out;
-      last=d?.error?.message||"No response";
-    }catch(e){last=e.message}
-  }
-  return "AI error: "+last;
-};
+window.aiAskV4 = async function(prompt){return await missionUnifiedAI(prompt,{task:'v4'});};
 
 window.show = window.show || function(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
@@ -2576,23 +2544,7 @@ renderAIIntegrated = async function(){
     const d=await r.json();
     return d.response || 'No Ollama response.';
   }
-  async function askGeminiV23(prompt){
-    const s=getAISettingsV23();
-    const key=s.geminiKey || (typeof GEMINI_API_KEY!=='undefined'?GEMINI_API_KEY:'');
-    if(!key) throw new Error('Gemini API key missing. Add it in AI Control Centre.');
-    const models=['gemini-2.0-flash','gemini-2.5-flash','gemini-2.5-flash-lite'];
-    let last='';
-    for(const model of models){
-      try{
-        const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:makeUPSCPromptV23(prompt)}]}]})});
-        const d=await r.json();
-        const out=d?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if(out) return out;
-        last=d?.error?.message||'No Gemini response';
-      }catch(e){last=e.message}
-    }
-    throw new Error(last||'Gemini failed');
-  }
+  async function askGeminiV23(prompt){if(typeof window.__missionV301Router==='function')return await window.__missionV301Router(prompt);if(typeof window.missionAskAI==='function')return await window.missionAskAI(prompt);throw new Error('Secure Gemini router is still loading. Refresh once and try again.');}
   async function askChatGPTPromptModeV23(prompt){
     lastChatGPTPromptV23=makeUPSCPromptV23(prompt);
     try{await navigator.clipboard.writeText(lastChatGPTPromptV23)}catch(e){}
@@ -4025,12 +3977,20 @@ renderAIIntegrated = async function(){
     return text.trim();
   }
   async function docxTextU(file){const m=await loadMammothU(),r=await m.extractRawText({arrayBuffer:await file.arrayBuffer()});return String(r.value||'').trim()}
-  function geminiKeyU(){const s=settingsU();return s.geminiKey||(typeof GEMINI_API_KEY!=='undefined'?GEMINI_API_KEY:'')||''}
   async function geminiVisionU(file,instruction){
-    const key=geminiKeyU();if(!key)throw new Error('Gemini API key is missing. Add it in AI Control Centre.');if(file.size>15*1024*1024)throw new Error('Visual file is over 15 MB. Compress or split it first.');
-    const data=(await dataUrlU(file)).split(',')[1]||'';const models=['gemini-2.5-flash','gemini-2.0-flash'];let last='';
-    for(const model of models){try{const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:instruction},{inline_data:{mime_type:file.type||'application/octet-stream',data}}]}]})});const d=await r.json();const out=(d?.candidates?.[0]?.content?.parts||[]).map(x=>x.text||'').join('\n').trim();if(out)return out;last=d?.error?.message||'Gemini returned no extracted text.'}catch(e){last=e.message}}
-    throw new Error(last||'Gemini visual reading failed.');
+    if(file.size>12*1024*1024)throw new Error('Visual file is over 12 MB. Compress or split it first.');
+    const settings=settingsU();
+    const proxy=String(settings.geminiProxyUrl||'').trim().replace(/\/$/,'');
+    if(!proxy)throw new Error('Secure Gemini proxy URL is missing. Save it in AI Control Centre.');
+    if(typeof window.getFirebaseIdTokenV301!=='function')throw new Error('Google sign-in bridge unavailable. Refresh and sign in again.');
+    const data=(await dataUrlU(file)).split(',')[1]||'';
+    const call=async(force=false)=>{
+      const token=await window.getFirebaseIdTokenV301(force);
+      return await fetch(proxy,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${token}`},body:JSON.stringify({prompt:instruction,model:settings.geminiModel||'gemini-2.5-flash',temperature:0.1,maxOutputTokens:16384,file:{mimeType:file.type||'application/octet-stream',dataBase64:data,name:file.name||'upload'}})});
+    };
+    let r=await call(false);if(r.status===401)r=await call(true);
+    const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||d.message||`Secure Gemini file reader HTTP ${r.status}`);
+    const out=String(d.result||d.text||'').trim();if(!out)throw new Error('Secure Gemini returned no extracted text.');return out;
   }
   async function ollamaVisionU(file,instruction){
     if(!/^image\//i.test(file.type))throw new Error('Ollama browser import supports image files here, not scanned PDF. Use Gemini for scanned PDF or upload page images.');

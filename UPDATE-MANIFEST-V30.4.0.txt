@@ -1,0 +1,22 @@
+MISSION UPSC AI OS V30.4.0 — GITHUB UPDATE MANIFEST
+
+Replace/add:
+- index.html
+- app.js
+- firebase-config.js
+- service-worker.js
+- jarvis-v2823.js
+- v301-ai-full-setup.js
+- v3040-final-polish.css
+- v3040-final-polish.js
+- .firebaserc
+- firebase.json
+- functions/index.js
+- functions/package.json
+- functions/package-lock.json
+- README-V30.4.0.md
+- V30.4.0-QA-REPORT.txt
+- UPDATE-MANIFEST-V30.4.0.txt
+
+Do not upload functions/node_modules.
+Run `npx firebase-tools deploy --only functions` once only if secure scanned-PDF/image reading is required.
