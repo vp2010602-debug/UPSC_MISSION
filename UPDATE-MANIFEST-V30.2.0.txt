@@ -1,0 +1,10 @@
+V30.2.0 GITHUB UPDATE FILES
+
+index.html
+service-worker.js
+v3020-prompt-youtube.css
+v3020-prompt-youtube.js
+README-V30.2.0.md
+V30.2.0-QA-REPORT.txt
+
+Backend functions and Firebase secrets are unchanged.

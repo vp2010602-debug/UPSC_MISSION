@@ -1,0 +1,15 @@
+MISSION UPSC AI OS V30.2.0 QA REPORT
+
+PASS - JavaScript syntax check for every project JS file.
+PASS - No duplicate HTML IDs.
+PASS - All local script and stylesheet references exist.
+PASS - New ChatGPT Prompt Hub navigation target exists.
+PASS - New YouTube Video Notes navigation target exists.
+PASS - New HTML button handlers are defined.
+PASS - Service worker cache upgraded to v30.2.0 and includes both new assets.
+PASS - Jarvis explanation classifier: Article 14 Prelims + Mains remains inside Jarvis.
+PASS - Explicit MCQ/test requests continue to use Prelims Test Centre.
+PASS - Secure Gemini backend configuration and functions folder unchanged.
+PASS - Temporal picker and hamburger assets preserved.
+
+Browser-level Gemini/YouTube network calls require the deployed GitHub site and signed-in user, so they are tested by the website after deployment.

@@ -1,0 +1,61 @@
+/* Mission UPSC AI OS V30.2.0 — ChatGPT Prompt Hub + YouTube Notes */
+.v302PromptHub,.v302YoutubeSection{padding-bottom:48px}
+.v302Hero{margin-bottom:20px}
+.v302MiniLaunchCard{display:flex;align-items:center;justify-content:space-between;gap:22px;margin-bottom:20px}
+.v302MiniLaunchCard>div:first-child{min-width:0;flex:1}
+.v302MiniLaunchCard .actions{margin:0;flex-wrap:wrap;justify-content:flex-end}
+.v302Status{margin-top:12px;padding:12px 14px;border:1px solid rgba(30,102,214,.18);background:rgba(239,246,255,.75);border-radius:14px;font-size:.94rem;line-height:1.45;color:#244568}
+[data-theme="dark"] .v302Status{background:rgba(14,34,58,.74);color:#d5e7ff;border-color:rgba(120,170,235,.25)}
+#chatgptPromptMountV302>.v301PromptWorkspace{margin-top:0}
+.v302PromptHub .v301WorkspaceGrid{align-items:start}
+.v302PromptHub .v301PromptPane textarea{min-height:250px}
+.v302PromptHub #chatgptResponseV301{min-height:300px}
+.v302ExtraPromptActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+
+.v302YoutubeGrid{align-items:start}
+.v302VideoSourceCard,.v302VideoOutputCard{min-width:0}
+.v302CardHead{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:16px}
+.v302CardHead h2{margin:0 0 5px}
+.v302CardHead .sub{margin:0}
+.v302InlineInput{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}
+.v302PlayerWrap{position:relative;aspect-ratio:16/9;width:100%;margin:14px 0 18px;border-radius:18px;overflow:hidden;background:#071525;border:1px solid rgba(40,93,145,.25);box-shadow:0 14px 35px rgba(17,48,84,.12)}
+.v302PlayerWrap iframe{width:100%;height:100%;border:0;display:block}
+.v302PlayerEmpty{height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px;color:#d9e8f9;text-align:center;padding:20px}
+.v302PlayerEmpty span{font-size:2.4rem}
+.v302PlayerEmpty small{opacity:.78}
+.v302MetaGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.v302MetaGrid label{margin:0}
+.v302MetaGrid label span{display:block;font-weight:750;margin:0 0 7px}
+.v302Transcript{min-height:310px;resize:vertical}
+.v302TranscriptMeta{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:7px 2px 12px;font-size:.86rem;color:#66809b}
+.v302SourceActions,.v302OutputActions{gap:9px;flex-wrap:wrap}
+.v302GenerateBtn{min-width:210px}
+.v302NotesOutput{min-height:610px;resize:vertical;font-family:inherit;line-height:1.62;white-space:pre-wrap}
+.v302RecentCard{margin-top:20px}
+.v302HistoryItem{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(71,103,139,.14)}
+.v302HistoryItem:last-child{border-bottom:0}
+.v302HistoryItem h3{margin:0 0 5px;font-size:1rem}
+.v302HistoryItem p{margin:0;color:#6c8095;font-size:.88rem}
+.v302HistoryItem .actions{margin:0;justify-content:flex-end}
+.v302HistoryItem .btn{padding:8px 12px;font-size:.86rem}
+
+@media (max-width:1100px){
+  .v302MiniLaunchCard{align-items:flex-start;flex-direction:column}
+  .v302MiniLaunchCard .actions{justify-content:flex-start}
+  .v302YoutubeGrid{grid-template-columns:1fr!important}
+  .v302NotesOutput{min-height:480px}
+}
+@media (max-width:700px){
+  .v302PromptHub,.v302YoutubeSection{padding-left:0;padding-right:0}
+  .v302InlineInput{grid-template-columns:1fr}
+  .v302InlineInput .btn{width:100%}
+  .v302MetaGrid{grid-template-columns:1fr}
+  .v302Transcript{min-height:260px}
+  .v302NotesOutput{min-height:430px}
+  .v302TranscriptMeta{align-items:flex-start;flex-direction:column;gap:4px}
+  .v302SourceActions .btn,.v302OutputActions .btn{flex:1 1 145px}
+  .v302HistoryItem{grid-template-columns:1fr}
+  .v302HistoryItem .actions{justify-content:flex-start}
+  .v302PromptHub .v301WorkspaceGrid{grid-template-columns:1fr!important}
+  .v302PromptHub .v301WorkspaceBadge{display:none}
+}

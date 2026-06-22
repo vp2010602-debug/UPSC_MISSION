@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jarvis UPSC V30.1.3 — Secure AI Router Fix</title>
+  <title>Jarvis UPSC V30.2.0 — Prompt Hub & YouTube Notes</title>
   <meta name="theme-color" content="#06264a" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="./v3007-centered-temporal-hamburger.css?v=30.0.7" />
   <link rel="stylesheet" href="./v301-ai-full-setup.css?v=30.1.3" />
   <link rel="stylesheet" href="./v3012-temporal-picker-hotfix.css?v=30.1.2" />
+  <link rel="stylesheet" href="./v3020-prompt-youtube.css?v=30.2.0" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -68,6 +69,8 @@
       <button onclick="show('timeHabitV262',this)">⏱️ Focus & Habit Intelligence</button>
       <button onclick="show('memoryEngineV263',this)">🧠 Smart Recall & Spaced Revision</button>
       <button onclick="show('aiControlCentre',this)">🤖 AI Control Centre</button>
+      <button onclick="show('chatgptPromptHubV302',this)">📋 ChatGPT Prompt Hub</button>
+      <button onclick="show('youtubeNotesV302',this)">▶️ YouTube Video → Notes</button>
       <button onclick="show('aiMentorPage',this)">🤖 AI Personal Mentor</button>
       <button onclick="show('revisionPlannerV291',this)">🧠 Weak Topics & Revision Planner</button>
       <button onclick="show('aiLibraryAssistant',this)">🔎 Smart Library Assistant</button>
@@ -2598,6 +2601,112 @@
       </div>
     </section>
 
+
+
+    <section id="chatgptPromptHubV302" class="section lightStudySection v302PromptHub">
+      <div class="cleanHero v302Hero">
+        <div>
+          <span class="eyebrow blueEye">CHATGPT PLUS • MANUAL EXPERT WORKFLOW</span>
+          <h1>ChatGPT Prompt Hub</h1>
+          <p class="sub">Prepare a strict UPSC prompt, open ChatGPT in a compact window, paste the response back into JARVIS, then save, print or download it.</p>
+        </div>
+        <div class="heroIcon">📋</div>
+      </div>
+
+      <div class="card v302MiniLaunchCard">
+        <div>
+          <h2>ChatGPT Mini Workspace</h2>
+          <p class="sub">Keep this JARVIS section open. ChatGPT opens in a compact companion window on laptop and a new tab on phone or iPad.</p>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn purple" onclick="openChatGPTV301()">↗ Open ChatGPT Mini Window</button>
+          <button type="button" class="btn ghost" onclick="openChatGPTFullV302()">Open Full ChatGPT</button>
+        </div>
+        <div id="chatgptMiniStatusV302" class="v302Status">Generate and copy a prompt below, then open ChatGPT.</div>
+      </div>
+
+      <div id="chatgptPromptMountV302"></div>
+    </section>
+
+    <section id="youtubeNotesV302" class="section lightStudySection v302YoutubeSection">
+      <div class="cleanHero v302Hero youtubeHeroV302">
+        <div>
+          <span class="eyebrow blueEye">VIDEO LECTURE • TRANSCRIPT • UPSC NOTES</span>
+          <h1>YouTube Video → Notes Maker</h1>
+          <p class="sub">Load a YouTube lecture, paste or upload its transcript/captions, and convert it into structured Prelims and Mains notes using your selected AI.</p>
+        </div>
+        <div class="heroIcon">▶️</div>
+      </div>
+
+      <div class="grid two v302YoutubeGrid">
+        <div class="card v302VideoSourceCard">
+          <div class="v302CardHead">
+            <div><h2>1. Video & Transcript</h2><p class="sub">JARVIS processes the transcript you provide. The YouTube player is included for viewing alongside your notes.</p></div>
+            <span id="youtubeVideoStateV302" class="pill blue">Waiting</span>
+          </div>
+
+          <label>YouTube URL</label>
+          <div class="v302InlineInput">
+            <input id="youtubeUrlV302" type="url" inputmode="url" placeholder="https://www.youtube.com/watch?v=...">
+            <button type="button" class="btn blue" onclick="loadYouTubeVideoV302()">Load Video</button>
+          </div>
+
+          <div id="youtubePlayerWrapV302" class="v302PlayerWrap">
+            <div class="v302PlayerEmpty"><span>▶️</span><b>Paste a YouTube link</b><small>The lecture player will appear here.</small></div>
+          </div>
+
+          <div class="v302MetaGrid">
+            <label><span>Note title</span><input id="youtubeTitleV302" placeholder="Lecture title"></label>
+            <label><span>Subject</span><select id="youtubeSubjectV302"><option>Polity</option><option>History</option><option>Geography</option><option>Economy</option><option>Environment</option><option>Science & Tech</option><option>Current Affairs</option><option>Ethics</option><option>Essay</option><option>Optional</option><option selected>General Studies</option></select></label>
+            <label><span>Note type</span><select id="youtubeModeV302"><option value="integrated" selected>Integrated Prelims + Mains</option><option value="prelims">Prelims Focus</option><option value="mains">Mains Focus</option><option value="lecture">Detailed Lecture Notes</option><option value="revision">One-page Revision Capsule</option></select></label>
+            <label><span>Language</span><select id="youtubeLanguageV302"><option selected>English</option><option>Simple English</option><option>English + Tamil keywords</option></select></label>
+          </div>
+
+          <label>Transcript / captions / lecture text</label>
+          <textarea id="youtubeTranscriptV302" class="v302Transcript" placeholder="Paste the YouTube transcript here, or upload .txt, .md, .srt or .vtt captions..."></textarea>
+          <div class="v302TranscriptMeta"><span id="youtubeTranscriptCountV302">0 words</span><span>Timestamp lines are cleaned automatically.</span></div>
+
+          <input id="youtubeTranscriptFileV302" type="file" accept=".txt,.md,.srt,.vtt,text/plain,text/vtt,application/x-subrip" hidden onchange="readYouTubeTranscriptFileV302(this)">
+          <div class="actions v302SourceActions">
+            <button type="button" class="btn ghost" onclick="document.getElementById('youtubeTranscriptFileV302').click()">⬆ Upload Transcript</button>
+            <button type="button" class="btn purple" onclick="pasteYouTubeTranscriptV302()">📥 Paste Clipboard</button>
+            <button type="button" class="btn ghost" onclick="cleanYouTubeTranscriptV302()">🧹 Clean Captions</button>
+            <button type="button" class="btn gold" onclick="openYouTubeSourceV302()">↗ Open YouTube</button>
+          </div>
+          <div id="youtubeInputStatusV302" class="v302Status">Add a video URL and transcript to begin.</div>
+        </div>
+
+        <div class="card v302VideoOutputCard">
+          <div class="v302CardHead">
+            <div><h2>2. AI UPSC Notes</h2><p class="sub">The selected Gemini, Ollama, Hybrid or ChatGPT mode is used.</p></div>
+            <span id="youtubeAIStateV302" class="pill green">AI ready</span>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn purple v302GenerateBtn" onclick="generateYouTubeNotesV302()">✨ Generate UPSC Notes</button>
+            <button type="button" class="btn ghost" onclick="sendYouTubeToPromptHubV302()">📋 Use ChatGPT Prompt Hub</button>
+          </div>
+
+          <textarea id="youtubeNotesOutputV302" class="v302NotesOutput" placeholder="Your editable UPSC notes will appear here..."></textarea>
+          <div class="v302TranscriptMeta"><span id="youtubeOutputCountV302">0 words</span><span id="youtubeRouteV302">Selected AI route</span></div>
+
+          <div class="actions v302OutputActions">
+            <button type="button" class="btn green" onclick="saveYouTubeNotesV302()">💾 Save as Note</button>
+            <button type="button" class="btn blue" onclick="printYouTubeNotesV302()">🖨 Print / PDF</button>
+            <button type="button" class="btn gold" onclick="downloadYouTubeNotesV302()">⬇ Save TXT File</button>
+            <button type="button" class="btn ghost" onclick="copyYouTubeNotesV302()">📋 Copy</button>
+            <button type="button" class="btn danger" onclick="clearYouTubeNotesV302()">Clear</button>
+          </div>
+          <div id="youtubeOutputStatusV302" class="v302Status">Generated notes remain editable before saving or printing.</div>
+        </div>
+      </div>
+
+      <div class="card v302RecentCard">
+        <div class="v302CardHead"><div><h2>Recent YouTube Notes</h2><p class="sub">Open previously saved video notes from your JARVIS Notes collection.</p></div><button type="button" class="btn ghost" onclick="renderYouTubeNotesHistoryV302()">Refresh</button></div>
+        <div id="youtubeNotesHistoryV302" class="list"><div class="emptyState">No YouTube notes saved yet.</div></div>
+      </div>
+    </section>
+
     <section id="settings" class="section">
       <div class="card">
         <h2>Setup</h2>
@@ -2722,7 +2831,7 @@
         <div class="card">
           <h2>📦 Release Information</h2>
           <div class="v275ReleaseList">
-            <div><span>Version</span><b>Mission UPSC AI OS V30.1.3 Secure AI Router Fix</b></div>
+            <div><span>Version</span><b>Mission UPSC AI OS V30.2.0 Prompt Hub + YouTube Notes</b></div>
             <div><span>Build date</span><b>22 June 2026</b></div>
             <div><span>Base</span><b>V28.6 Final UI + V28.5 Responsive Jarvis Pro</b></div>
             <div><span>Data policy</span><b>Paid Gemini calls only when you select Gemini/Hybrid and run an AI action</b></div>
@@ -2757,5 +2866,6 @@
 <script defer src="./v301-ai-full-setup.js?v=30.1.5"></script>
 <script defer src="./v3012-temporal-picker-hotfix.js?v=30.1.2"></script>
 <script defer src="./v3015-ai-route-lock.js?v=30.1.5"></script>
+<script defer src="./v3020-prompt-youtube.js?v=30.2.0"></script>
 </body>
 </html>
