@@ -1,0 +1,135 @@
+/* Mission UPSC AI OS V30.0.6 — Native date/time containment + unified section toggle
+   Scope: date/time controls only. The original V30 layout and spacing are preserved. */
+
+/* A real clipping shell is used because iPad Safari can paint native date/time
+   controls wider than their CSS grid cell even when width:100% is set. */
+.v3006TemporalShell{
+  position:relative!important;
+  display:block!important;
+  inline-size:100%!important;
+  width:100%!important;
+  min-inline-size:0!important;
+  min-width:0!important;
+  max-inline-size:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  contain:inline-size layout paint!important;
+  isolation:isolate!important;
+  border:1px solid var(--v285-line,#d9e5f1)!important;
+  border-radius:13px!important;
+  background:var(--card,#fff)!important;
+}
+
+.v3006TemporalShell:focus-within{
+  border-color:var(--v285-blue,#1769e0)!important;
+  box-shadow:0 0 0 4px rgba(23,105,224,.12)!important;
+}
+
+.v3006TemporalShell > input[type="date"],
+.v3006TemporalShell > input[type="time"],
+.v3006TemporalShell > input[type="datetime-local"],
+.v3006TemporalShell > input[type="month"],
+.v3006TemporalShell > input[type="week"]{
+  position:relative!important;
+  inset:auto!important;
+  display:block!important;
+  inline-size:100%!important;
+  width:100%!important;
+  min-inline-size:0!important;
+  min-width:0!important;
+  max-inline-size:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:12px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding-inline:12px 42px!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
+/* Keep the native picker active but invisible; the whole field remains tappable. */
+.v3006TemporalShell > input::-webkit-calendar-picker-indicator{
+  position:absolute!important;
+  inset:0!important;
+  inline-size:100%!important;
+  width:100%!important;
+  block-size:100%!important;
+  height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  opacity:0!important;
+  cursor:pointer!important;
+}
+.v3006TemporalShell > input::-webkit-date-and-time-value{
+  display:block!important;
+  inline-size:auto!important;
+  width:auto!important;
+  min-inline-size:0!important;
+  min-width:0!important;
+  max-inline-size:calc(100% - 30px)!important;
+  max-width:calc(100% - 30px)!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  text-align:left!important;
+}
+.v3006TemporalShell > input::-webkit-datetime-edit{
+  min-inline-size:0!important;
+  min-width:0!important;
+  max-inline-size:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  white-space:nowrap!important;
+}
+
+.v3006TemporalShell::after{
+  content:"📅";
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:2;
+  pointer-events:none;
+  font-size:15px;
+  line-height:1;
+  opacity:.72;
+}
+.v3006TemporalShell[data-temporal-kind="time"]::after{content:"🕒"}
+.v3006TemporalShell[data-temporal-kind="datetime-local"]::after{content:"📅"}
+
+/* The field and every immediate layout cell must be allowed to shrink. */
+.v3006TemporalShell,
+.v3006TemporalShell > input,
+label:has(> .v3006TemporalShell),
+.v30Field:has(.v3006TemporalShell),
+.threeInput > *:has(.v3006TemporalShell),
+.twoInput > *:has(.v3006TemporalShell),
+.v27FormGrid > *:has(.v3006TemporalShell),
+.pwaReminderFormV284 > *:has(.v3006TemporalShell){
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+
+/* Do not show the old extra Show/Hide Sections button in the page action row.
+   The single hamburger in the navy top section bar remains the only control. */
+#sidebarToggleV3004,.v3004SidebarToggle{display:none!important}
+
+html[data-theme="dark"] .v3006TemporalShell{
+  background:color-mix(in srgb,var(--card,#111827) 96%,#020617)!important;
+}
+
+@media(max-width:1180px){
+  .v3006TemporalShell > input{font-size:16px!important}
+}
