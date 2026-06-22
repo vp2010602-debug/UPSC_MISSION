@@ -1,0 +1,149 @@
+/* Mission UPSC AI OS V30.0.7 — centred date/time values + top-bar section toggle
+   This patch preserves the V30.0 layout and changes only temporal value alignment
+   and the location/behaviour of the section sidebar control. */
+
+/* ---------- Date / time value presentation ---------- */
+.v3006TemporalShell.v3007TemporalShell{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  min-height:56px!important;
+  height:56px!important;
+  margin:6px 0 10px!important;
+  overflow:hidden!important;
+}
+
+.v3006TemporalShell.v3007TemporalShell > input[type="date"],
+.v3006TemporalShell.v3007TemporalShell > input[type="time"],
+.v3006TemporalShell.v3007TemporalShell > input[type="datetime-local"],
+.v3006TemporalShell.v3007TemporalShell > input[type="month"],
+.v3006TemporalShell.v3007TemporalShell > input[type="week"]{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:56px!important;
+  margin:0!important;
+  padding:0 48px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:transparent!important;
+  -webkit-text-fill-color:transparent!important;
+  caret-color:transparent!important;
+  text-align:center!important;
+  text-align-last:center!important;
+  line-height:56px!important;
+  cursor:pointer!important;
+  z-index:1!important;
+}
+
+/* Hide the native text, but keep the native picker available over the entire field. */
+.v3007TemporalShell > input::-webkit-date-and-time-value,
+.v3007TemporalShell > input::-webkit-datetime-edit,
+.v3007TemporalShell > input::-webkit-datetime-edit-fields-wrapper,
+.v3007TemporalShell > input::-webkit-datetime-edit-text,
+.v3007TemporalShell > input::-webkit-datetime-edit-day-field,
+.v3007TemporalShell > input::-webkit-datetime-edit-month-field,
+.v3007TemporalShell > input::-webkit-datetime-edit-year-field,
+.v3007TemporalShell > input::-webkit-datetime-edit-hour-field,
+.v3007TemporalShell > input::-webkit-datetime-edit-minute-field,
+.v3007TemporalShell > input::-webkit-datetime-edit-ampm-field{
+  color:transparent!important;
+  -webkit-text-fill-color:transparent!important;
+  opacity:0!important;
+}
+
+.v3007TemporalValue{
+  position:absolute!important;
+  inset:0 44px!important;
+  z-index:2!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:0!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  color:var(--text,#102440)!important;
+  font:inherit!important;
+  font-weight:800!important;
+  line-height:1.15!important;
+  pointer-events:none!important;
+}
+.v3007TemporalValue.is-placeholder{
+  color:var(--muted,#6b7d93)!important;
+  font-weight:650!important;
+}
+html[data-theme="dark"] .v3007TemporalValue{color:var(--text,#f6f8fb)!important}
+html[data-theme="dark"] .v3007TemporalValue.is-placeholder{color:var(--muted,#c8d3df)!important}
+
+/* Keep the picker glyph at the right while the value itself remains truly centred. */
+.v3007TemporalShell::after{
+  right:13px!important;
+  left:auto!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  z-index:3!important;
+}
+
+/* ---------- One hamburger in the navy top section bar ---------- */
+#sidebarToggleV3004,.v3004SidebarToggle{display:none!important}
+.v2754MenuBtn{
+  display:grid!important;
+  place-items:center!important;
+  visibility:visible!important;
+  opacity:1!important;
+  flex:0 0 46px!important;
+  position:relative!important;
+  z-index:3!important;
+}
+
+@media (min-width:1280px){
+  .mobileTop{
+    margin-left:282px!important;
+    width:calc(100% - 282px)!important;
+    position:sticky!important;
+    top:0!important;
+  }
+  body.v3007SidebarCollapsed .mobileTop{margin-left:0!important;width:100%!important}
+  body.v3007SidebarCollapsed aside.sidebar{
+    transform:translateX(-105%)!important;
+    pointer-events:none!important;
+  }
+  body.v3007SidebarCollapsed main{
+    margin-left:0!important;
+    width:100%!important;
+  }
+}
+
+@media (min-width:981px) and (max-width:1279px){
+  .mobileTop{
+    margin-left:255px!important;
+    width:calc(100% - 255px)!important;
+    position:sticky!important;
+    top:0!important;
+  }
+  body.v3007SidebarCollapsed .mobileTop{margin-left:0!important;width:100%!important}
+  body.v3007SidebarCollapsed aside.sidebar{
+    transform:translateX(-105%)!important;
+    pointer-events:none!important;
+  }
+  body.v3007SidebarCollapsed main{
+    margin-left:0!important;
+    width:100%!important;
+  }
+}
+
+@media (min-width:981px){
+  aside.sidebar,main,.mobileTop{
+    transition:transform .22s ease,margin-left .22s ease,width .22s ease!important;
+  }
+}
+
+@media (max-width:980px){
+  .mobileTop{margin-left:0!important;width:100%!important}
+}
