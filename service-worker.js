@@ -1,5 +1,5 @@
-/* Mission UPSC AI OS V32.0.1 PWA service worker */
-const VERSION = 'v32.0.1';
+/* Mission UPSC AI OS V32.0.2 PWA service worker */
+const VERSION = 'v32.0.2';
 const SHELL_CACHE = `mission-upsc-shell-${VERSION}`;
 const RUNTIME_CACHE = `mission-upsc-runtime-${VERSION}`;
 const CORE_ASSETS = [
