@@ -1,0 +1,10 @@
+{
+  "version": "32.2.1",
+  "index_bytes": 315719,
+  "inline_css": true,
+  "inline_js": true,
+  "external_tracker_css_ref": false,
+  "external_tracker_js_ref": false,
+  "placeholder": true,
+  "service_worker_version": true
+}
