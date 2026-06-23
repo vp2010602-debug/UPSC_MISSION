@@ -37,3 +37,58 @@
 .v31Timetable .v31PlanTable input{min-width:130px}
 .v31StabilityNote{margin-top:10px;padding:10px;border:1px solid #d8e5f2;border-radius:14px;background:#f8fbff;color:#456176;font-size:12px;font-weight:700}
 @media(max-width:700px){.v31PlanTable th,.v31PlanTable td{font-size:12px}.v31PlanTable input{min-width:120px}}
+
+
+/* V32.0.1 — Master Planner War Card alignment and contrast hotfix */
+.v31WarTop{
+  display:grid!important;
+  grid-template-columns:170px minmax(0,1fr) 170px!important;
+  align-items:center!important;
+  gap:12px!important;
+}
+.v31WarTop::before{content:"";display:block;grid-column:1}
+.v31WarTop .v31WarTitle{grid-column:2;text-align:center!important;min-width:0}
+.v31WarTop .v31WarDate{grid-column:3;margin:0!important;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.v31WarTop .v31WarTitle h2,
+.v31WarTop .v31WarTitle p,
+.v31WarTop .v31WarDate,
+.v31WarTop .v31WarDate b,
+.v31WarTop .v31WarDate span{
+  color:#ffffff!important;
+  opacity:1!important;
+}
+.v31WarTop .v31WarTitle h2{margin:0 0 8px!important;line-height:1.05!important;text-shadow:0 1px 2px rgba(0,0,0,.18)}
+.v31WarTop .v31WarTitle p{margin:0!important;color:#dbeafe!important;font-weight:700!important}
+@media(max-width:700px){
+  .v31WarTop{display:block!important;text-align:center!important}
+  .v31WarTop::before{display:none!important}
+  .v31WarTop .v31WarTitle,.v31WarTop .v31WarDate{display:block!important;margin-top:12px!important}
+  .v31WarTop .v31WarTitle{margin-top:0!important}
+}
+@media print{
+  .v31WarTop{display:grid!important;grid-template-columns:140px minmax(0,1fr) 140px!important}
+  .v31WarTop::before{display:block!important}
+  .v31WarTop .v31WarTitle{grid-column:2!important}
+  .v31WarTop .v31WarDate{grid-column:3!important}
+}
+
+
+/* V32.0.1 — keep all nine planner mode buttons aligned and visible on desktop */
+@media(min-width:1201px){
+  .v31Tabs{
+    display:grid!important;
+    grid-template-columns:repeat(9,minmax(0,1fr))!important;
+    gap:8px!important;
+    overflow:visible!important;
+  }
+  .v31Tabs button{
+    min-width:0!important;
+    padding:11px 7px!important;
+    font-size:12px!important;
+    text-align:center!important;
+  }
+}
+@media(max-width:1200px){
+  .v31Tabs{display:flex!important;overflow-x:auto!important}
+  .v31Tabs button{flex:0 0 auto!important}
+}
