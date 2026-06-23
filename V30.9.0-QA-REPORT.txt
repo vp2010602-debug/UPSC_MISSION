@@ -1,0 +1,32 @@
+MISSION UPSC AI OS V30.9.0 — QA REPORT
+Date: 23 June 2026
+
+SCOPE TESTED
+1. Official JARVIS Daily War Card V1.0 installation and rendering.
+2. One-input AI briefing route and cross-module task sync code paths.
+3. Formal Exam Countdown replacement and visible date mirror fields.
+4. Study Library PDF/image/text reader and explicit non-blank fallback.
+5. UPSC Performance Intelligence layout and data collector.
+6. Desktop, tablet and phone responsive CSS breakpoints.
+7. Service-worker cache manifest and version bump.
+
+AUTOMATED CHECKS
+- All project JavaScript files: syntax passed with Node --check.
+- V30.9.0 CSS: opening/closing brace count matched (206/206 at initial check; final file rechecked during packaging).
+- Static HTML duplicate IDs: 0.
+- Missing local script/stylesheet references: 0.
+- V30.9.0 inline handler names unresolved: 0.
+- Simulated browser DOM: War Card, Countdown, Performance Intelligence and Reader installed successfully.
+- Simulated reader: linked PDF iframe and original-file fallback rendered.
+- Simulated no-data state: readiness score correctly returns 0%, not an inflated value.
+- Responsive rules verified at phone, tablet and laptop widths; new layouts collapse to single-column where required.
+
+PRESERVED
+- Secure Firebase Gemini proxy and owner authentication.
+- Gemini / Ollama / ChatGPT Prompt / Hybrid modes.
+- Working date/time picker and hamburger fixes.
+- Saarthi, Current Affairs, YouTube Notes and existing data collections.
+
+DEPLOYMENT
+- Frontend-only update. Firebase Functions redeployment is not required.
+- Hard refresh and installed-PWA restart are required after GitHub Pages deployment.
