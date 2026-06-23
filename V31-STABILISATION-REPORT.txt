@@ -1,0 +1,16 @@
+Mission UPSC AI OS V31.0 Stable — Stabilisation Report
+
+Stabilised from: V31.0 Step 4 Polish Integration
+Base: V30.9.0 Final Integrated Intelligence
+
+Fixed/guarded:
+- Master Planner storage safe parse added.
+- Save failure warning added.
+- Duplicate legacy planner/progress nav hidden with CSS + JS guard.
+- Version labels updated to V31.0 Stable.
+- Cache busting updated to 31.0.5.
+- Mobile planner table guard added.
+- Print layout guard preserved.
+
+No destructive deletion performed.
+Legacy code preserved for rollback safety.

@@ -1,11 +1,11 @@
-/* V31.0.4 Step 4 — JARVIS Master Planner Polish Integration
+/* V31.0.5 Stable — JARVIS Master Planner Stabilisation
    One source of truth: Daily / AI / Mentor → War Card → Checklist → Calendar + Revision + Gaps + Progress */
 (function(){
   const KEY='jarvisV31MasterPlanner';
   const $=id=>document.getElementById(id);
   const today=()=>new Date().toISOString().slice(0,10);
-  const state=()=>JSON.parse(localStorage.getItem(KEY)||'{}');
-  const save=s=>localStorage.setItem(KEY,JSON.stringify({...state(),...s,updatedAt:new Date().toISOString()}));
+  const state=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){console.warn('V31 storage repaired',e);localStorage.removeItem(KEY);return {}}};
+  const save=s=>{try{localStorage.setItem(KEY,JSON.stringify({...state(),...s,updatedAt:new Date().toISOString(),build:'31.0.5-stable'}));}catch(e){console.warn('V31 save failed',e);alert('Storage is full or blocked. Export your planner text, then clear old browser data if needed.')}};
   const esc=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
   function norm(t){let [h,m='00']=String(t||'00:00').replace('.',':').split(':');return `${String(h||'0').padStart(2,'0')}:${String(m||'00').padStart(2,'0')}`}
@@ -91,5 +91,8 @@
   function renderWeekly(){const s=state(), wp=s.weeklyPlan||makeWeekly((s.mentorDecoded&&s.mentorDecoded.targets)||[]);setHTML('v31WeeklyRows',wp.map(x=>`<tr><td>${x.day}</td><td>${esc(x.focus)}</td><td>${x.hours} hrs</td><td>${x.status}</td></tr>`).join(''))}
   function renderProgress(){const d=buildDerived(); ['v31SideBar','v31ProgressBigBar'].forEach(id=>$(id)&&($(id).style.width=d.percent+'%')); if($('v31SideCompletion'))$('v31SideCompletion').textContent=d.percent+'%'; if($('v31SidePending'))$('v31SidePending').textContent=d.pendingCount; setHTML('v31ProgressSummary',`<b>${d.percent}% completed</b><br>${d.doneCount} of ${d.total} tasks completed. Pending: ${d.pendingCount}.<br>Planned: ${Math.round(d.plannedMins/60*10)/10} hrs • Completed: ${Math.round(d.completedMins/60*10)/10} hrs.<br>Focus score: ${d.percent>=80?'Excellent':d.percent>=60?'Good':d.percent>=40?'Average':'Needs repair'}.`); setHTML('v31SubjectProgress',Object.entries(d.subjectMap).map(([k,m])=>`<div class="v31MiniItem"><b>${esc(k)}</b> — ${Math.round(m/60*10)/10} hrs</div>`).join('')||'No subject data yet.'); setHTML('v31GapReport',d.gaps.slice(0,8).map(g=>`<div class="v31MiniItem">⚠ ${esc(g.task)} <small>${esc(g.reason)} • ${esc(g.subject)}</small></div>`).join('')||'No gaps.'); setHTML('v31ProgressRevision',d.revision.slice(0,8).map(r=>`<div class="v31MiniItem">🔁 ${r.date} — ${esc(r.topic)}</div>`).join('')||'Complete tasks to create revision radar.'); }
   function renderAll(){renderWar();renderChecklist();renderWeekly();renderProgress()}
-  document.addEventListener('DOMContentLoaded',()=>{const s=state(); if($('v31Date'))$('v31Date').value=s.date||today(); if($('v31Mission'))$('v31Mission').value=s.mission||''; if(s.review){ if($('v31ReviewWent'))$('v31ReviewWent').value=s.review.went||''; if($('v31ReviewImprove'))$('v31ReviewImprove').value=s.review.improve||''; if($('v31ReviewLearn'))$('v31ReviewLearn').value=s.review.learn||''; if($('v31ReviewMood'))$('v31ReviewMood').value=s.review.mood||'Good'; if($('v31ReviewScore'))$('v31ReviewScore').value=s.review.score||'';} document.querySelectorAll('#simpleProgressNavV307').forEach(el=>el.classList.add('v31LegacyHidden')); renderAll();});
+  document.addEventListener('DOMContentLoaded',()=>{
+    // Stability: keep old duplicate planner/progress nav hidden without deleting legacy code.
+    document.querySelectorAll('#unifiedMissionNavV307,#simpleProgressNavV307').forEach(el=>el.classList.add('v31LegacyHidden'));
+    const s=state(); if($('v31Date'))$('v31Date').value=s.date||today(); if($('v31Mission'))$('v31Mission').value=s.mission||''; if(s.review){ if($('v31ReviewWent'))$('v31ReviewWent').value=s.review.went||''; if($('v31ReviewImprove'))$('v31ReviewImprove').value=s.review.improve||''; if($('v31ReviewLearn'))$('v31ReviewLearn').value=s.review.learn||''; if($('v31ReviewMood'))$('v31ReviewMood').value=s.review.mood||'Good'; if($('v31ReviewScore'))$('v31ReviewScore').value=s.review.score||'';} renderAll();});
 })();
