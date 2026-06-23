@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="./v3070-unified-mission.css?v=30.7.0" />
   <link rel="stylesheet" href="./v3080-final-refinement.css?v=30.8.0" />
   <link rel="stylesheet" href="./v3090-final-intelligence.css?v=30.9.0" />
-  <link rel="stylesheet" href="./v3100-master-planner.css?v=31.0.0" />
+  <link rel="stylesheet" href="./v3100-master-planner.css?v=31.0.3" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -419,7 +419,7 @@
           <div id="v31Panel_weekly" class="v31Panel">
             <h2>📅 Weekly / Monthly Planning Chart</h2>
             <p class="v31Sub">Use this as the distribution view after AI Planner or Mentor Decoder. V31 keeps one source of truth, not separate duplicated weekly planners.</p>
-            <table class="v31PlanTable"><thead><tr><th>Day</th><th>Top Focus</th><th>Target Hours</th><th>Status</th></tr></thead><tbody><tr><td>Mon</td><td>Heavy GS topic</td><td>8 hrs</td><td>Planned</td></tr><tr><td>Tue</td><td>Economy + CA</td><td>8 hrs</td><td>Planned</td></tr><tr><td>Wed</td><td>CSAT + PYQ</td><td>7 hrs</td><td>Planned</td></tr><tr><td>Thu</td><td>Revision + Answer Writing</td><td>8 hrs</td><td>Planned</td></tr><tr><td>Fri</td><td>Backlog Repair</td><td>7 hrs</td><td>Planned</td></tr><tr><td>Sat</td><td>Mock + Analysis</td><td>6 hrs</td><td>Planned</td></tr><tr><td>Sun</td><td>Weekly Review</td><td>4 hrs</td><td>Planned</td></tr></tbody></table>
+            <table class="v31PlanTable"><thead><tr><th>Day</th><th>Top Focus</th><th>Target Hours</th><th>Status</th></tr></thead><tbody id="v31WeeklyRows"></tbody></table>
           </div>
 
           <div id="v31Panel_subject" class="v31Panel">
@@ -449,10 +449,11 @@
                 <div class="v31Box"><h3>💪 Habits & Discipline</h3><div class="v31CheckLine"><input type="checkbox"> Wake Early <input type="checkbox"> Exercise</div><div class="v31CheckLine"><input type="checkbox"> Meditation <input type="checkbox"> Water <input type="checkbox"> Sleep before 11</div></div>
                 <div class="v31Box"><h3>📈 Today's Progress</h3><div class="v31ProgressRows"><div class="v31ProgressRow"><span>Tasks</span><div class="v31MiniBar"><i id="v31WarProgressBar"></i></div><b id="v31WarProgressText">0%</b></div><div>Completed: <b id="v31HoursText">0 / 0</b></div></div></div>
                 <div class="v31Box"><h3>🌙 Night Review</h3><textarea placeholder="What went well? What can improve?"></textarea></div>
-                <div class="v31Box"><h3>🔄 Carry Forward</h3><div class="v31CheckLine"><input type="checkbox"><input type="text" placeholder="Pending task"></div><div class="v31CheckLine"><input type="checkbox"><input type="text" placeholder="Pending task"></div></div>
+                <div class="v31Box"><h3>🔄 Carry Forward</h3><div id="v31CarryForwardBox"></div></div>
+                <div class="v31Box"><h3>🔁 Revision Radar</h3><div id="v31RevisionRadarBox"></div></div>
                 <div class="v31Box v31Quote">“Discipline today, success tomorrow.”<br>— JARVIS</div>
               </div>
-              <div class="v31Actions"><button class="v31Btn primary" onclick="v31PrintWar()">🖨 Print A4</button><button class="v31Btn" onclick="v31ExportTxt()">📄 Export TXT</button><button class="v31Btn green" onclick="alert('Calendar sync route reserved: tasks are already stored as planner blocks for AI Calendar integration.')">📅 Add to Calendar</button></div>
+              <div class="v31Actions"><button class="v31Btn primary" onclick="v31PrintWar()">🖨 Print A4</button><button class="v31Btn" onclick="v31ExportTxt()">📄 Export TXT</button><button class="v31Btn green" onclick="v31SyncExternal()">📅 Sync Calendar + Revision</button><button class="v31Btn gold" onclick="v31CarryForwardTomorrow()">🔄 Carry Forward Tomorrow</button></div>
             </div>
           </div>
 
@@ -470,6 +471,11 @@
           <div id="v31Panel_progress" class="v31Panel">
             <h2>📈 Progress Dashboard</h2><p class="v31Sub">Single progress view for daily planner, checklist and review. No duplicate progress cards.</p>
             <div class="v31Metric"><span>Overall Progress</span><b id="v31ProgressSummary">0% completed</b><div class="v31MiniBar"><i id="v31ProgressBigBar"></i></div></div>
+            <div class="v31ProgressGrid">
+              <div class="v31Metric"><span>Subject Hours</span><div id="v31SubjectProgress">No subject data yet.</div></div>
+              <div class="v31Metric"><span>Gap Report</span><div id="v31GapReport">No gaps yet.</div></div>
+              <div class="v31Metric"><span>Revision Radar</span><div id="v31ProgressRevision">No revision yet.</div></div>
+            </div>
           </div>
 
           <div class="v31BottomIntegrations">
@@ -3025,6 +3031,6 @@
 <script defer src="./v3070-unified-mission.js?v=30.7.0"></script>
 <script defer src="./v3080-final-refinement.js?v=30.8.0"></script>
 <script defer src="./v3090-final-intelligence.js?v=30.9.0"></script>
-<script defer src="./v3100-master-planner.js?v=31.0.0"></script>
+<script defer src="./v3100-master-planner.js?v=31.0.3"></script>
 </body>
 </html>
