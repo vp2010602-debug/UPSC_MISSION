@@ -41,6 +41,7 @@
   }
 
   function installSimpleCA(){
+    if(window.__JARVIS_TRACKER_V322_ACTIVE__)return true;
     const section=$('currentAffairsAI');
     if(!section||$('v3061SimpleCA')) return false;
     const legacy=$('v306EasyCA');
@@ -279,6 +280,7 @@
   }
 
   function updateVersion(){
+    if(window.__JARVIS_TRACKER_V322_ACTIVE__)return;
     document.title='Jarvis UPSC V30.6.1 — Simple CA + Simple Mentor';
     document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V30.6.1 • Simple CA + Mentor');
     window.__MISSION_UPSC_VERSION__=VERSION;

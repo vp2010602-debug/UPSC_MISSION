@@ -221,6 +221,7 @@
   function renderAllCA(){renderQueue();renderStats();renderTopicRail()}
   window.renderDailyCATrackerV305=renderAllCA;
   function buildCA(){
+    if(window.__JARVIS_TRACKER_V322_ACTIVE__)return;
     const s=$('currentAffairsAI');if(!s||s.dataset.v305==='1')return;s.dataset.v305='1';s.classList.add('v305CA');
     const cats=[...new Set(SOURCES.map(x=>x.cat))],sourceOptions=SOURCES.map(x=>`<option>${esc(x.name)}</option>`).join('')+'<option>Other</option>';
     s.innerHTML=`<div class="v305CAHero"><div><span class="eyebrow">V30.5 • MANUAL TOKEN CONTROL • TRACKER-STYLE WORKFLOW</span><h1>JARVIS Daily Current Affairs Tracker</h1><p>Open trusted sources, queue only UPSC-relevant items, preview token demand, and press Generate yourself. Nothing is generated automatically, so your paid Gemini credits remain under your control.</p></div><div class="v305CAHeroIcon">📰</div></div>
@@ -233,7 +234,7 @@
     renderSources();renderAllCA();
   }
 
-  function updateVersion(){document.title='Jarvis UPSC V30.5.0 — Final Daily CA';document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V30.5.0 • Voice + Daily CA');window.__MISSION_UPSC_VERSION__=VERSION;const rel=[...document.querySelectorAll('.v275ReleaseList div')].find(x=>x.querySelector('span')?.textContent==='Version');if(rel?.querySelector('b'))rel.querySelector('b').textContent='Mission UPSC AI OS V30.5.0 Final Daily CA';}
+  function updateVersion(){if(window.__JARVIS_TRACKER_V322_ACTIVE__)return;document.title='Jarvis UPSC V30.5.0 — Final Daily CA';document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V30.5.0 • Voice + Daily CA');window.__MISSION_UPSC_VERSION__=VERSION;const rel=[...document.querySelectorAll('.v275ReleaseList div')].find(x=>x.querySelector('span')?.textContent==='Version');if(rel?.querySelector('b'))rel.querySelector('b').textContent='Mission UPSC AI OS V30.5.0 Final Daily CA';}
   function init(){installVoicePanel();buildCA();updateVersion();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(init,80),{once:true});else setTimeout(init,80);
   window.addEventListener('load',()=>setTimeout(init,150),{once:true});

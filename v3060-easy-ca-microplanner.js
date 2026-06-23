@@ -77,6 +77,7 @@
   function fetchedState(){const s=read(FETCH_KEY,{items:[],statuses:[],fetchedAt:''});s.items=Array.isArray(s.items)?s.items:[];return s;}
   function selectedFeedIds(){return [...document.querySelectorAll('#v306FeedChoices input:checked')].map(x=>x.value);}
   function installEasyCA(){
+    if(window.__JARVIS_TRACKER_V322_ACTIVE__)return true;
     const section=$('currentAffairsAI');if(!section||$('v306EasyCA'))return false;
     const firstGrid=section.querySelector('.v305CAGrid');if(!firstGrid)return false;
     const box=document.createElement('div');box.id='v306EasyCA';box.className='v306EasyCA';
@@ -163,7 +164,7 @@
   window.integrateMicroPlanV306=integrateMicroPlan;
   window.printMicroPlanV306=()=>{if(!pendingMicroPlan)return toast('Build a plan first.','warn');const w=open('','_blank','width=900,height=850');w.document.write(`<html><head><title>${esc(pendingMicroPlan.title)}</title><style>body{font-family:Arial;padding:28px;line-height:1.45;color:#17324c}section{border:1px solid #ccdce8;border-radius:12px;padding:12px;margin:10px 0}small{color:#5c7185}p{margin:4px 0}</style></head><body><h1>${esc(pendingMicroPlan.title)}</h1><p>${pendingMicroPlan.weekStart} to ${pendingMicroPlan.weekEnd}</p>${pendingMicroPlan.days.map(d=>`<section><h3>${d.date}</h3>${(d.tasks||[]).map(t=>`<p><b>${esc(t.title)}</b><br><small>${esc(t.type)} • ${t.estimatedMinutes||0} min</small><br>${esc(t.details||'')}</p>`).join('')}</section>`).join('')}<script>onload=()=>print()<\/script></body></html>`);w.document.close()};
 
-  function updateVersion(){document.title='Jarvis UPSC V30.6.0 — Easy CA + Microtopic Planner';document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V30.6.0 • Easy CA + Micro-Planner');window.__MISSION_UPSC_VERSION__=VERSION;const rel=[...document.querySelectorAll('.v275ReleaseList div')].find(x=>x.querySelector('span')?.textContent==='Version');if(rel?.querySelector('b'))rel.querySelector('b').textContent='Mission UPSC AI OS V30.6.0 Easy CA + Microtopic Planner';}
+  function updateVersion(){if(window.__JARVIS_TRACKER_V322_ACTIVE__)return;document.title='Jarvis UPSC V30.6.0 — Easy CA + Microtopic Planner';document.querySelectorAll('.versionBadge').forEach(x=>x.textContent='V30.6.0 • Easy CA + Micro-Planner');window.__MISSION_UPSC_VERSION__=VERSION;const rel=[...document.querySelectorAll('.v275ReleaseList div')].find(x=>x.querySelector('span')?.textContent==='Version');if(rel?.querySelector('b'))rel.querySelector('b').textContent='Mission UPSC AI OS V30.6.0 Easy CA + Microtopic Planner';}
   function init(){let tries=0;const timer=setInterval(()=>{const a=installEasyCA(),b=installMicroPlanner();if((a||$('v306EasyCA'))&&(b||$('v306MicroPanel'))||++tries>50){clearInterval(timer);renderFetched();renderMapLibrary();renderMicroTree();updateVersion();}},120);}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

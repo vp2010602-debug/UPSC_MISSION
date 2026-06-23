@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jarvis UPSC V32.1.0 — Tracker Rebuild</title>
+  <title>Jarvis UPSC V32.2.0 — Mind Palace Tracker</title>
   <meta name="theme-color" content="#06264a" />
+  <script>window.__JARVIS_TRACKER_V32_ACTIVE__=true;window.__JARVIS_TRACKER_V322_ACTIVE__=true;</script>
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -39,8 +40,8 @@
   <link rel="stylesheet" href="./v3070-unified-mission.css?v=30.7.0" />
   <link rel="stylesheet" href="./v3080-final-refinement.css?v=30.8.0" />
   <link rel="stylesheet" href="./v3090-final-intelligence.css?v=30.9.0" />
-  <link rel="stylesheet" href="./v3100-master-planner.css?v=32.1.0" />
-  <link rel="stylesheet" href="./v3200-tracker-engine.css?v=32.1.0" />
+  <link rel="stylesheet" href="./v3100-master-planner.css?v=32.2.0" />
+  <link rel="stylesheet" href="./v3220-mind-palace-tracker.css?v=32.2.0" />
 </head>
 <body>
 <div class="mobileTop" id="mobileTopV2754">
@@ -1699,93 +1700,7 @@
       </div>
     </section>
 
-    <section id="currentAffairsAI" class="section lightStudySection caEngineV243">
-      <div class="cleanHero caHeroV243">
-        <div>
-          <span class="eyebrow blueEye">V24.3 • AI CURRENT AFFAIRS ENGINE</span>
-          <h1>AI Current Affairs Engine Pro</h1>
-          <p class="sub">Paste article text, add a daily digest, or upload PDF/TXT notes. AI converts it into UPSC Prelims + Mains notes, PYQ linkage, flashcards, mindmap and revision tasks.</p>
-        </div>
-        <div class="heroIcon">📰</div>
-      </div>
-
-      <div class="caQuickSourcesV243">
-        <a target="_blank" href="https://www.pib.gov.in/">PIB</a>
-        <a target="_blank" href="https://www.thehindu.com/">The Hindu</a>
-        <a target="_blank" href="https://indianexpress.com/">Indian Express</a>
-        <a target="_blank" href="https://prsindia.org/">PRS</a>
-        <a target="_blank" href="https://www.rbi.org.in/">RBI</a>
-        <a target="_blank" href="https://www.mea.gov.in/">MEA</a>
-        <a target="_blank" href="https://www.drishtiias.com/current-affairs-news-analysis-editorials">Drishti</a>
-        <a target="_blank" href="https://www.insightsonindia.com/current-affairs/">Insights</a>
-      </div>
-
-      <div class="two">
-        <div class="card v24Panel">
-          <h2>News Input</h2>
-          <div class="threeInput">
-            <input id="caTitleAI" placeholder="News title / issue">
-            <select id="caSubjectAI">
-              <option>Polity</option><option>Economy</option><option>Environment</option><option>Science & Tech</option>
-              <option>IR</option><option>Security</option><option>Social Issues</option><option>Geography</option><option>Ethics</option><option>Culture</option><option>Governance</option>
-            </select>
-            <select id="caSourceAI">
-              <option>PIB</option><option>The Hindu</option><option>Indian Express</option><option>PRS</option><option>RBI</option><option>MEA</option><option>Drishti</option><option>Insights</option><option>Other</option>
-            </select>
-          </div>
-          <div class="threeInput">
-            <select id="caModeV243"><option>Single Article</option><option>Daily Digest</option><option>Editorial Analysis</option><option>PIB Scheme Note</option><option>Prelims Facts Only</option><option>Mains Issue Note</option></select>
-            <select id="caDepthV243"><option>Fast</option><option selected>Balanced</option><option>Expert</option></select>
-            <input id="caDateV243" type="date">
-          </div>
-          <textarea id="caArticleAI" class="caTextareaV243" placeholder="Paste daily news/article/editorial text here. For digest, paste multiple items separated by headings."></textarea>
-          <label class="fileDropV243">📄 Upload PDF/TXT for CA analysis
-            <input id="caFileV243" type="file" accept=".txt,.pdf,.md,.csv" onchange="loadCAFileV243(event)">
-          </label>
-          <div id="caFileStatusV243" class="aiGenStatusV232"></div>
-          <div class="actions">
-            <button class="btn purple" onclick="makeCurrentAffairsIntelligence()">🚀 Generate CA Intelligence</button>
-            <button class="btn green" onclick="saveCurrentAffairsIntelligence()">💾 Save Daily CA</button>
-            <button class="btn gold" onclick="caIntelligenceToRevision()">📌 Revision</button>
-            <button class="btn blue" onclick="caIntelligenceToLibrary()">🏛 Library</button>
-          </div>
-        </div>
-        <div class="card v24Panel">
-          <h2>AI Output Actions</h2>
-          <p class="sub">Use selected AI mode from AI Control Centre. On tab/iPad use Gemini/ChatGPT Prompt. On laptop use Ollama.</p>
-          <div id="caModeBadgeV243" class="aiProviderBadgeV231">Selected AI will appear here</div>
-          <div class="actions stackedActionsV243">
-            <button class="btn green" onclick="saveCurrentAffairsIntelligence()">💾 Save to Current Affairs</button>
-            <button class="btn purple" onclick="caToFlashcardsV243()">🃏 Convert to Flashcards</button>
-            <button class="btn gold" onclick="caToMindmapV243()">🧠 Send to Mindmap</button>
-            <button class="btn blue" onclick="caToMainsFrameworkV243()">✍️ Mains Framework</button>
-            <button class="btn ghost" onclick="downloadAIOutputV226('caAIOutput','html')">⬇ Download</button>
-            <button class="btn ghost" onclick="printSection('caAIOutput')">📄 PDF / Print</button>
-          </div>
-          <div class="caMiniPanelV243">
-            <b>Smart Daily Workflow</b>
-            <span>Read → Paste/Upload → Generate → Save → Flashcards → Revision</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card v24Panel">
-        <h2>CA Intelligence Output</h2>
-        <div id="caAIOutput" class="aiOutput bigAI">Paste news and generate UPSC current affairs intelligence.</div>
-      </div>
-
-      <div class="card caDashboard v24Panel">
-        <h2>Saved Current Affairs Dashboard</h2>
-        <div class="caFilters">
-          <input id="caSearchAI" oninput="renderCurrentAffairsIntelligence()" placeholder="Search current affairs">
-          <select id="caFilterSubjectAI" onchange="renderCurrentAffairsIntelligence()">
-            <option>All</option><option>Polity</option><option>Economy</option><option>Environment</option><option>Science & Tech</option><option>IR</option><option>Security</option><option>Social Issues</option><option>Geography</option><option>Ethics</option><option>Culture</option><option>Governance</option>
-          </select>
-          <button class="btn purple" onclick="generateDailyCARevisionV243()">🗓 Make Daily CA Revision</button>
-        </div>
-        <div id="caDisplayList" class="caNewsGrid"></div>
-      </div>
-    </section>
+    <section id="currentAffairsAI" class="section lightStudySection trackerMP322"></section>
 
     <section id="evernoteNotes" class="section">
       <div class="two">
@@ -3029,10 +2944,10 @@
 <script defer src="./v3050-final-ca-voice.js?v=30.5.0"></script>
 <script defer src="./v3060-easy-ca-microplanner.js?v=30.6.0"></script>
 <script defer src="./v3061-simple-ca-mentor.js?v=30.6.1"></script>
-<script defer src="./v3070-unified-mission.js?v=32.1.0"></script>
-<script defer src="./v3080-final-refinement.js?v=32.1.0"></script>
-<script defer src="./v3090-final-intelligence.js?v=32.0.2"></script>
-<script defer src="./v3100-master-planner.js?v=32.1.0"></script>
-<script defer src="./v3200-tracker-engine.js?v=32.1.0"></script>
+<script defer src="./v3070-unified-mission.js?v=32.2.0"></script>
+<script defer src="./v3080-final-refinement.js?v=32.2.0"></script>
+<script defer src="./v3090-final-intelligence.js?v=32.2.0"></script>
+<script defer src="./v3100-master-planner.js?v=32.2.0"></script>
+<script defer src="./v3220-mind-palace-tracker.js?v=32.2.0"></script>
 </body>
 </html>
