@@ -89,6 +89,7 @@
     </section>`}
 
   function rebuildCA(){
+    if(window.__JARVIS_TRACKER_V32_ACTIVE__)return;
     const desk=$('v307CADesk');if(!desk||desk.dataset.v308==='1')return;
     desk.dataset.v308='1';desk.innerHTML=caHtml();
     const file=$('v307CAUploadFile');if(file)file.addEventListener('change',()=>{$('v307CAUploadStatus').textContent=file.files?.[0]?`Selected: ${file.files[0].name}`:'No file selected.'});
@@ -273,7 +274,7 @@
   function upgradeProgress(){const sec=$('simpleProgressV307');if(!sec||sec.dataset.v308==='1')return;sec.dataset.v308='1';sec.innerHTML=progressHtml();setTimeout(window.refreshProgressV308,100)}
 
   /* ---------------- navigation and bootstrap ---------------- */
-  function upgradeVersion(){document.title='Jarvis UPSC V30.8.0 — Final Refinement';const b=document.querySelector('.versionBadge');if(b)b.textContent='V30.8.0 • Refined Daily System'}
+  function upgradeVersion(){if(window.__JARVIS_TRACKER_V32_ACTIVE__)return;document.title='Jarvis UPSC V30.8.0 — Final Refinement';const b=document.querySelector('.versionBadge');if(b)b.textContent='V30.8.0 • Refined Daily System'}
   function wrapShow(){const old=window.show;if(typeof old!=='function'||old.__v308)return;const fn=function(id,btn){const r=old.apply(this,arguments);setTimeout(()=>{if(id==='currentAffairsAI'){rebuildCA();refreshCAStats();try{window.renderCATopicsV307?.()}catch(_){}}if(id==='countdownPage'){installCountdownV308();renderCountdownV308()}if(id==='youtubeNotesV302')upgradeYouTube();if(id==='simpleProgressV307'){upgradeProgress();window.refreshProgressV308()}},100);return r};fn.__v308=true;window.show=fn}
   function init(){upgradeVersion();wrapShow();rebuildCA();installCountdownV308();upgradeYouTube();upgradeProgress();refreshCAStats();console.info('Mission UPSC V30.8.0 refinement loaded')}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{setTimeout(init,300);setTimeout(init,900)});else{setTimeout(init,300);setTimeout(init,900)}

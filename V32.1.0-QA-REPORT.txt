@@ -1,0 +1,14 @@
+Mission UPSC AI OS V32.1.0 — QA Report
+
+Validated:
+- JavaScript syntax: v3070, v3080, v3090, v3100 and v3200 passed node --check.
+- All local script and stylesheet references in index.html exist.
+- No duplicate static HTML IDs detected.
+- Tracker stylesheet is loaded in the document head.
+- Legacy V30.7/V30.8 current-affairs injectors are guarded when V32 Tracker is active.
+- V32 Tracker has delayed remount/version guards for legacy asynchronous scripts.
+- Master Planner hero, status panel, metric values and War Card header have explicit high-contrast rules.
+- Existing localStorage keys are preserved, so existing planner/tracker records are not intentionally deleted.
+
+Deployment:
+Upload every file from the GitHub Update ZIP to the repository root and replace existing files.

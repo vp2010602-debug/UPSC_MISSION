@@ -92,3 +92,52 @@
   .v31Tabs{display:flex!important;overflow-x:auto!important}
   .v31Tabs button{flex:0 0 auto!important}
 }
+
+
+/* V32.1.0 — definitive planner contrast + alignment repair */
+.v31Planner .v31Hero,
+.v31Planner .v31WarTop{isolation:isolate}
+.v31Planner .v31Hero h1,
+.v31Planner .v31Hero p,
+.v31Planner .v31Hero .v31Badge{
+  color:#ffffff!important;
+  opacity:1!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.18)!important;
+}
+.v31Planner .v31Hero p{color:#dceaff!important}
+.v31Planner .v31Hero{align-items:center!important;min-height:118px!important}
+.v31Planner .v31Grid{align-items:start!important}
+aside.v31Side{
+  background:#ffffff!important;
+  background-image:none!important;
+  color:#071b33!important;
+  border:1px solid #d9e5f2!important;
+  box-shadow:0 10px 30px rgba(6,27,53,.08)!important;
+}
+aside.v31Side h3,
+aside.v31Side .v31Metric b,
+aside.v31Side .v31Metric small,
+aside.v31Side .v31Metric span{
+  color:#071b33!important;
+  opacity:1!important;
+}
+aside.v31Side>h3{margin:2px 0 14px!important;font-size:18px!important}
+aside.v31Side .v31Metric{
+  background:linear-gradient(180deg,#ffffff,#f7faff)!important;
+  color:#071b33!important;
+}
+aside.v31Side .v31Metric span{color:#50657d!important}
+aside.v31Side .v31Metric small{display:block;margin-top:4px;color:#5d7188!important;line-height:1.45}
+aside.v31Side .v31Metric b{font-size:22px!important}
+.v31Planner .v31WarTop{min-height:132px!important}
+.v31Planner .v31WarTop .v31WarTitle{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important}
+.v31Planner .v31WarTop .v31WarTitle h2{color:#fff!important;font-weight:900!important;letter-spacing:.035em!important}
+.v31Planner .v31WarTop .v31WarDate{min-height:108px!important;box-sizing:border-box!important}
+@media(max-width:1100px){
+  aside.v31Side{position:static!important}
+  .v31Planner .v31Hero{min-height:auto!important}
+}
+@media(max-width:700px){
+  .v31Planner .v31WarTop{min-height:auto!important}
+  .v31Planner .v31WarTop .v31WarTitle{display:flex!important}
+}
